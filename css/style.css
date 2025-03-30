@@ -9,12 +9,12 @@ html {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #3eaf4f;
+    background-color: #21bb5c;
 }
 
 .home-window {
     text-align: center;
-    background-color: #3eaf4f;
+    background-color: #21bb5c;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -30,20 +30,20 @@ html {
     color: #555;
 }
 
-.home-window button {
+#zip {
     padding: 10px 20px;
     font-size: 16px;
     margin: 10px;
     cursor: pointer;
     border: none;
     border-radius: 5px;
-    background-color: #007BFF;
+    background-color: #169e02;
     color: #ffffff;
     transition: background-color 0.3s;
 }
 
-.home-window button:hover {
-    background-color: #0056b3;
+#zip:hover {
+    background-color: #0f6a02;
 }
 a {
     color: #ffffff;
