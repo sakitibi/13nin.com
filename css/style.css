@@ -30,7 +30,7 @@ html {
     color: #555;
 }
 
-#SNWInstall-7z {
+.SNWInstall-7z {
     padding: 10px 20px;
     font-size: 16px;
     margin: 10px;
@@ -42,11 +42,11 @@ html {
     transition: background-color 0.3s;
 }
 
-#SNWInstall-7z:hover {
+.SNWInstall-7z:hover {
     background-color: #0f6a02;
 }
 
-#SNWInstall-zip {
+.SNWInstall-zip {
     padding: 10px 20px;
     font-size: 16px;
     margin: 10px;
@@ -58,7 +58,7 @@ html {
     transition: background-color 0.3s;
 }
 
-#SNWInstall-zip:hover {
+.SNWInstall-zip:hover {
     background-color: #a70202;
 }
 
