@@ -21,6 +21,7 @@ p {
     color: #ffffff;
     font-size: 15px;
     font-weight: bold;
+    border: none;
   }
 #dl:hover {
     background-color: orangered;
