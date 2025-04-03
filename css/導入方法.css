@@ -27,7 +27,7 @@ p {
     transition: background-color 0.3s;
   }
 #dl:hover {
-    background-color: darkorange;
+    background-color: orangered;
   }
 
 body {
