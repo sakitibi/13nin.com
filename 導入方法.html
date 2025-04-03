@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja" oncontextmenu="return false">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>導入方法</title>
+    <style>
+        h2 {
+            font-size: 15px;
+            font-weight: bold;
+            color: #ffffff;
+            font-style: normal;
+        }
+        h3 {
+            font-size: 15px;
+            font-weight: bold;
+            color: #ff0000;
+            font-style: normal;
+        }
+        p {
+            font-style: normal;
+            font-size: 15px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        button {
+            background-color: darkorange;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: orangered;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: bold;
+        }
+        body {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+    <h2>SuperNewRoles導入方法</h2>
+    <p>1.パッケージをダウンロードする</p>
+    <button id="dl">ダウンロード</button>
+    <p>2. ダウンロードしたzipファイルを解凍する</p>
+    <p>3. 解凍したファイルを「datapacks」フォルダに格納する</p>
+    <p>4. 「assets」フォルダにリソースパックも格納する(参加者全員導入推奨)</p>
+    <p>5. Minecraft JavaEditionを起動し、ワールドを開く</p>
+    <p>6. /reloadを実行する</p>
+    <h3>以上で導入完了です!</h3>
+    <script>
+        let add = Math.floor( Math.random() * 10000);
+        const loop = 0;
+        while (loop === 0) {
+            add = Math.floor( Math.random() * 10000);
+            if (add === 100) {
+                alert("名前は長い方が有利に警戒して下さい");
+            }
+        }
+
+        document.getElementById("dl").addEventListener("click", function() {
+            location.href = "https://github.com/sakitibi/Minecraft-Werewolf_Quest-Mods-SuperNewRoles/releases/download/V2.5.0.7/SuperNewRolesv2.5.0.7.zip";
+        });
+    </script>
+</body>
+</html>
