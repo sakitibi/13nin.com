@@ -1,0 +1,33 @@
+h2 {
+    font-size: 15px;
+    font-weight: bold;
+    color: #ffffff;
+    font-style: normal;
+    }
+h3 {
+    font-size: 15px;
+    font-weight: bold;
+    color: #ff0000;
+    font-style: normal;
+  }
+p {
+    font-style: normal;
+    font-size: 15px;
+    font-weight: bold;
+    color: #ffffff;
+  }
+button {
+    background-color: darkorange;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: bold;
+  }
+button:hover {
+    background-color: orangered;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: bold;
+  }
+body {
+    background-color: darkgreen;
+}
