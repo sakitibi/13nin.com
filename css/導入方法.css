@@ -17,6 +17,7 @@ p {
     color: #ffffff;
   }
 #dl {
+    padding: 10px 20px;
     background-color: darkorange;
     color: #ffffff;
     font-size: 15px;
@@ -25,10 +26,12 @@ p {
     border-radius: 5px;
   }
 #dl:hover {
+    padding: 10px 20px;
     background-color: orangered;
     color: #ffffff;
     font-size: 15px;
     font-weight: bold;
+    border: none;
     border-radius: 5px;
   }
 body {
