@@ -24,15 +24,10 @@ p {
     font-weight: bold;
     border: none;
     border-radius: 5px;
+    transition: background-color 0.3s;
   }
 #dl:hover {
-    padding: 10px 20px;
-    background-color: orangered;
     color: #ffffff;
-    font-size: 15px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
   }
 body {
     background-color: darkgreen;
