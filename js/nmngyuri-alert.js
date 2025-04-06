@@ -1,4 +1,4 @@
-let nmngyuri = Math.floor(Math.random() * 1);
+let nmngyuri = Math.floor(Math.random() * 2);
 if (nmngyuri === 0){
     alert("名前は長い方が有利戦争の応戦にご協力をお願い致します。");
 } else if (nmngyuri === 1) {
