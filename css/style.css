@@ -78,6 +78,38 @@ html {
     background-color: #0056b3;
 }
 
+.home-window #SNWInstall-xz {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: aqua;
+    color: #ffffff;
+    transition: background-color 0.3s;
+}
+
+.home-window #SNWInstall-xz:hover {
+    background-color: #007f81;
+}
+
+.home-window #SNWInstall-bzip2 {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff9000;
+    color: #ffffff;
+    transition: background-color 0.3s;
+}
+
+.home-window #SNWInstall-bzip2:hover {
+    background-color: #844b00;
+}
+
 a {
     color: #ffffff;
 }
