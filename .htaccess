@@ -2,6 +2,7 @@ ErrorDocument 404 /404.html
 order Allow,Deny
 Allow from all
 Deny from p896144-ipoe.ipoe.ocn.ne.jp
+Deny from 101-140-179-88f1.shg1.eonet.ne.jp
 order Allow,Deny
 Allow from all
 Deny from .ua
