@@ -6,3 +6,6 @@ order Allow,Deny
 Allow from all
 Deny from .ua
 Deny from .us
+<Files "導入方法.html">
+    Require ip 123.456.789.0
+</Files>
