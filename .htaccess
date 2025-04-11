@@ -1,7 +1,8 @@
 ErrorDocument 404 /404.html
-order allow,deny
-allow from all
+order Allow,Deny
+Allow from all
 deny from p896144-ipoe.ipoe.ocn.ne.jp
-<Files "導入方法.html">
-    Require ip 123.456.789.0
-</Files>
+order Allow,Deny
+Allow from all
+Deny from .ua
+Deny from .us
