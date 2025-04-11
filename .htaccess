@@ -3,7 +3,5 @@ order allow,deny
 allow from all
 deny from p896144-ipoe.ipoe.ocn.ne.jp
 <Files "導入方法.html">
-    order allow,deny
-    deny from all
-    Allow from 123.456.789.0
+    Require ip 123.456.789.0
 </Files>
