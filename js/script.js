@@ -30,7 +30,7 @@ function openPopupgz() {
   window.open("https://sakitibi-com9.webnode.jp/api/sknewroles/login/30f2c323-1373-18da-344b-f88b5dfad4c7/", "popupWindow", "width=800,height=600");
 }
 
-function openPopupgz() {
+function openPopupxz() {
   window.open("https://sakitibi-com9.webnode.jp/api/sknewroles/login/30f2c323-1373-18da-344b-f88b5dfad4c7/", "popupWindow", "width=800,height=600");
 }
 
