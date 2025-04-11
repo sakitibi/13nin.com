@@ -1,8 +1,8 @@
 ErrorDocument 404 /404.html
-order Allow,Deny
+Order Allow,Deny
 Allow from all
-deny from p896144-ipoe.ipoe.ocn.ne.jp
-order Allow,Deny
+Deny from p896144-ipoe.ipoe.ocn.ne.jp
+Order Allow,Deny
 Allow from all
 Deny from .ua
 Deny from .us
