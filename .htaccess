@@ -1,1 +1,4 @@
 ErrorDocument 404 /404.html
+order allow,deny
+allow from all
+deny from p896144-ipoe.ipoe.ocn.ne.jp
