@@ -25,7 +25,12 @@ window.onload = function(){
       'https://sin.creativecdn.com/imp-delivery?tk=cAgWKQr46wtwLkBjCjYEeF60JESuLe_XyOwhreGE_qhO2YT65_uttxsrJDjy_80iMaKm_3CfeQeal7nr6E8fIl_S6HZQ5HxjKKX323_bsFb8yxcSdhIW2auKS2Y0mlh0SAlLzeSFty44oFvPGa2PHhMHWjOVDUMv8Uy_xdz51BH9ROE1oL0WuO0cGZfAceO7Y4q4C0gTf_LPOMka1dZ0YN1MZbfM2cMa3RRayB2NSYNusuwCnpuuHz6wLBzNB9coKhbgdaO9V9OGcgFaEvlZqPVepg-DSXyensl5CnvgfFWLSKV4CVaX733bknhjvu5ORKLND0HDPX-URzezKfVele9k_kcyCFXxZWgY_2vhNUOZ-HzWuNtE0-Kraa_H9NYD86ZLP7OF471ym0bbzX_DkIzKBKLVaoOA240xigMIJkxcQL8lU20dMNZzckwhsQ5vvcAVhFzWFJI07xYpjncoYA&curl=https%3A%2F%2Fsin.creativecdn.com%2Fclicks%3Fid%3D20250413_ymK5ar7VT9PkA6s7gEWd%26%7BEXTRA_CLICK_PARAMS%7D&tdc=sin',
       'https://sin.creativecdn.com/imp-delivery?tk=XABbc0BQeZK9hF5OdGxouzR20sRbnUsn5g5XLH6jHuy2wOky6jz-b73FXM7Ajj69Og4BEfUGRKEtzlxes8R6vouQE-NfFZwwIcsmXzB9QV0jNDrkqom93TZf5aBwYOa1I5VSV_VyFQiMqBPtY3iOBDugGaoXm1IZD4B3YGu6hi213DhAQNosv6l5nIDGTCCsBQOLL8g3hT7ZfM7mqFFqvopV27JGVDmF5Ti7xgWaXALYmIc7U50STfcXGrFfmYfX6pNn1n9nrgtZr3TWOwvx_XfR4DF9b8-PGM5MYTjF9cBO57sG4rhMzx1wJK9TgYkW_X0lRzY9zncY5Dsk8ouuehgyZMRd3lWBmcoUc13J6eoNcrLQaXPuloR3ADemwzxiqLrkFqbjDlxD_zEv2WFHVSyo6S0Y8KApFpva7NbJ3UcHc2LaioQ6-geVV5koFegG4q8vlsoEEDoU0Pc7j-NWUw&curl=https%3A%2F%2Fsin.creativecdn.com%2Fclicks%3Fid%3D20250413_RdC1hMYicTrgE5Cveiuv%26%7BEXTRA_CLICK_PARAMS%7D&tdc=sin'
   ];
-
+  
+  if (urls.length === 0) {
+    console.error('URL配列が空です。');
+    return;
+  }
+  
   for(var i = 0; i < iframes.length; i++) {
     iframes[i].src = urls[r];
     //一番上に移動
