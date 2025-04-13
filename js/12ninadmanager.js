@@ -28,6 +28,6 @@ window.onload = function(){
 　    ifm.src = urls[r];
       //一番上に移動
       location.href = '#';
-    }
+    }, false);
   }
 }
