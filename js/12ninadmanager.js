@@ -54,7 +54,7 @@ window.onload = function(){
     console.error('URL配列が空です。');
     return;
   } else {
-    console.log(urls);
+    console.log(r);
   }
   for(var i = 0; i < iframes.length; i++) {
     iframes[i].src = urls[r];
