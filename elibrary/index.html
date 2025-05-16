@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1024">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+<meta name="format-detection" content="telephone=no">
+<title>elibrary</title>
+<link href="https://ela.kodomo.ne.jp/css/reset.css" rel="stylesheet" type="text/css">
+<link href="https://ela.kodomo.ne.jp/css/ela_icon.css" rel="stylesheet" type="text/css">
+<link href="https://ela.kodomo.ne.jp/css/base.css" rel="stylesheet" type="text/css">
+<link href="https://ela.kodomo.ne.jp/css/student-common.css" rel="stylesheet" type="text/css">
+<link href="https://ela.kodomo.ne.jp/css/gadget.css" rel="stylesheet" type="text/css">
+<!-- ↑ここまでページは共通css↑　-->
+
+<script type="text/javascript" src="https://ela.kodomo.ne.jp/js/jquery/jquery-3.4.1.min.js?rtp=1711913210"></script>
+
+<!-- imgでsrcした外部SVGの埋め込み -->
+<script type="text/javascript" src="https://ela.kodomo.ne.jp/js/desvg.js"></script>
+<script type="text/javascript" src="https://ela.kodomo.ne.jp/js/is.js"></script>
+<script>
+$(function(){
+  deSVG('.svg-inline-true', true);
+  $("body").addClass(getOsName() + " " + getBrowserName());// bodyに、os & browser class指定
+    function getOsName(){
+      if(is.windows())return 'windows';
+        if(is.ios())return 'ios';if(is.android())return 'android';
+        if(is.mac())return 'mac';
+        return '';
+    }
+    function getBrowserName(){
+        if(is.chrome())return 'chrome';if(is.firefox())return 'firefox';if(is.safari())return 'safari';
+        if(is.edge())return 'edge';if(is.ie())return 'ie';
+        return '';
+    }
+});
+</script> <!-- オリジナル -->
+
+</head>
+
+<body ontouchstart="" class="gridContainer cs-01">
+
+<!--:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
+<!--　ヘッダ　-->
+<!--:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
+<header class="header">
+
+  <!------------------------------------------------------------------------------->
+  <!--　elaロゴ　※desvg.jsでSVGソースを埋め込み-->
+  <!-- <h1 class="logo">以外の要素を全て排除すること -->
+  <h1 class="logo"><img src="/images/logo.svg" alt="ラインズeライブラリアドバンス" class="svg-inline-true"></h1>
+  <!--　家庭版マーク ※学校版は.hidden付加で非表示-->
+    <div class="katei-sign"><span class="contents">家庭版</span></div>
+  </header>
+
+
+<!--:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
+<!--　コンテンツ　-->
+<!--:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
+<div class="contentsWrapper">
+
+  <div class="contentsContainer page-home-error">
+
+    <div class="content-block">
+      
+                      <p>しばらく<ruby>操作<rt>そうさ</rt></ruby>をしなかったのでタイムアウトしました。<br>この<ruby>画面<rt>がめん</rt></ruby>を<ruby>閉<rt>と</rt></ruby>じて、デスクトップのショートカットかブックマークからやり<ruby>直<rt>なお</rt></ruby>してください。</p>
+                  </div>
+
+
+  </div>
+</div>
+
+
+
+<!--:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
+<!--　フッター　-->
+<!--:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
+<footer>
+  <div class="copyright">Copyright 12ninstudio</div>
+</footer>
+
+
+
+
+<!--:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
+<!--　モーダル　-->
+<!--:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
+
+<!------------------------------------------------------------------------------->
+<!-- モーダルラッパー　-->
+<div class="modal spec js-modal"  data-id="modal1">
+
+  <!------------------------------------------------------------------------------->
+  <!-- ウインドウ　-->
+  <div class="modal-window">
+
+    <!-- ウインドウ　--　ヘッダ（省略可）　-->
+    <h3>表示期間を選んでください</h3>
+
+    <!-- ウインドウ　--　ボディー　-->
+    <div class="modal-contents select-term">
+
+      │<br>
+      │<br>
+      モーダルの内容<br>
+      │<br>
+      │<br>
+
+      <!-- 各種ボタン　(省略可) ※.modal-contents内で最後に来る.content-block-->
+      <div class="content-block button-area">
+        <div class="button nor js-modal-close"><span class="contents">表示</span></div>
+        <div class="button nor js-modal-close"><span class="contents">キャンセル</span></div>
+      </div>
+
+      <!-- 閉じるボタン 　(省略可)-->
+      <div class="close-btn nor js-modal-close"></div>
+    </div>
+  </div>
+</div>
+
+<!------------------------------------------------------------------------------->
+<!-- モーダルレイヤー(透過背景)　-->
+<div id="modal-layer"></div>
+
+<!-- サンプルスクリプト (デザインと動作確認用)-->
+<script>
+  $('.js-btn-modal').on('click', function () {
+    $('#modal-layer').fadeIn();
+    var id = $(this).data('id');
+    $('.js-modal[data-id="modal' + id + '"]').fadeIn();
+  });
+
+  $('.js-modal-close').on('click', function () {
+    $('.js-modal').fadeOut();
+    $('#modal-layer').fadeOut();
+
+  });
+  $('#modal-layer').on('click', function () {
+    $('.js-modal').fadeOut();
+    $('#modal-layer').fadeOut();
+  });
+</script>
+</body>
+</html>
