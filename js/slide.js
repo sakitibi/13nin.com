@@ -5,6 +5,7 @@ var list1 = document.getElementById('list1');
 var list2 = document.getElementById('list2');
 var list3 = document.getElementById('list3');
 var list4 = document.getElementById('list4');
+var list5 = document.getElementById('list5');
 
 // クリックイベント
 
@@ -30,10 +31,16 @@ function nextClick() {
     list3.style.backgroundColor = 'transparent';
     list4.style.backgroundColor = '#000';
     count = 0;
-  } else {
+  } else if (slide.classList.contains('slider4') === true) {
     slide.classList.remove('slider4');
-    slide.classList.add('slider1');
+    slide.classList.add('slider5');
     list4.style.backgroundColor = 'transparent';
+    list5.style.backgroundColor = '#000';
+    count = 0;
+  } else {
+    slide.classList.remove('slider5');
+    slide.classList.add('slider1');
+    list5.style.backgroundColor = 'transparent';
     list1.style.backgroundColor = '#000';
     count = 0;
   }
