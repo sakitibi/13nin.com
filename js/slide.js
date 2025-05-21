@@ -97,6 +97,7 @@ function click1() {
   list2.style.backgroundColor = 'transparent';
   list3.style.backgroundColor = 'transparent';
   list4.style.backgroundColor = 'transparent';
+  list5.style.backgroundColor = 'transparent';
 }
 
 function click2() {
