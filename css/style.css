@@ -5,9 +5,6 @@ html {
 .body {
     font-family: Arial, sans-serif;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 150vh;
     margin: 0;
     background-color: #21bb5c;
 }
