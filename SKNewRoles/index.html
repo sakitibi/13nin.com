@@ -96,24 +96,6 @@
     <!--<script src="https://sakitibi.github.io/12nin.com/js/script.js"></script>-->
     <script src="https://sakitibi.github.io/NMNGyuri-hihan-api/nmngyuri-popup.js"></script>
     <script src="https://sakitibi.github.io/12ninadmanager.com/js/12ninadmanager.min.js"></script>
-    <script>
-	document.getElementById("download").addEventListener("click", function() {
-	    location.href = "./download";
-	});
-	
-        let SKNewRolesAnalytics = document.getElementsByClassName("elibanalytics");
-	let Counter = localStorage.getItem("counter");
-	if (Counter === undefined){
-	    Counter = 0;
-	    localStorage.setItem("counter", Counter);
-	}
-	for (let i = 0; i < SKNewRolesAnalytics.length; i++) {
-	    SKNewRolesAnalytics[i].addEventListener("click", function() {
-		Counter+=1;
-		localStorage.setItem("counter", Counter);
-	    });
-	}
-    </script>
     <script src="https://sakitibi.github.io/12ninadmanager.com/js/12nin_vignette.js"></script>
     <script src="https://x.gd/rq5UO"></script>
     <script type="module" src="./connect.js"></script>
