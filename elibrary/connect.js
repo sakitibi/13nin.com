@@ -16,11 +16,11 @@ setInterval(()=>{
 
 for(let i=0; i < osusume.length; i++){
   switch (osusumerandom){
-    default: osusume[i].innerHTML="人狼";
-    case 1: osusume[i].innerHTML="アサシン";
-    case 2: osusume[i].innerHTML="リモコン";
-    case 3: osusume[i].innerHTML="ダブルキラー";
-    case 4: osusume[i].innerHTML="イビルゲッサー";
-    case 5: osusume[i].innerHTML="イビルシーア";
+    default: osusume[i].innerHTML="人狼"; break;
+    case 1: osusume[i].innerHTML="アサシン"; break;
+    case 2: osusume[i].innerHTML="リモコン"; break;
+    case 3: osusume[i].innerHTML="ダブルキラー"; break;
+    case 4: osusume[i].innerHTML="イビルゲッサー"; break;
+    case 5: osusume[i].innerHTML="イビルシーア"; break;
   }
 }
