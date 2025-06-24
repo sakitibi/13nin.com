@@ -34,3 +34,16 @@ p {
 body {
     background-color: darkgreen;
 }
+button[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+button:not([aria-disabled]) {
+    cursor: pointer;
+}
+
+button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
