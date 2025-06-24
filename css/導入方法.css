@@ -34,6 +34,21 @@ p {
 body {
     background-color: darkgreen;
 }
+button{
+	padding: 10px 20px;
+	font-size: 16px;
+	margin: 10px;
+	cursor: pointer;
+	border: none;
+	border-radius: 5px;
+	color: #ffffff;
+	background-color: #002aff;
+	transition: background-color 0.3s;
+}
+
+button:hover{
+	background-color: #002b9c;
+}
 button[aria-disabled="true"] {
     cursor: not-allowed;
     opacity: 0.5;
