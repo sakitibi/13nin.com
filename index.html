@@ -1,32 +1,35 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head prefix="og: https://ogp.me/ns# fb: https://ogp.me/ns/fb# article: https://ogp.me/ns/article#">
     <meta charset="utf-8">
     <meta name="viewport" content="width=980">
-    <meta name="description" content="あさクラV1.21.207 Wiki*">
-    <meta property="og:url" content="https://wikiwiki.jp/12ninstudio/" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="あさクラV1.21.207 Wiki*" />
-    <meta property="og:description" content="あさクラV1.21.207 Wiki*" />
-    <meta property="og:site_name" content="あさクラV1.21.207 Wiki*" />
-    <meta property="og:image" content="https://icon.wikiwiki.jp/symbolicon/12ninstudio/ogImage/edb4e8be30ea.jpg" />
-    <title>あさクラV1.21.207 Wiki*</title>
 
-    <link rel="alternate" href="https://wikiwiki.jp/12ninstudio/::cmd/mixirss" type="application/rss+xml" title="RSS" />
+    <meta name="description" content="あさクラV1.21.2147483647 Wiki*">
+        <meta property="og:url" content="https://wikiwiki.jp/12ninstudio/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="あさクラV1.21.2147483647 Wiki*" />
+    <meta property="og:description" content="あさクラV1.21.2147483647 Wiki*" />
+    <meta property="og:site_name" content="あさクラV1.21.2147483647 Wiki*" />
+    <meta property="og:image" content="https://icon.wikiwiki.jp/symbolicon/12ninstudio/ogImage/edb4e8be30ea.jpg" />
+    <title>あさクラV1.21.2147483647 Wiki*</title>
+
+    <link rel="alternate" href="/12ninstudio/::cmd/mixirss" type="application/rss+xml" title="RSS" />
         <link rel="icon" href="https://icon.wikiwiki.jp/symbolicon/12ninstudio/favicon/8e4596c3afb4.jpg" />
     <link rel="apple-touch-icon" href="https://icon.wikiwiki.jp/symbolicon/12ninstudio/appleTouchIcon/8c467c6e992a.jpg" />
     <link rel="manifest" href="https://icon.wikiwiki.jp/symbolicon/12ninstudio/manifest.webmanifest">
-    <link rel="stylesheet" href="https://cdn.wikiwiki.jp/to/w/common/assets/dist/wikiwiki-82a61b752418277ebf23.min.css" type="text/css">
+    <link rel="stylesheet" href="https://cdn.wikiwiki.jp/to/w/common/assets/dist/wikiwiki-10a34703a91a8c7b77d8.min.css" type="text/css">
+<link rel="stylesheet" href="https://cdn.wikiwiki.jp/to/w/common/assets/dist/wikiwiki-ex1-ca7abd155d2d8393da00.min.css" type="text/css">
 <link rel="stylesheet" href="https://cdn.wikiwiki.jp/to/w/common/assets/dist/skin-default_pink-5d0beb202473e8304522.min.css" type="text/css">
     
     <script type="text/javascript" src="https://cdn.wikiwiki.jp/to/w/common/assets/dist/ad-1bf004520fc167abbea6.min.js"></script>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-4LX8LZQS8J"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3Y8FN9EFS7"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-4LX8LZQS8J', {
+    gtag('config', 'G-3Y8FN9EFS7', {
         'content_group': '12ninstudio'
     });
     gtag('config', 'G-4LX8LZQS8J');
@@ -59,9 +62,16 @@
         var wi_referer = "unknown";
     }
 
+    // Chromium系判定
+    function isChromium() {
+        var ua = navigator.userAgent;
+        // Edge, Opera, Chrome, Chromium, Brave など
+        return /\b(Chrome|Chromium|Edg|OPR|Brave)\b/.test(ua) && !/Silk|UCBrowser|SamsungBrowser|CriOS|FxiOS|OPiOS|EdgiOS/.test(ua);
+    }
+
     var wi_ismobile;
     var wi_device;
-    if (navigator.userAgentData) {
+    if (isChromium() && navigator.userAgentData) {
         wi_ismobile = navigator.userAgentData.mobile;
         if (wi_ismobile) {
             if (navigator.userAgentData.platform === "Android") {
@@ -156,8 +166,18 @@ if (document.documentElement.clientWidth > 406) {
 }
 
 window.defineSlotFlux = [];
+    if (wi_isinbound && wi_ismobile && wi_group == "N" && wi_agreement === "false") {
+      defineSlotFlux.push({"slotID": "div-gpt-ad-1563430750445-0", "sizes": [[300,250]], "slotName":"WIKIWIKI_SP_INBOUND"});
+    } else if (wi_isinbound && wi_group == "N" && wi_agreement === "false") {
+      defineSlotFlux.push({"slotID": "div-gpt-ad-1567409776345-0", "sizes": [[300,250]], "slotName":"WIKIWIKI_PC_INBOUND"});
+      defineSlotFlux.push({"slotID": "div-gpt-ad-1658802281376-0", "sizes": [[300,250]], "slotName":"WIKIWIKI_PC_INBOUND_RIGHT"});
+    }
+  if (wi_ismobile && !wi_isinbound) {
+    defineSlotFlux.push({"slotID": "div-gpt-ad-1567408559923-0", "sizes": [[300,250]], "slotName":"WIKIWIKI_SP_SECOND"});
+  } else if (!wi_ismobile && (!wi_isinbound || (wi_isinbound && wi_group !== "N"))) {
     defineSlotFlux.push({"slotID": "div-gpt-ad-1567408559923-0", "sizes": [[300,250]], "slotName":"WIKIWIKI_PC_BOTTOM_LEFT"});
     defineSlotFlux.push({"slotID": "div-gpt-ad-1658912377789-0", "sizes": [[300,250]], "slotName":"WIKIWIKI_PC_BOTTOM_RIGHT"});
+  }
 if (wi_ismobile && wi_isportrait) {
   defineSlotFlux.push({"slotID": "div-gpt-ad-1563441919648-0", "sizes": [[320, 100], [320, 50]], "slotName":"WIKIWIKI_SP_OVERLAY"});
 }
@@ -193,14 +213,27 @@ if (defineSlotFlux.length) {
 </script>
 <script>
 googletag.cmd.push(function() {
-    googletag.defineSlot('/19033742/WIKIWIKI_PC_BOTTOM_LEFT',[[336,280],[300,250]],
-    'div-gpt-ad-1567408559923-0').addService(googletag.pubads());
-    googletag.defineSlot('/19033742/WIKIWIKI_PC_BOTTOM_RIGHT',[[336,280],[300,250]],
-    'div-gpt-ad-1658912377789-0').addService(googletag.pubads());
-}
-if (wi_ismobile && wi_isportrait) {
-    googletag.defineSlot('/19033742/WIKIWIKI_SP_OVERLAY',[[320,100],[320,50],[1,1]],'div-gpt-ad-1563441919648-0').addService(googletag.pubads());
-}
+    if (wi_isinbound && wi_ismobile && wi_group == "N" && wi_agreement === "false") {
+      googletag.defineSlot('/19033742/WIKIWIKI_SP_INBOUND',[[300,250]],
+        'div-gpt-ad-1563430750445-0').setCollapseEmptyDiv(true).addService(googletag.pubads());
+    } else if (wi_isinbound && wi_group == "N" && wi_agreement === "false") {
+      googletag.defineSlot('/19033742/WIKIWIKI_PC_INBOUND',[[336,280],[300,250]],
+        'div-gpt-ad-1567409776345-0').setCollapseEmptyDiv(true).addService(googletag.pubads());
+      googletag.defineSlot('/19033742/WIKIWIKI_PC_INBOUND_RIGHT',[[336,280],[300,250]],
+        'div-gpt-ad-1658802281376-0').setCollapseEmptyDiv(true).addService(googletag.pubads());
+    }
+    if (wi_ismobile && !wi_isinbound) {
+        googletag.defineSlot('/19033742/WIKIWIKI_SP_SECOND',[[300,250]],
+        'div-gpt-ad-1567408559923-0').addService(googletag.pubads());
+    } else if (!wi_ismobile && (!wi_isinbound || (wi_isinbound && wi_group !== "N"))) {
+        googletag.defineSlot('/19033742/WIKIWIKI_PC_BOTTOM_LEFT',[[336,280],[300,250]],
+        'div-gpt-ad-1567408559923-0').addService(googletag.pubads());
+        googletag.defineSlot('/19033742/WIKIWIKI_PC_BOTTOM_RIGHT',[[336,280],[300,250]],
+        'div-gpt-ad-1658912377789-0').addService(googletag.pubads());
+    }
+    if (wi_ismobile && wi_isportrait) {
+        googletag.defineSlot('/19033742/WIKIWIKI_SP_OVERLAY',[[320,100],[320,50],[1,1]],'div-gpt-ad-1563441919648-0').addService(googletag.pubads());
+    }
     googletag.pubads().setTargeting("gpolicy","sunny");
     googletag.pubads().setTargeting("site","12ninstudio");
     googletag.pubads().collapseEmptyDivs();
@@ -344,7 +377,7 @@ googletag.cmd.push(function() {
 
 <link rel="preload" as="script" href="https://pdn.adingo.jp/p.js">
 <link rel="preconnect" href="https://sh.adingo.jp" crossorigin="use-credentials">
-    <link rel="canonical" href="https://sakitibi.github.io/12nin.com/index.html">
+    <link rel="canonical" href="https://wikiwiki.jp/12ninstudio/">
     <style>
 @media screen and (min-width: 820px) {
   .container-wrapper {
@@ -384,25 +417,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="container clearfix">
                                 <div id="header" class="user-header">
-                <div style="text-align:right"><span style="font-size:20px"><span class="wikicolor" style="color:white; background-color:red"><a href="https://c.kuku.lu/6xm75ywv"  rel="nofollow"><strong>緊急チャットルームを開設しました</strong></a></span></span><span style="font-size:20px"><span class="wikicolor" style="color:white; background-color:lime"><a href="https://wikiwiki.jp/12ninstudio/" title="FrontPage" class="rel-wiki-page"><strong>あさクラV1.21.207 Wiki*</strong></a></span></span></div>            </div>
+                <marquee bgcolor="black" behavior="slide"><span style="color:lime;font-size:20px;">餅尾急行ワールドに軍事侵攻中</span></marquee>
+<marquee bgcolor="black" behavior="slide"><span style="color:lime;font-size:20px;">応戦にご協力をお願いします</span></marquee>
+<div style="text-align:center"><span style="font-size:20px">超大型アップデートまであと<span class="realtime-countdown" data-limit="1751641200" data-mode="full"><span class="countdown-remaining"></span><span class="countdown-contents" style="display: none;"><span style="font-size:50px"><span class="wikicolor" style="color:white; background-color:blue"><strong>超大型アップデートが来ました!!!</strong></span></span></span></span></span></div>
+<div style="text-align:right"><span style="font-size:20px"><span class="wikicolor" style="color:white; background-color:red"><a href="https://c.kuku.lu/6xm75ywv"  rel="nofollow"><strong>緊急チャットルームを開設しました</strong></a></span></span><span style="font-size:20px"><span class="wikicolor" style="color:white; background-color:lime"><a href="/12ninstudio/" title="FrontPage" class="rel-wiki-page"><strong>あさクラV1.21.2147483647 Wiki*</strong></a></span></span></div>            </div>
                 <div class="toolbox-container system-ui clearfix" id="naviframe">
             <div class="toolbox toolbox-desktop navibar-container">
-                <div id="navigator">[ <a href="https://wikiwiki.jp/12ninstudio/">ホーム</a> | <a href="https://wikiwiki.jp/12ninstudio/::cmd/newpage?refer=FrontPage" rel="nofollow">新規</a> | <a href="https://wikiwiki.jp/12ninstudio/::cmd/edit?page=FrontPage" rel="nofollow">編集</a> | <a href="https://wikiwiki.jp/12ninstudio/::cmd/attach?page=FrontPage" rel="nofollow">添付</a> ]</div>            </div>
+                <div id="navigator">[ <a href="/12ninstudio/">ホーム</a> | <a href="/12ninstudio/::cmd/newpage?refer=FrontPage" rel="nofollow">新規</a> | <a href="/12ninstudio/::cmd/edit?page=FrontPage" rel="nofollow">編集</a> | <a href="/12ninstudio/::cmd/attach?page=FrontPage" rel="nofollow">添付</a> ]</div>            </div>
             <div class="toolbox toolbox-desktop toolbar-container">
-                <div class="toolbar"><a href="https://wikiwiki.jp/12ninstudio/::cmd/list" title="一覧" rel="nofollow"><span class="system-icon toolbar list"></span></a>
-<a href="https://wikiwiki.jp/12ninstudio/RecentChanges" title="最終更新" rel="nofollow"><span class="system-icon toolbar recent"></span></a>
-<a href="https://wikiwiki.jp/12ninstudio/::cmd/diff?page=FrontPage" title="差分" rel="nofollow"><span class="system-icon toolbar diff"></span></a>
-<a href="https://wikiwiki.jp/12ninstudio/::cmd/backup?page=FrontPage" title="バックアップ" rel="nofollow"><span class="system-icon toolbar backup"></span></a>
-<a href="https://wikiwiki.jp/12ninstudio/::cmd/unfreeze?page=FrontPage" title="凍結解除" rel="nofollow"><span class="system-icon toolbar unfreeze"></span></a>
-<a href="https://wikiwiki.jp/12ninstudio/::cmd/template?refer=FrontPage" title="複製" rel="nofollow"><span class="system-icon toolbar copy"></span></a>
-<a href="https://wikiwiki.jp/12ninstudio/::cmd/rename?refer=FrontPage" title="名前変更" rel="nofollow"><span class="system-icon toolbar rename"></span></a>
-<a href="https://wikiwiki.jp/12ninstudio/::cmd/help" title="ヘルプ" rel="nofollow"><span class="system-icon toolbar help"></span></a></div>            </div>
+                <div class="toolbar"><a href="/12ninstudio/::cmd/list" title="一覧" rel="nofollow"><span class="system-icon toolbar list"></span></a>
+<a href="/12ninstudio/RecentChanges" title="最終更新" rel="nofollow"><span class="system-icon toolbar recent"></span></a>
+<a href="/12ninstudio/::cmd/diff?page=FrontPage" title="差分" rel="nofollow"><span class="system-icon toolbar diff"></span></a>
+<a href="/12ninstudio/::cmd/backup?page=FrontPage" title="バックアップ" rel="nofollow"><span class="system-icon toolbar backup"></span></a>
+<a href="/12ninstudio/::cmd/unfreeze?page=FrontPage" title="凍結解除" rel="nofollow"><span class="system-icon toolbar unfreeze"></span></a>
+<a href="/12ninstudio/::cmd/template?refer=FrontPage" title="複製" rel="nofollow"><span class="system-icon toolbar copy"></span></a>
+<a href="/12ninstudio/::cmd/rename?refer=FrontPage" title="名前変更" rel="nofollow"><span class="system-icon toolbar rename"></span></a>
+<a href="/12ninstudio/::cmd/help" title="ヘルプ" rel="nofollow"><span class="system-icon toolbar help"></span></a></div>            </div>
             <div class="toolbox toolbox-mobile toolbar-container">
-                <div class="toolbar"><a href="https://wikiwiki.jp/12ninstudio/" title="ホーム"><span class="system-icon toolbar top"></span></a>
-<a href="https://wikiwiki.jp/12ninstudio/RecentChanges" title="最終更新" rel="nofollow"><span class="system-icon toolbar recent"></span></a>
+                <div class="toolbar"><a href="/12ninstudio/" title="ホーム"><span class="system-icon toolbar top"></span></a>
+<a href="/12ninstudio/RecentChanges" title="最終更新" rel="nofollow"><span class="system-icon toolbar recent"></span></a>
 <a id="menu-in-nav" href="#menubar" class="menu-in-nav">Menu<i class="fas fa-arrow-alt-down"></i></a></div>            </div>
             <div class="toolbox toolbox-searchbar">
-                <form action="https://wikiwiki.jp/12ninstudio/::cmd/search" method="get">
+                <form action="/12ninstudio/::cmd/search" method="get">
                     <input type="search"  name="word" value="" size="16" placeholder="サイト内検索">
                     <input type="hidden" name="type" value="AND">
                     <input type="submit" value="検索">
@@ -413,10 +449,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div style="display: none;">
         <div id="edit-menu" class="system-ui">
             <div id="edit-menu-items">
-                <ul><li><a href="https://wikiwiki.jp/12ninstudio/::cmd/newpage?refer=FrontPage" rel="nofollow"><span class='system-icon toolbar new'></span> 新規</a></li><li><a href="https://wikiwiki.jp/12ninstudio/::cmd/edit?page=FrontPage" rel="nofollow"><span class='system-icon toolbar edit'></span> 編集</a></li><li><a href="https://wikiwiki.jp/12ninstudio/::cmd/attach?page=FrontPage" rel="nofollow"><span class='system-icon toolbar upload'></span> 添付</a></li></ul>
-<ul><li><a href="https://wikiwiki.jp/12ninstudio/::cmd/list" rel="nofollow"><span class='system-icon toolbar list'></span> 一覧</a></li><li><a href="https://wikiwiki.jp/12ninstudio/RecentChanges" rel="nofollow"><span class='system-icon toolbar recent'></span> 最終更新</a></li><li><a href="https://wikiwiki.jp/12ninstudio/::cmd/diff?page=FrontPage" rel="nofollow"><span class='system-icon toolbar diff'></span> 差分</a></li><li><a href="https://wikiwiki.jp/12ninstudio/::cmd/backup?page=FrontPage" rel="nofollow"><span class='system-icon toolbar backup'></span> バックアップ</a></li></ul>
-<ul><li><a href="https://wikiwiki.jp/12ninstudio/::cmd/unfreeze?page=FrontPage" rel="nofollow"><span class='system-icon toolbar unfreeze'></span> 凍結解除</a></li><li><a href="https://wikiwiki.jp/12ninstudio/::cmd/template?refer=FrontPage" rel="nofollow"><span class='system-icon toolbar copy'></span> 複製</a></li><li><a href="https://wikiwiki.jp/12ninstudio/::cmd/rename?refer=FrontPage" rel="nofollow"><span class='system-icon toolbar rename'></span> 名前変更</a></li></ul>
-<ul><li><a href="https://wikiwiki.jp/12ninstudio/::cmd/help" rel="nofollow"><span class='system-icon toolbar help'></span> ヘルプ</a></li></ul>
+                <ul><li><a href="/12ninstudio/::cmd/newpage?refer=FrontPage" rel="nofollow"><span class='system-icon toolbar new'></span> 新規</a></li><li><a href="/12ninstudio/::cmd/edit?page=FrontPage" rel="nofollow"><span class='system-icon toolbar edit'></span> 編集</a></li><li><a href="/12ninstudio/::cmd/attach?page=FrontPage" rel="nofollow"><span class='system-icon toolbar upload'></span> 添付</a></li></ul>
+<ul><li><a href="/12ninstudio/::cmd/list" rel="nofollow"><span class='system-icon toolbar list'></span> 一覧</a></li><li><a href="/12ninstudio/RecentChanges" rel="nofollow"><span class='system-icon toolbar recent'></span> 最終更新</a></li><li><a href="/12ninstudio/::cmd/diff?page=FrontPage" rel="nofollow"><span class='system-icon toolbar diff'></span> 差分</a></li><li><a href="/12ninstudio/::cmd/backup?page=FrontPage" rel="nofollow"><span class='system-icon toolbar backup'></span> バックアップ</a></li></ul>
+<ul><li><a href="/12ninstudio/::cmd/unfreeze?page=FrontPage" rel="nofollow"><span class='system-icon toolbar unfreeze'></span> 凍結解除</a></li><li><a href="/12ninstudio/::cmd/template?refer=FrontPage" rel="nofollow"><span class='system-icon toolbar copy'></span> 複製</a></li><li><a href="/12ninstudio/::cmd/rename?refer=FrontPage" rel="nofollow"><span class='system-icon toolbar rename'></span> 名前変更</a></li></ul>
+<ul><li><a href="/12ninstudio/::cmd/help" rel="nofollow"><span class='system-icon toolbar help'></span> ヘルプ</a></li></ul>
 
             </div>
         </div>
@@ -425,17 +461,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="container">
         <div class="clearfix">
             <div id="breadcrumbs" class="system-ui">
-                <div id="topicpath"><a href="https://wikiwiki.jp/12ninstudio/" title="FrontPage"><i class="fa fa-home" style="margin-left: 6px; display: inline-block; min-width: 1.2em;"></i></a></div>            </div>
+                <div id="topicpath"><a href="/12ninstudio/" title="FrontPage"><i class="fa fa-home" style="margin-left: 6px; display: inline-block; min-width: 1.2em;"></i></a></div>            </div>
             <div id="system-icon-container" class="system-ui">
-                                <a class="is-frozen-icon single-system-icon" href="https://wikiwiki.jp/12ninstudio/::cmd/unfreeze?page=FrontPage">
+                                <a class="is-frozen-icon single-system-icon" href="/12ninstudio/::cmd/unfreeze?page=FrontPage">
                     <i class="fas fa-lock-alt"></i>
                 </a>
                                 <span id="share-button-root"></span>                <span id="admin-contact-root" class="single-system-icon"></span>
                 <div id="load-panel-root"></div>
-                <span id="control-panel" class="single-system-icon">
+                <span id="admin-login" class="single-system-icon">
                     
-<a href="https://c.wikiwiki.jp/login" title="コントロールパネル">
-    <i class="fas fa-cog"></i>
+<a class="admin-login-status" href="/12ninstudio/::cmd/admin_login?return_to=%2F12ninstudio%2F" title="未ログイン">
+    <i class="fa-solid fa-cog"></i>
 </a>
                 </span>
             </div>
@@ -450,7 +486,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                                 <div id="title">
                                             <h1 class="title">あさクラ</h1>
                                                                 <div id="lastmodified">
-                            Last-modified: 2025-05-08 (木) 20:09:36                                                            <span class="lastmodified-file-itself tooltip" data-tippy-content="このページ自体の更新: 2025-03-22 (土) 19:34:02"><i class="fas fa-file-signature"></i></span>
+                            Last-modified: 2025-06-26 (木) 21:41:58                                                            <span class="lastmodified-file-itself tooltip" data-tippy-content="このページ自体の更新: 2025-06-25 (水) 17:45:49"><i class="fas fa-file-signature"></i></span>
                                                     </div>
                                     </div>
 
@@ -545,12 +581,83 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div id="content">
                                         
 <div style="text-align:center"><span style="font-size:20px">今日のおすすめ</span></div>
-<ul class="list1"><li><a href="https://wikiwiki.jp/12ninstudio/%E5%90%8D%E5%89%8D%E3%81%AF%E9%95%B7%E3%81%84%E6%96%B9%E3%81%8C%E6%9C%89%E5%88%A9%E7%94%A8%E3%81%AE%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E5%8F%88%E3%81%AF%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E6%AC%84" title="名前は長い方が有利用のテンプレ又はコメント欄" class="rel-wiki-page">名前は長い方が有利戦争応戦用のコメント欄</a></li>
-<li><a href="https://wikiwiki.jp/12ninstudio/%E4%BA%A4%E6%B5%81%E5%AE%A4" title="交流室" class="rel-wiki-page">交流室</a></li>
-<li><a href="https://wikiwiki.jp/12ninstudio/%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B" title="お知らせ" class="rel-wiki-page">お知らせ</a></li>
-<li><a href="https://wikiwiki.jp/12ninstudio/%E9%80%A3%E7%B5%A1%E6%8E%B2%E7%A4%BA%E6%9D%BF" title="連絡掲示板" class="rel-wiki-page">連絡掲示板</a></li>
-<li><a href="https://wikiwiki.jp/12ninstudio/%E5%90%8D%E5%89%8D%E3%81%AF%E9%95%B7%E3%81%84%E6%96%B9%E3%81%8C%E6%9C%89%E5%88%A9%E8%A2%AB%E5%AE%B3%E8%80%85" title="名前は長い方が有利被害者" class="rel-wiki-page">名前は長い方が有利被害者</a>
-<div style="text-align:center"><span style="font-size:20px">あさクラワールドの<!--autolink--><a href="https://wikiwiki.jp/12ninstudio/%E5%8F%82%E5%8A%A0%E8%80%85%E4%B8%80%E8%A6%A7" title="参加者一覧" class="rel-wiki-page">参加者一覧</a><!--/autolink--></span></div>
+<ul class="list1"><li><a href="/12ninstudio/%E5%90%8D%E5%89%8D%E3%81%AF%E9%95%B7%E3%81%84%E6%96%B9%E3%81%8C%E6%9C%89%E5%88%A9%E7%94%A8%E3%81%AE%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E5%8F%88%E3%81%AF%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E6%AC%84" title="名前は長い方が有利用のテンプレ又はコメント欄" class="rel-wiki-page">名前は長い方が有利戦争応戦用のコメント欄</a></li>
+<li><a href="/12ninstudio/%E5%90%8D%E5%89%8D%E3%81%AF%E9%95%B7%E3%81%84%E6%96%B9%E3%81%8C%E6%9C%89%E5%88%A9%E8%A2%AB%E5%AE%B3%E8%80%85" title="名前は長い方が有利被害者" class="rel-wiki-page">名前は長い方が有利被害者</a></li>
+<li><a href="/12ninstudio/%E3%83%9E%E3%82%A4%E9%89%84%E3%83%8D%E3%83%83%E3%83%88%E6%92%B2%E6%BB%85%E5%A7%94%E5%93%A1%E4%BC%9A" title="マイ鉄ネット撲滅委員会" class="rel-wiki-page">マイ鉄ネット撲滅委員会</a></li>
+<li><a href="/12ninstudio/%E4%BA%A4%E6%B5%81%E5%AE%A4" title="交流室" class="rel-wiki-page">交流室</a></li>
+<li><a href="/12ninstudio/%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B" title="お知らせ" class="rel-wiki-page">お知らせ</a>
+<a id="tvote0"></a>
+<form action="/12ninstudio/::cmd/tvote?refer=13nin.com%2Fvote&tvote_no=0" method="post"
+    class="tvote-form security-check-interrupt"
+    data-trolling-defence="on" data-page="13nin.com/vote"
+    data-interrupt="none" data-unfreeze-url=""
+ >
+ <table class="tvote" summary="tvote">
+  <tr>
+   <td align="left" class="vote_label" style="padding-left:0.5em;padding-right:0.5em"><strong>選択肢</strong>
+    <input type="hidden" name="digest" value="e8142ba9ea5d9b1eaa227b7f489117f3" />
+   </td>
+   <td align="right" class="vote_label"><strong>得票数</strong></td>
+   <td align="right" class="vote_label"><strong>得票率</strong></td>
+   <td align="center" class="vote_label"><strong>投票</strong></td>
+  </tr>  <tr>
+   <td align="left" class="vote_td2" style="padding-left:0.5em;padding-right:0.5em">SKNewRolesの開発</td>
+   <td align="right" class="vote_td2" style="padding-left:0.5em;padding-right:0.5em">1</td>
+   <td align="right" class="vote_td2" style="padding-left:0.5em;padding-right:0.5em">100.0%</td>
+   <td align="right" class="vote_td2" style="padding-left:0.5em;padding-right:0.5em"><input type="submit" name="tvote_534B4E6577526F6C6573A4CEB3ABC8AF" value="投票" class="submit"></td></tr>  <tr>
+   <td align="left" class="vote_td1" style="padding-left:0.5em;padding-right:0.5em">TrainBuildersの開発</td>
+   <td align="right" class="vote_td1" style="padding-left:0.5em;padding-right:0.5em">0</td>
+   <td align="right" class="vote_td1" style="padding-left:0.5em;padding-right:0.5em">0.0%</td>
+   <td align="right" class="vote_td1" style="padding-left:0.5em;padding-right:0.5em"><input type="submit" name="tvote_547261696E4275696C64657273A4CEB3ABC8AF" value="投票" class="submit"></td></tr>  <tr>
+   <td align="left" class="vote_td2" style="padding-left:0.5em;padding-right:0.5em">名前は長い方が有利に法的措置</td>
+   <td align="right" class="vote_td2" style="padding-left:0.5em;padding-right:0.5em">0</td>
+   <td align="right" class="vote_td2" style="padding-left:0.5em;padding-right:0.5em">0.0%</td>
+   <td align="right" class="vote_td2" style="padding-left:0.5em;padding-right:0.5em"><input type="submit" name="tvote_CCBEC1B0A4CFC4B9A4A4CAFDA4ACCDADCDF8A4CBCBA1C5AAC1BCC3D6" value="投票" class="submit"></td></tr>  <tr>
+   <td align="left" class="vote_td1" colspan="3" style="padding-left:0.5em;padding-right:0.5em">その他
+<input type="text" size="40" name="tvote_add" value="" />
+</td>
+   <td align="right" class="vote_td1" style="padding-left:0.5em;padding-right:0.5em">
+<input type="submit" name="add_submit" value="投票" class="submit">
+   </td>
+  </tr>  <tr>
+   <td align="left" class="vote_td2" style="padding-left:0.5em;padding-right:0.5em">投票総数</td>
+   <td align="right" class="vote_td2" style="padding-left:0.5em;padding-right:0.5em">1</td>
+   <td align="right" class="vote_td2" style="padding-left:0.5em;padding-right:0.5em"></td>
+   <td align="right" class="vote_td2" style="padding-left:0.5em;padding-right:0.5em"></td>
+  </tr></table></form>
+<a id="tvote1"></a>
+<form action="/12ninstudio/::cmd/tvote?refer=13nin.com%2Fvote&tvote_no=1" method="post"
+    class="tvote-form security-check-interrupt"
+    data-trolling-defence="on" data-page="13nin.com/vote"
+    data-interrupt="none" data-unfreeze-url=""
+ >
+ <table class="tvote" summary="tvote">
+  <tr>
+   <td align="left" class="vote_label" style="padding-left:0.5em;padding-right:0.5em"><strong>選択肢</strong>
+    <input type="hidden" name="digest" value="e8142ba9ea5d9b1eaa227b7f489117f3" />
+   </td>
+   <td align="right" class="vote_label"><strong>得票数</strong></td>
+   <td align="right" class="vote_label"><strong>得票率</strong></td>
+   <td align="center" class="vote_label"><strong>投票</strong></td>
+  </tr>  <tr>
+   <td align="left" class="vote_td2" style="padding-left:0.5em;padding-right:0.5em">餅尾戦争を支持</td>
+   <td align="right" class="vote_td2" style="padding-left:0.5em;padding-right:0.5em">2</td>
+   <td align="right" class="vote_td2" style="padding-left:0.5em;padding-right:0.5em">100.0%</td>
+   <td align="right" class="vote_td2" style="padding-left:0.5em;padding-right:0.5em">投票済</td></tr>  <tr>
+   <td align="left" class="vote_td1" colspan="3" style="padding-left:0.5em;padding-right:0.5em">その他
+<input type="text" size="40" name="tvote_add" value="" />
+</td>
+   <td align="right" class="vote_td1" style="padding-left:0.5em;padding-right:0.5em">
+<input type="submit" name="add_submit" value="投票" class="submit">
+   </td>
+  </tr>  <tr>
+   <td align="left" class="vote_td2" style="padding-left:0.5em;padding-right:0.5em">投票総数</td>
+   <td align="right" class="vote_td2" style="padding-left:0.5em;padding-right:0.5em">2</td>
+   <td align="right" class="vote_td2" style="padding-left:0.5em;padding-right:0.5em"></td>
+   <td align="right" class="vote_td2" style="padding-left:0.5em;padding-right:0.5em"></td>
+  </tr></table></form>
+
+<div style="text-align:center"><span style="font-size:20px">あさクラワールドの<!--autolink--><a href="/12ninstudio/%E5%8F%82%E5%8A%A0%E8%80%85%E4%B8%80%E8%A6%A7" title="参加者一覧" class="rel-wiki-page">参加者一覧</a><!--/autolink--></span></div>
 
 <div class="accordion-container ">
     <h2 class="accordion-header">
@@ -564,7 +671,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <i class="fas fa-minus-square visible-on-open"></i>
         2021年1月～3月参加
     </h3>
-    <div class="accordion-content"><div class="h-scrollable"><table><tbody><tr><th>名前/活動母体</th><th>版</th><th>方式</th><th>参加日</th><th>活動場所リンク</th><th>活動場所</th></tr><tr><th>さきちび</th><td>統合版NintendoSwitch</td><td>バニラ</td><td>2021/01/01</td><td><a class="ext" href="https://youtube.com/@12nintvSakitibi/?sub_confirmation=1"  rel="nofollow">https://youtube.com/@12nintvSakitibi/?sub_confirmation=1<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@12nintvSakitibi/?sub_confirmation=1" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>つばき<br class="spacer">ちゃん<br class="spacer">つばきくん<br class="spacer">ちび<br class="spacer">ちゃん</th><td>統合版NintendoSwitch</td><td>バニラ</td><td>2021/01/01</td><td><a class="ext" href="https://youtube.com/@otibinominecraft"  rel="nofollow">https://youtube.com/@otibinominecraft<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@otibinominecraft" data-frame="_blank"></span></a></td><td>YouTube</td></tr></tbody></table></div>
+    <div class="accordion-content"><div class="h-scrollable"><table><tbody><tr><th>名前/活動母体</th><th>版</th><th>方式</th><th>参加日</th><th>活動場所リンク</th><th>活動場所</th></tr><tr><th>さきちび</th><td>統合版NintendoSwitch2</td><td>バニラ</td><td>2021/01/01</td><td><a class="ext" href="https://youtube.com/channel/UCJcP2mfDCtKnADrbDDjT_8g/?sub_confirmation=1"  rel="nofollow">https://youtube.com/channel/UCJcP2mfDCtKnADrbDDjT_8g/?sub_confirmation=1<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/channel/UCJcP2mfDCtKnADrbDDjT_8g/?sub_confirmation=1" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>つばき<br class="spacer">ちゃん<br class="spacer">つばきくん<br class="spacer">ちび<br class="spacer">ちゃん</th><td>統合版NintendoSwitch2</td><td>バニラ</td><td>2021/01/01</td><td><a class="ext" href="https://youtube.com/@otibinominecraft"  rel="nofollow">https://youtube.com/@otibinominecraft<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@otibinominecraft" data-frame="_blank"></span></a></td><td>YouTube</td></tr></tbody></table></div>
 </div>
 </div>
 <div class="accordion-container ">
@@ -643,7 +750,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <i class="fas fa-minus-square visible-on-open"></i>
         2023年1月～3月参加
     </h3>
-    <div class="accordion-content"><div class="h-scrollable"><table><tbody><tr><th>名前/活動母体</th><th>版</th><th>方式</th><th>参加日</th><th>活動場所リンク</th><th>活動場所</th></tr><tr><th>あげるくん<br class="spacer">あげる<br class="spacer">ちゃん<br class="spacer">あみりい</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/01/26</td><td><a class="ext" href="https://youtube.com/@SHIMAJIROCH"  rel="nofollow">https://youtube.com/@SHIMAJIROCH<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@SHIMAJIROCH" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>ヒカキン</th><td>統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@HikakinGames"  rel="nofollow">https://youtube.com/@HikakinGames<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@HikakinGames" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>28<br class="spacer">(ふたば)</th><td>Java版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@28Games28"  rel="nofollow">https://youtube.com/@28Games28<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@28Games28" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>72<br class="spacer">(なつ)</th><td>Java版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@72なつちゃんねる"  rel="nofollow">https://youtube.com/@72なつちゃんねる<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@72なつちゃんねる" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>ちろぴの</th><td>Java版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@tiropino"  rel="nofollow">https://youtube.com/@tiropino<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@tiropino" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>MK</th><td>統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@mkgamech"  rel="nofollow">https://youtube.com/@mkgamech<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@mkgamech" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>めめんと<br class="spacer">もり</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@Memento-mori"  rel="nofollow">https://youtube.com/@Memento-mori<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@Memento-mori" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>Latte</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@Latte1729"  rel="nofollow">https://youtube.com/@Latte1729<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@Latte1729" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>ウパパロン</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@upapalon25"  rel="nofollow">https://youtube.com/@upapalon25<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@upapalon25" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>ぐさお</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@Gusao"  rel="nofollow">https://youtube.com/@Gusao<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@Gusao" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>みぞれ</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@Mizore471"  rel="nofollow">https://youtube.com/@Mizore471<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@Mizore471" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>ひなにい</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@HinaRuka21"  rel="nofollow">https://youtube.com/@HinaRuka21<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@HinaRuka21" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>Sレイマリ</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@S_Reimari"  rel="nofollow">https://youtube.com/@S_Reimari<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@S_Reimari" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>ぜんこぱす</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@zennkopasu"  rel="nofollow">https://youtube.com/@zennkopasu<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@zennkopasu" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>メテヲ</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@meteor_s7"  rel="nofollow">https://youtube.com/@meteor_s7<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@meteor_s7" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>八幡宮</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@HachimanD"  rel="nofollow">https://youtube.com/@HachimanD<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@HachimanD" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>ガンマス</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@GGunmas"  rel="nofollow">https://youtube.com/@GGunmas<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@GGunmas" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>iemon</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@iemon2353"  rel="nofollow">https://youtube.com/@iemon2353<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@iemon2353" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>レイラー</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@laloryukkuri"  rel="nofollow">https://youtube.com/@laloryukkuri<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@laloryukkuri" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>アナケナ<br class="spacer">ファミリー</th><td>統合版<br class="spacer">Nin<br class="spacer">tendo<br class="spacer">Swi<br class="spacer">tch</td><td>バニラ</td><td>2023/03/01</td><td><a class="ext" href="https://youtube.com/@anakena.M"  rel="nofollow">https://youtube.com/@anakena.M<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@anakena.M" data-frame="_blank"></span></a></td><td>YouTube</td></tr></tbody></table></div>
+    <div class="accordion-content"><div class="h-scrollable"><table><tbody><tr><th>名前/活動母体</th><th>版</th><th>方式</th><th>参加日</th><th>活動場所リンク</th><th>活動場所</th></tr><tr><th>あげるくん<br class="spacer">あげる<br class="spacer">ちゃん<br class="spacer">あみりい</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/01/26</td><td><a class="ext" href="https://youtube.com/@SHIMAJIROCH"  rel="nofollow">https://youtube.com/@SHIMAJIROCH<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@SHIMAJIROCH" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>ヒカキン</th><td>統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@HikakinGames"  rel="nofollow">https://youtube.com/@HikakinGames<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@HikakinGames" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>28<br class="spacer">(ふたば)</th><td>Java版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@28Games28"  rel="nofollow">https://youtube.com/@28Games28<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@28Games28" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>72<br class="spacer">(なつ)</th><td>Java版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@72なつちゃんねる"  rel="nofollow">https://youtube.com/@72なつちゃんねる<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@72なつちゃんねる" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>ちろぴの</th><td>Java版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@tiropino"  rel="nofollow">https://youtube.com/@tiropino<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@tiropino" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>MK</th><td>統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@mkgamech"  rel="nofollow">https://youtube.com/@mkgamech<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@mkgamech" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>めめんと<br class="spacer">もり</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@Memento-mori"  rel="nofollow">https://youtube.com/@Memento-mori<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@Memento-mori" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>Latte</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@Latte1729"  rel="nofollow">https://youtube.com/@Latte1729<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@Latte1729" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>ウパパロン</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@upapalon25"  rel="nofollow">https://youtube.com/@upapalon25<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@upapalon25" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>三枝りん</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@saegusarin_0930"  rel="nofollow">https://youtube.com/@saegusarin_0930<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@saegusarin_0930" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>みぞれ</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@Mizore471"  rel="nofollow">https://youtube.com/@Mizore471<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@Mizore471" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>ひなにい</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@HinaRuka21"  rel="nofollow">https://youtube.com/@HinaRuka21<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@HinaRuka21" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>Sレイマリ</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@S_Reimari"  rel="nofollow">https://youtube.com/@S_Reimari<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@S_Reimari" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>ぜんこぱす</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@zennkopasu"  rel="nofollow">https://youtube.com/@zennkopasu<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@zennkopasu" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>メテヲ</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@meteor_s7"  rel="nofollow">https://youtube.com/@meteor_s7<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@meteor_s7" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>八幡宮</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@HachimanD"  rel="nofollow">https://youtube.com/@HachimanD<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@HachimanD" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>ガンマス</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@GGunmas"  rel="nofollow">https://youtube.com/@GGunmas<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@GGunmas" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>iemon</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@iemon2353"  rel="nofollow">https://youtube.com/@iemon2353<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@iemon2353" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>レイラー</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@laloryukkuri"  rel="nofollow">https://youtube.com/@laloryukkuri<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@laloryukkuri" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>アナケナ<br class="spacer">ファミリー</th><td>統合版<br class="spacer">Nin<br class="spacer">tendo<br class="spacer">Swi<br class="spacer">tch2</td><td>バニラ</td><td>2023/03/01</td><td><a class="ext" href="https://youtube.com/@anakena.M"  rel="nofollow">https://youtube.com/@anakena.M<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@anakena.M" data-frame="_blank"></span></a></td><td>YouTube</td></tr></tbody></table></div>
 </div>
 </div>
 <div class="accordion-container ">
@@ -746,7 +853,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 </div>
 
-<div style="text-align:center"><span style="font-size:20px">あさクラワールドの<!--autolink--><a href="https://wikiwiki.jp/12ninstudio/%E5%8F%82%E5%8A%A0%E7%A4%BE%E4%B8%80%E8%A6%A7" title="参加社一覧" class="rel-wiki-page">参加社一覧</a><!--/autolink--></span></div>
+<div style="text-align:center"><span style="font-size:20px">あさクラワールドの<!--autolink--><a href="/12ninstudio/%E5%8F%82%E5%8A%A0%E7%A4%BE%E4%B8%80%E8%A6%A7" title="参加社一覧" class="rel-wiki-page">参加社一覧</a><!--/autolink--></span></div>
 
 <div class="accordion-container ">
     <h2 class="accordion-header">
@@ -760,7 +867,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <i class="fas fa-minus-square visible-on-open"></i>
         2021年1月～3月参加
     </h3>
-    <div class="accordion-content"><div class="h-scrollable"><table><tbody><tr><th>タイトル</th><th>社長/経営母体</th><th>版</th><th>方式</th><th>参加日</th><th>活動場所リンク</th><th>活動場所</th></tr><tr><th><a href="https://wikiwiki.jp/12ninstudio/SakitibiRailway.com" title="SakitibiRailway.com" class="rel-wiki-page">さきちび交通</a></th><td>さきちび</td><td>統合版NintendoSwitch</td><td>バニラ鉄道</td><td>2021/01/01</td><td><a class="ext" href="https://youtube.com/@12nintvSakitibi/?sub_confirmation=1"  rel="nofollow">https://youtube.com/@12nintvSakitibi/?sub_confirmation=1<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@12nintvSakitibi/?sub_confirmation=1" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th><a href="https://wikiwiki.jp/12ninstudio/Otibi.com/OtibiRailway" title="Otibi.com/OtibiRailway" class="rel-wiki-page">おちび私鉄</a></th><td>つばきちゃん・つばきくん・ちびちゃん</td><td>統合版NintendoSwitch</td><td>バニラ鉄道</td><td>2021/01/01</td><td><a class="ext" href="https://youtube.com/@otibinominecraft"  rel="nofollow">https://youtube.com/@otibinominecraft<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@otibinominecraft" data-frame="_blank"></span></a></td><td>YouTube</td></tr></tbody></table></div>
+    <div class="accordion-content"><div class="h-scrollable"><table><tbody><tr><th>タイトル</th><th>社長/経営母体</th><th>版</th><th>方式</th><th>参加日</th><th>活動場所リンク</th><th>活動場所</th></tr><tr><th><a href="/12ninstudio/SakitibiRailway.com" title="SakitibiRailway.com" class="rel-wiki-page">さきちび交通</a></th><td>さきちび</td><td>統合版NintendoSwitch2</td><td>バニラ鉄道</td><td>2021/01/01</td><td><a class="ext" href="https://youtube.com/channel/UCJcP2mfDCtKnADrbDDjT_8g/?sub_confirmation=1"  rel="nofollow">https://youtube.com/channel/UCJcP2mfDCtKnADrbDDjT_8g/?sub_confirmation=1<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/channel/UCJcP2mfDCtKnADrbDDjT_8g/?sub_confirmation=1" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th><a href="/12ninstudio/Otibi.com/OtibiRailway" title="Otibi.com/OtibiRailway" class="rel-wiki-page">おちび私鉄</a></th><td>つばきちゃん・つばきくん・ちびちゃん</td><td>統合版NintendoSwitch2</td><td>バニラ鉄道</td><td>2021/01/01</td><td><a class="ext" href="https://youtube.com/@otibinominecraft"  rel="nofollow">https://youtube.com/@otibinominecraft<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@otibinominecraft" data-frame="_blank"></span></a></td><td>YouTube</td></tr></tbody></table></div>
 </div>
 </div>
 <div class="accordion-container ">
@@ -839,7 +946,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <i class="fas fa-minus-square visible-on-open"></i>
         2023年1月～3月参加
     </h3>
-    <div class="accordion-content"><div class="h-scrollable"><table><tbody><tr><th>タイトル</th><th>社長/経営母体</th><th>版</th><th>方式</th><th>参加日</th><th>活動場所リンク</th><th>活動場所</th></tr><tr><th><a href="https://wikiwiki.jp/12ninstudio/Minecraft.Metro.com" title="Minecraft.Metro.com" class="rel-wiki-page">マイクラ<br class="spacer">メトロ</a></th><td>あげるくん</td><td><del>Java</del><br class="spacer">統合版</td><td>バニラ鉄道</td><td>2023/01/26</td><td><a class="ext" href="https://youtube.com/@SHIMAJIROCH"  rel="nofollow">https://youtube.com/@SHIMAJIROCH<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@SHIMAJIROCH" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th><a href="https://wikiwiki.jp/12ninstudio/HinaRuka.com/TaigasetsugenRailway" title="HinaRuka.com/TaigasetsugenRailway" class="rel-wiki-page">タイガ<br class="spacer">雪原<br class="spacer">鉄道</a></th><td>ひなにい</td><td><del>Java</del><br class="spacer">統合版</td><td>バニラ鉄道</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@HinaRuka21"  rel="nofollow">https://youtube.com/@HinaRuka21<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@HinaRuka21" data-frame="_blank"></span></a></td><td>YouTube</td></tr></tbody></table></div>
+    <div class="accordion-content"><div class="h-scrollable"><table><tbody><tr><th>タイトル</th><th>社長/経営母体</th><th>版</th><th>方式</th><th>参加日</th><th>活動場所リンク</th><th>活動場所</th></tr><tr><th><a href="/12ninstudio/Minecraft.Metro.com" title="Minecraft.Metro.com" class="rel-wiki-page">マイクラ<br class="spacer">メトロ</a></th><td>あげるくん</td><td><del>Java</del><br class="spacer">統合版</td><td>バニラ鉄道</td><td>2023/01/26</td><td><a class="ext" href="https://youtube.com/@SHIMAJIROCH"  rel="nofollow">https://youtube.com/@SHIMAJIROCH<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@SHIMAJIROCH" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th><a href="/12ninstudio/HinaRuka.com/TaigasetsugenRailway" title="HinaRuka.com/TaigasetsugenRailway" class="rel-wiki-page">タイガ<br class="spacer">雪原<br class="spacer">鉄道</a></th><td>ひなにい</td><td><del>Java</del><br class="spacer">統合版</td><td>バニラ鉄道</td><td>2023/02/01</td><td><a class="ext" href="https://youtube.com/@HinaRuka21"  rel="nofollow">https://youtube.com/@HinaRuka21<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@HinaRuka21" data-frame="_blank"></span></a></td><td>YouTube</td></tr></tbody></table></div>
 </div>
 </div>
 <div class="accordion-container ">
@@ -927,13 +1034,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <i class="fas fa-minus-square visible-on-open"></i>
         2025年1月～3月参加
     </h3>
-    <div class="accordion-content"><div class="h-scrollable"><table><tbody><tr><th>タイトル</th><th>社長/経営母体</th><th>版</th><th>方式</th><th>参加日</th><th>活動場所リンク</th><th>活動場所</th></tr><tr><th><a class="ext" href="https://wikiwiki.jp/maitestu-net/宮急電鉄"  rel="nofollow">宮急電鉄<span class="system-icon ext pukiwiki-open-uri" data-href="https://wikiwiki.jp/maitestu-net/宮急電鉄" data-frame="_blank"></span></a></th><td>tetudou77</td><td>java版</td><td>RTM</td><td>2025/03/01</td><td><a class="ext" href="https://wikiwiki.jp/12ninstudio/%5B%5Bhttps%3A//www.youtube.com/%40tetudou77%5D%5D" title="https://www.youtube.com/@tetudou77"  rel="nofollow">https://www.youtube.com/@tetudou77<span class="system-icon ext pukiwiki-open-uri" data-href="https://wikiwiki.jp/12ninstudio/%5B%5Bhttps%3A//www.youtube.com/%40tetudou77%5D%5D" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th><a href="https://wikiwiki.jp/12ninstudio/Chaaaco.jp/Railway" title="Chaaaco.jp/Railway" class="rel-wiki-page">茶子鉄道</a></th><td>茶子</td><td>Java版</td><td>バニラ鉄道</td><td>2025/03/04</td><td><a class="ext" href="https://youtube.com/@chaaaco"  rel="nofollow">https://youtube.com/@chaaaco<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@chaaaco" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th><a class="ext" href="https://wikiwiki.jp/maitestu-net/七川電鉄"  rel="nofollow">七川鉄道<span class="system-icon ext pukiwiki-open-uri" data-href="https://wikiwiki.jp/maitestu-net/七川電鉄" data-frame="_blank"></span></a></th><td>七科/なのしな</td><td>Java版</td><td>バニラ鉄道</td><td>2025/03/06</td><td></td><td>YouTube</td></tr></tbody></table></div>
+    <div class="accordion-content"><div class="h-scrollable"><table><tbody><tr><th>タイトル</th><th>社長/経営母体</th><th>版</th><th>方式</th><th>参加日</th><th>活動場所リンク</th><th>活動場所</th></tr><tr><th><a class="ext" href="https://wikiwiki.jp/maitestu-net/宮急電鉄"  rel="nofollow">宮急電鉄<span class="system-icon ext pukiwiki-open-uri" data-href="https://wikiwiki.jp/maitestu-net/宮急電鉄" data-frame="_blank"></span></a></th><td>tetudou77</td><td>java版</td><td>RTM</td><td>2025/03/01</td><td><a class="ext" href="/12ninstudio/%5B%5Bhttps%3A//www.youtube.com/%40tetudou77%5D%5D" title="https://www.youtube.com/@tetudou77"  rel="nofollow">https://www.youtube.com/@tetudou77<span class="system-icon ext pukiwiki-open-uri" data-href="/12ninstudio/%5B%5Bhttps%3A//www.youtube.com/%40tetudou77%5D%5D" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th><a href="/12ninstudio/Chaaaco.jp/Railway" title="Chaaaco.jp/Railway" class="rel-wiki-page">茶子鉄道</a></th><td>茶子</td><td>Java版</td><td>バニラ鉄道</td><td>2025/03/04</td><td><a class="ext" href="https://youtube.com/@chaaaco"  rel="nofollow">https://youtube.com/@chaaaco<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@chaaaco" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th><a class="ext" href="https://wikiwiki.jp/maitestu-net/七川電鉄"  rel="nofollow">七川鉄道<span class="system-icon ext pukiwiki-open-uri" data-href="https://wikiwiki.jp/maitestu-net/七川電鉄" data-frame="_blank"></span></a></th><td>七科/なのしな</td><td>Java版</td><td>バニラ鉄道</td><td>2025/03/06</td><td></td><td>YouTube</td></tr></tbody></table></div>
 </div>
 </div>
 </div>
 </div>
 
-<div style="text-align:center"><span style="font-size:20px">キチクラワールドの<a href="https://wikiwiki.jp/12ninstudio/Kitikura/%E5%8F%82%E5%8A%A0%E8%80%85%E4%B8%80%E8%A6%A7" title="Kitikura/参加者一覧" class="rel-wiki-page">参加者一覧</a></span></div>
+<div style="text-align:center"><span style="font-size:20px">キチクラワールドの<a href="/12ninstudio/Kitikura/%E5%8F%82%E5%8A%A0%E8%80%85%E4%B8%80%E8%A6%A7" title="Kitikura/参加者一覧" class="rel-wiki-page">参加者一覧</a></span></div>
 
 <div class="accordion-container ">
     <h2 class="accordion-header">
@@ -947,7 +1054,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <i class="fas fa-minus-square visible-on-open"></i>
         2024年10月～12月参加
     </h3>
-    <div class="accordion-content"><div class="h-scrollable"><table><tbody><tr><th>名前/活動母体</th><th>版</th><th>方式</th><th>参加日</th><th>動画マイリスト</th><th>活動場所リンク</th><th>活動場所</th></tr><tr><th>さきちび</th><td>統合版NintendoSwitch</td><td>バニラ</td><td>2024/10/30</td><td></td><td><a class="ext" href="https://youtube.com/@12nintvSakitibi/?sub_confirmation=1"  rel="nofollow">https://youtube.com/@12nintvSakitibi/?sub_confirmation=1<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@12nintvSakitibi/?sub_confirmation=1" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>つばき<br class="spacer">ちゃん<br class="spacer">つばきくん<br class="spacer">ちび<br class="spacer">ちゃん</th><td>統合版NintendoSwitch</td><td>バニラ</td><td>2024/10/30</td><td></td><td><a class="ext" href="https://youtube.com/@otibinominecraft"  rel="nofollow">https://youtube.com/@otibinominecraft<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@otibinominecraft" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>あげるくん<br class="spacer">あげる<br class="spacer">ちゃん<br class="spacer">あみりい</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2024/10/30</td><td></td><td><a class="ext" href="https://youtube.com/@SHIMAJIROCH"  rel="nofollow">https://youtube.com/@SHIMAJIROCH<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@SHIMAJIROCH" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>きゅう<br class="spacer">のすけ<br class="spacer">ごっ<br class="spacer">ぺい</th><td>統合版NintendoSwitch</td><td>バニラ</td><td>2024/12/27</td><td></td><td><a class="ext" href="https://youtube.com/@kyunosuke_odomin"  rel="nofollow">https://youtube.com/@kyunosuke_odomin<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@kyunosuke_odomin" data-frame="_blank"></span></a></td><td>YouTube</td></tr></tbody></table></div>
+    <div class="accordion-content"><div class="h-scrollable"><table><tbody><tr><th>名前/活動母体</th><th>版</th><th>方式</th><th>参加日</th><th>動画マイリスト</th><th>活動場所リンク</th><th>活動場所</th></tr><tr><th>さきちび</th><td>統合版NintendoSwitch2</td><td>バニラ</td><td>2024/10/30</td><td></td><td><a class="ext" href="https://youtube.com/channel/UCJcP2mfDCtKnADrbDDjT_8g/?sub_confirmation=1"  rel="nofollow">https://youtube.com/channel/UCJcP2mfDCtKnADrbDDjT_8g/?sub_confirmation=1<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/channel/UCJcP2mfDCtKnADrbDDjT_8g/?sub_confirmation=1" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>つばき<br class="spacer">ちゃん<br class="spacer">つばきくん<br class="spacer">ちび<br class="spacer">ちゃん</th><td>統合版NintendoSwitch2</td><td>バニラ</td><td>2024/10/30</td><td></td><td><a class="ext" href="https://youtube.com/@otibinominecraft"  rel="nofollow">https://youtube.com/@otibinominecraft<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@otibinominecraft" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>あげるくん<br class="spacer">あげる<br class="spacer">ちゃん<br class="spacer">あみりい</th><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2024/10/30</td><td></td><td><a class="ext" href="https://youtube.com/@SHIMAJIROCH"  rel="nofollow">https://youtube.com/@SHIMAJIROCH<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@SHIMAJIROCH" data-frame="_blank"></span></a></td><td>YouTube</td></tr><tr><th>きゅう<br class="spacer">のすけ<br class="spacer">ごっ<br class="spacer">ぺい</th><td>統合版NintendoSwitch2</td><td>バニラ</td><td>2024/12/27</td><td></td><td><a class="ext" href="https://youtube.com/@kyunosuke_odomin"  rel="nofollow">https://youtube.com/@kyunosuke_odomin<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@kyunosuke_odomin" data-frame="_blank"></span></a></td><td>YouTube</td></tr></tbody></table></div>
 </div>
 </div>
 </div>
@@ -970,7 +1077,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 </div>
 
-<div style="text-align:center"><span style="font-size:20px">キチクラワールドの<a href="https://wikiwiki.jp/12ninstudio/Kitikura/%E5%8F%82%E5%8A%A0%E7%A4%BE%E4%B8%80%E8%A6%A7" title="Kitikura/参加社一覧" class="rel-wiki-page">参加社一覧</a></span></div>
+<div style="text-align:center"><span style="font-size:20px">キチクラワールドの<a href="/12ninstudio/Kitikura/%E5%8F%82%E5%8A%A0%E7%A4%BE%E4%B8%80%E8%A6%A7" title="Kitikura/参加社一覧" class="rel-wiki-page">参加社一覧</a></span></div>
 
 <div class="accordion-container ">
     <h2 class="accordion-header">
@@ -984,7 +1091,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <i class="fas fa-minus-square visible-on-open"></i>
         2024年10月～12月参加
     </h3>
-    <div class="accordion-content"><div class="h-scrollable"><table><tbody><tr><th>タイトル</th><th>社長/経営母体</th><th>版</th><th>方式</th><th>参加日</th><th>動画マイリスト</th><th>活動場所リンク</th><th>活動場所</th></tr><tr><th><a href="https://wikiwiki.jp/12ninstudio/Kitikura/NorthWestMainLine" title="Kitikura/NorthWestMainLine" class="rel-wiki-page">キチクラ鉄道</a></th><td>さきちび</td><td>統合版NintendoSwitch</td><td>バニラ</td><td>2024/10/30</td><td></td><td><a class="ext" href="https://youtube.com/@12nintvSakitibi/?sub_confirmation=1"  rel="nofollow">https://youtube.com/@12nintvSakitibi/?sub_confirmation=1<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@12nintvSakitibi/?sub_confirmation=1" data-frame="_blank"></span></a></td><td>YouTube</td></tr></tbody></table></div>
+    <div class="accordion-content"><div class="h-scrollable"><table><tbody><tr><th>タイトル</th><th>社長/経営母体</th><th>版</th><th>方式</th><th>参加日</th><th>動画マイリスト</th><th>活動場所リンク</th><th>活動場所</th></tr><tr><th><a href="/12ninstudio/Kitikura/NorthWestMainLine" title="Kitikura/NorthWestMainLine" class="rel-wiki-page">キチクラ鉄道</a></th><td>さきちび</td><td>統合版NintendoSwitch2</td><td>バニラ</td><td>2024/10/30</td><td></td><td><a class="ext" href="https://youtube.com/channel/UCJcP2mfDCtKnADrbDDjT_8g/?sub_confirmation=1"  rel="nofollow">https://youtube.com/channel/UCJcP2mfDCtKnADrbDDjT_8g/?sub_confirmation=1<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/channel/UCJcP2mfDCtKnADrbDDjT_8g/?sub_confirmation=1" data-frame="_blank"></span></a></td><td>YouTube</td></tr></tbody></table></div>
 </div>
 </div>
 </div>
@@ -1001,18 +1108,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <i class="fas fa-minus-square visible-on-open"></i>
         2025年1月～3月参加
     </h3>
-    <div class="accordion-content"><div class="h-scrollable"><table><tbody><tr><th>タイトル</th><th>社長/経営母体</th><th>版</th><th>方式</th><th>参加日</th><th>動画マイリスト</th><th>活動場所リンク</th><th>活動場所</th></tr><tr><th><a href="https://wikiwiki.jp/12ninstudio/Kitikura/DokanRailway" title="Kitikura/DokanRailway" class="rel-wiki-page">土管鉄道</a></th><td>あげるくん</td><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2025/02/25</td><td></td><td><a class="ext" href="https://youtube.com/@SHIMAJIROCH"  rel="nofollow">https://youtube.com/@SHIMAJIROCH<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@SHIMAJIROCH" data-frame="_blank"></span></a></td><td>YouTube</td></tr></tbody></table></div>
+    <div class="accordion-content"><div class="h-scrollable"><table><tbody><tr><th>タイトル</th><th>社長/経営母体</th><th>版</th><th>方式</th><th>参加日</th><th>動画マイリスト</th><th>活動場所リンク</th><th>活動場所</th></tr><tr><th><a href="/12ninstudio/Kitikura/DokanRailway" title="Kitikura/DokanRailway" class="rel-wiki-page">土管鉄道</a></th><td>あげるくん</td><td><del>Java</del><br class="spacer">統合版</td><td>バニラ</td><td>2025/02/25</td><td></td><td><a class="ext" href="https://youtube.com/@SHIMAJIROCH"  rel="nofollow">https://youtube.com/@SHIMAJIROCH<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@SHIMAJIROCH" data-frame="_blank"></span></a></td><td>YouTube</td></tr></tbody></table></div>
 </div>
 </div>
 </div>
 </div>
 
-<div style="text-align:center"><span style="font-size:20px"><!--autolink--><a href="https://wikiwiki.jp/12ninstudio/%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B" title="お知らせ" class="rel-wiki-page">お知らせ</a><!--/autolink--></span></div>
-<ul class="list1"><li>2025-05-08 <span style="font-size:15px">重要な<!--autolink--><a href="https://wikiwiki.jp/12ninstudio/%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B" title="お知らせ" class="rel-wiki-page">お知らせ</a><!--/autolink--><br class="spacer">本日、<a class="ext" href="https://sakitibi-com9.webnode.jp/page/10"  rel="nofollow">利用規約<span class="system-icon ext pukiwiki-open-uri" data-href="https://sakitibi-com9.webnode.jp/page/10" data-frame="_blank"></span></a>を改正しました、閲覧者は絶対に同意して下さい<br class="spacer">同意しないと<a href="https://wikiwiki.jp/12ninstudio/%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BA%BA%E7%89%A9%E3%83%AA%E3%82%B9%E3%83%88" title="要注意人物リスト" class="rel-wiki-page">要注意人物リスト</a>に入ります</span> -- さきちび <span class="comment_date"><span class="plugin-new-body" data-timestamp="1746702556">2025-05-08 (木) 20:09:16</span></span></li>
-<li>2025-04-29 みなさまに良く伝わったと思うので一回削除します -- さきちび <span class="comment_date"><span class="plugin-new-body" data-timestamp="1745925157">2025-04-29 (火) 20:12:37</span></span></li>
-<li>2025-04-26 注意 12nin広告のドメインが<br class="spacer"><a class="ext" href="https://sakitibi.github.io/12nin.com"  rel="nofollow">https://sakitibi.github.io/12nin.com<span class="system-icon ext pukiwiki-open-uri" data-href="https://sakitibi.github.io/12nin.com" data-frame="_blank"></span></a>から<br class="spacer"><a class="ext" href="https://sakitibi.github.io/12ninadmanager.com"  rel="nofollow">https://sakitibi.github.io/12ninadmanager.com<span class="system-icon ext pukiwiki-open-uri" data-href="https://sakitibi.github.io/12ninadmanager.com" data-frame="_blank"></span></a>に変わります、<br class="spacer">なるべく早く修正して下さい -- さきちび <span class="comment_date"><span class="plugin-new-body" data-timestamp="1745664895">2025-04-26 (土) 19:54:55</span></span></li>
-<li>2025-04-25 <span style="font-size:15px"><a class="ext" href="https://sakitibi.github.io/TrainBuildersWeb"  rel="nofollow">TrainBuilders V1.21.200正式リリース!<span class="system-icon ext pukiwiki-open-uri" data-href="https://sakitibi.github.io/TrainBuildersWeb" data-frame="_blank"></span></a></span> -- さきちび <span class="comment_date"><span class="plugin-new-body" data-timestamp="1745577446">2025-04-25 (金) 19:37:26</span></span></li>
-<li>2025-04-12 <span style="font-size:15px"><a class="ext" href="https://sakitibi.github.io/12nin.com/SKNewRoles"  rel="nofollow">SKNewRoles V2.5.0.9正式リリース!<span class="system-icon ext pukiwiki-open-uri" data-href="https://sakitibi.github.io/12nin.com/SKNewRoles" data-frame="_blank"></span></a></span> -- さきちび <span class="comment_date"><span class="plugin-new-body" data-timestamp="1744409209">2025-04-12 (土) 07:06:49</span></span></li></ul>
+<div style="text-align:center"><span style="font-size:20px"><!--autolink--><a href="/12ninstudio/%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B" title="お知らせ" class="rel-wiki-page">お知らせ</a><!--/autolink--></span></div>
+<ul class="list1"><li><span style="font-size:15px">2025-06-25 <a class="ext" href="https://youtu.be/12Xx5ZP-Vfo"  rel="nofollow">今夜19時に開始する生放送<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtu.be/12Xx5ZP-Vfo" data-frame="_blank"></span></a>で<a class="ext" href="https://youtube.com/@NMNGyuri"  rel="nofollow">名前は長い方が有利<span class="system-icon ext pukiwiki-open-uri" data-href="https://youtube.com/@NMNGyuri" data-frame="_blank"></span></a>と<a class="ext" href="https://wikiwiki.jp/maitestu-net"  rel="nofollow">マイ鉄ネット<span class="system-icon ext pukiwiki-open-uri" data-href="https://wikiwiki.jp/maitestu-net" data-frame="_blank"></span></a>と<a class="ext" href="https://wikiwiki.jp/mgtn"  rel="nofollow">秋月<span class="system-icon ext pukiwiki-open-uri" data-href="https://wikiwiki.jp/mgtn" data-frame="_blank"></span></a>を晒すことを決定いたしました<br class="spacer">あと12nin広告(7月5日以降13nin広告)に<br class="spacer">この事を入れてもらう事になりました</span> -- 三枝りん <span class="comment_date"><span class="plugin-new-body" data-timestamp="1750842544">2025-06-25 (水) 18:09:04</span></span></li>
+<li><span style="font-size:20px">2025-06-24 重要な<!--autolink--><a href="/12ninstudio/%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B" title="お知らせ" class="rel-wiki-page">お知らせ</a><!--/autolink--><br class="spacer">明日から7月4日まで<br class="spacer">一部UIやスクリプトなどが<br class="spacer">おかしくなる可能性があります、<br class="spacer">皆様のご理解とご協力をお願いします<br class="spacer">あと明日から<a class="ext" href="https://mochio-express.jimdofree.com/"  rel="nofollow">餅尾急行<span class="system-icon ext pukiwiki-open-uri" data-href="https://mochio-express.jimdofree.com/" data-frame="_blank"></span></a>ワールドに<br class="spacer">軍事侵攻します</span> -- さきちび <span class="comment_date"><span class="plugin-new-body" data-timestamp="1750768881">2025-06-24 (火) 21:41:21</span></span></li>
+<li><span style="font-size:15px">2025-06-20 フィードバックフォームからご指摘を受けたので<br class="spacer"><a class="ext" href="https://www.pixiv.net/users/114329709"  rel="nofollow">名前は長い方が有利のpixiv<span class="system-icon ext pukiwiki-open-uri" data-href="https://www.pixiv.net/users/114329709" data-frame="_blank"></span></a>を荒らし、<br class="spacer">嫌がらせで通報致しました。</span> -- さきちび <span class="comment_date"><span class="plugin-new-body" data-timestamp="1750402935">2025-06-20 (金) 16:02:15</span></span></li>
+<li>2025-06-15 三枝りんさん(旧ぐさおさん)から名前変更がされたので<br class="spacer"><!--autolink--><a href="/12ninstudio/%E5%8F%82%E5%8A%A0%E8%80%85%E4%B8%80%E8%A6%A7" title="参加者一覧" class="rel-wiki-page">参加者一覧</a><!--/autolink-->を変更致しました。<br class="spacer">また、ぐさおハウスは三枝(<del>みえ</del>さえ)に変更致しました -- さきちび <span class="comment_date"><span class="plugin-new-body" data-timestamp="1749942075">2025-06-15 (日) 08:01:15</span></span></li></ul>
 
 <div style="text-align:center"><span style="font-size:20px">人気のページ(今日)</span></div>
 
@@ -1165,31 +1271,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                     <div class="column-right">
                 <div id="sidebar">
-                                        <h2 id="h2_content_11_0" ><span class="wikicolor" style="color:blue">リンク</span></h2>
-<p><a href="https://youtube.com/@12nintvSakitibi/?sub_confirmation=1"  rel="nofollow"><span class="wikicolor" style="color:red">公式YOUTUBE</span></a><br />
+                                        <h2 id="h2_content_15_0" ><span class="wikicolor" style="color:blue">リンク</span></h2>
+<p><a href="https://youtube.com/channel/UCJcP2mfDCtKnADrbDDjT_8g/?sub_confirmation=1"  rel="nofollow"><span class="wikicolor" style="color:red">公式YOUTUBE</span></a><br />
 <a href="https://ja.minecraft.wiki"  rel="nofollow"><span class="wikicolor" style="color:blue">Minecraft Wiki</span></a><br />
 <a href="https://support-sakitibi-com9.webnode.jp"  rel="nofollow"><span class="wikicolor" style="color:red">サポートセンター</span></a><br />
 <a href="https://sakitibi-com9.webnode.jp"  rel="nofollow"><span class="wikicolor" style="color:blue">公式ホームページ</span></a><br />
 <a href="https://sakitibi-com9.webnode.jp/SKNewRoles"  rel="nofollow"><span class="wikicolor" style="color:red">SKNewRoles</span></a><br />
 <a href="https://sakitibi.github.io/TrainBuildersWeb"  rel="nofollow"><span class="wikicolor" style="color:blue">TrainBuilders</span></a></p>
-<h2 id="h2_content_11_1" class="heading-after-first"><span class="wikicolor" style="color:red">メニュー</span></h2>
+<h2 id="h2_content_15_1" class="heading-after-first"><span class="wikicolor" style="color:red">メニュー</span></h2>
 <ul class="list1"><li><a href="https://sakitibi-com9.webnode.jp/page/5/"  rel="nofollow"><span class="wikicolor" style="color:blue">参加申請</span></a>
 <hr class="short_line"></li>
-<li><a href="https://wikiwiki.jp/12ninstudio/Kitikura/%E5%8F%82%E5%8A%A0%E8%80%85%E4%B8%80%E8%A6%A7" title="Kitikura/参加者一覧" class="rel-wiki-page"><span class="wikicolor" style="color:red">参加者一覧</span></a></li>
-<li><a href="https://wikiwiki.jp/12ninstudio/Kitikura/%E5%8F%82%E5%8A%A0%E7%A4%BE%E4%B8%80%E8%A6%A7" title="Kitikura/参加社一覧" class="rel-wiki-page"><span class="wikicolor" style="color:blue">参加社一覧</span></a></li>
-<li><span class="plugin-new-body" data-timestamp="1746306095"><a href="https://wikiwiki.jp/12ninstudio/%E9%80%A3%E7%B5%A1%E6%8E%B2%E7%A4%BA%E6%9D%BF" title="連絡掲示板" class="rel-wiki-page">連絡掲示板</a></span>
-<ul class="list2"><li><span class="plugin-new-body" data-timestamp="1747566893"><a href="https://wikiwiki.jp/12ninstudio/%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BA%BA%E7%89%A9%E3%83%AA%E3%82%B9%E3%83%88" title="要注意人物リスト" class="rel-wiki-page">要注意人物リスト</a></span></li></ul></li>
-<li><span class="plugin-new-body" data-timestamp="1746763118"><a href="https://wikiwiki.jp/12ninstudio/%E3%83%9E%E3%82%A4%E9%89%84%E3%83%8D%E3%83%83%E3%83%88%E6%92%B2%E6%BB%85%E5%A7%94%E5%93%A1%E4%BC%9A" title="マイ鉄ネット撲滅委員会" class="rel-wiki-page">マイ鉄ネット撲滅委員会</a></span>
+<li><a href="/12ninstudio/Kitikura/%E5%8F%82%E5%8A%A0%E8%80%85%E4%B8%80%E8%A6%A7" title="Kitikura/参加者一覧" class="rel-wiki-page"><span class="wikicolor" style="color:red">参加者一覧</span></a></li>
+<li><a href="/12ninstudio/Kitikura/%E5%8F%82%E5%8A%A0%E7%A4%BE%E4%B8%80%E8%A6%A7" title="Kitikura/参加社一覧" class="rel-wiki-page"><span class="wikicolor" style="color:blue">参加社一覧</span></a></li>
+<li><span class="plugin-new-body" data-timestamp="1750846104"><a href="/12ninstudio/%E9%80%A3%E7%B5%A1%E6%8E%B2%E7%A4%BA%E6%9D%BF" title="連絡掲示板" class="rel-wiki-page">連絡掲示板</a></span>
+<ul class="list2"><li><span class="plugin-new-body" data-timestamp="1751093387"><a href="/12ninstudio/%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BA%BA%E7%89%A9%E3%83%AA%E3%82%B9%E3%83%88" title="要注意人物リスト" class="rel-wiki-page">要注意人物リスト</a></span></li></ul></li>
+<li><span class="plugin-new-body" data-timestamp="1750841668"><a href="/12ninstudio/%E3%83%9E%E3%82%A4%E9%89%84%E3%83%8D%E3%83%83%E3%83%88%E6%92%B2%E6%BB%85%E5%A7%94%E5%93%A1%E4%BC%9A" title="マイ鉄ネット撲滅委員会" class="rel-wiki-page">マイ鉄ネット撲滅委員会</a></span>
 <hr class="short_line"></li>
-<li><a href="https://wikiwiki.jp/12ninstudio/%E4%BA%A4%E6%B5%81%E5%AE%A4" title="交流室" class="rel-wiki-page">交流室</a></li>
-<li><a href="https://wikiwiki.jp/12ninstudio/%E3%81%93%E3%82%8C%E3%81%BE%E3%81%A7%E3%81%AE%E6%AD%A9%E3%81%BF" title="これまでの歩み" class="rel-wiki-page">これまでの歩み</a></li></ul>
-<h3 id="h3_content_11_2" class="heading-after-first"><span class="wikicolor" style="color:red">キチクラの鉄道路線</span></h3>
-<ul class="list3"><li><a href="https://wikiwiki.jp/12ninstudio/Kitikura/NorthWestMainLine" title="Kitikura/NorthWestMainLine" class="rel-wiki-page"><span class="wikicolor" style="color:blue">北西本線</span></a></li>
-<li><a href="https://wikiwiki.jp/12ninstudio/Kitikura/SouthWestMainLine" title="Kitikura/SouthWestMainLine" class="rel-wiki-page"><span class="wikicolor" style="color:red">南西本線</span></a></li>
-<li><a href="https://wikiwiki.jp/12ninstudio/Kitikura/DokanRailway" title="Kitikura/DokanRailway" class="rel-wiki-page"><span class="wikicolor" style="color:blue">土管鉄道</span></a></li></ul>
-<h3 id="h3_content_11_3" class="heading-after-first"><span class="wikicolor" style="color:red">名前は長い方が有利<br class="spacer">戦争の情勢</span></h3>
-<p>Loading..</p>
-<h3 id="h3_content_11_4" class="heading-after-first"><span class="wikicolor" style="color:blue">ご乗車人数</span></h3>
+<li><a href="/12ninstudio/%E4%BA%A4%E6%B5%81%E5%AE%A4" title="交流室" class="rel-wiki-page">交流室</a></li>
+<li><a href="/12ninstudio/%E3%81%93%E3%82%8C%E3%81%BE%E3%81%A7%E3%81%AE%E6%AD%A9%E3%81%BF" title="これまでの歩み" class="rel-wiki-page">これまでの歩み</a></li></ul>
+<h3 id="h3_content_15_2" class="heading-after-first"><span class="wikicolor" style="color:red">キチクラの鉄道路線</span></h3>
+<ul class="list3"><li><a href="/12ninstudio/Kitikura/NorthWestMainLine" title="Kitikura/NorthWestMainLine" class="rel-wiki-page"><span class="wikicolor" style="color:blue">北西本線</span></a></li>
+<li><a href="/12ninstudio/Kitikura/SouthWestMainLine" title="Kitikura/SouthWestMainLine" class="rel-wiki-page"><span class="wikicolor" style="color:red">南西本線</span></a></li>
+<li><a href="/12ninstudio/Kitikura/DokanRailway" title="Kitikura/DokanRailway" class="rel-wiki-page"><span class="wikicolor" style="color:blue">土管鉄道</span></a></li></ul>
+<h3 id="h3_content_15_3" class="heading-after-first"><span class="wikicolor" style="color:red">名前は長い方が有利<br class="spacer">戦争の情勢</span></h3>
+<p><span style="font-size:15px">Loading..</span></p>
+<h3 id="h3_content_15_4" class="heading-after-first"><span class="wikicolor" style="color:red">餅尾戦争の情勢</span></h3>
+<p><span style="font-size:15px">Loading..</span></p>
+<h3 id="h3_content_15_5" class="heading-after-first"><span class="wikicolor" style="color:blue">ご乗車人数</span></h3>
 <p><span class="wikicolor" style="color:red">今日</span> <span class="wikiwiki-counter wikiwiki-counter-today">?</span><br />
 <span class="wikicolor" style="color:blue">昨日</span> <span class="wikiwiki-counter wikiwiki-counter-yesterday">?</span><br />
 <span class="wikicolor" style="color:red">現在</span> <span class="wikiwiki-online">?</span><br />
@@ -1201,7 +1309,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li>...loading</li>
     </ul>
 </div>
-<div style="text-align:center">〔<a href="https://wikiwiki.jp/12ninstudio/%E4%BA%BA%E6%B0%97100" title="人気100" class="rel-wiki-page"><strong><span class="wikicolor" style="color:red">人気</span></strong></a>/<a href="https://wikiwiki.jp/12ninstudio/%E4%BB%8A%E6%97%A510" title="今日10" class="rel-wiki-page"><strong><span class="wikicolor" style="color:blue">今日人気</span></strong></a>〕〔<a href="https://wikiwiki.jp/12ninstudio/RecentChanges" title="RecentChanges" class="rel-wiki-page"><strong><span class="wikicolor" style="color:red">最新</span></strong></a>〕</div>
+<div style="text-align:center">〔<a href="/12ninstudio/%E4%BA%BA%E6%B0%97100" title="人気100" class="rel-wiki-page"><strong><span class="wikicolor" style="color:red">人気</span></strong></a>/<a href="/12ninstudio/%E4%BB%8A%E6%97%A510" title="今日10" class="rel-wiki-page"><strong><span class="wikicolor" style="color:blue">今日人気</span></strong></a>〕〔<a href="/12ninstudio/RecentChanges" title="RecentChanges" class="rel-wiki-page"><strong><span class="wikicolor" style="color:red">最新</span></strong></a>〕</div>
 <hr class="full_hr" />
 <div style="text-align:right"><span style="font-size:10px"><span class="wikicolor" style="color:blue">T.</span><span class="wikiwiki-counter wikiwiki-counter-today">?</span>　<span class="wikicolor" style="color:red">Y.</span><span class="wikiwiki-counter wikiwiki-counter-yesterday">?</span></span><br />
 <span style="font-size:10px"><span class="wikicolor" style="color:#663300"><span class="wikicolor" style="color:blue">NOW.</span><span class="wikiwiki-online">?</span></span></span>　<span style="font-size:10px"><span class="wikicolor" style="color:red">TOTAL.</span><span class="wikiwiki-counter wikiwiki-counter-total">?</span></span><br />
@@ -1212,37 +1320,39 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         
                     <div class="column-left">
                 <div id="menubar">
-                                        <h2 id="h2_content_8_0" ><span class="wikicolor" style="color:blue">リンク</span></h2>
-<p><a href="https://youtube.com/@12nintvSakitibi/?sub_confirmation=1"  rel="nofollow"><span class="wikicolor" style="color:red">公式YOUTUBE</span></a><br />
+                                        <h2 id="h2_content_12_0" ><span class="wikicolor" style="color:blue">リンク</span></h2>
+<p><a href="https://youtube.com/channel/UCJcP2mfDCtKnADrbDDjT_8g/?sub_confirmation=1"  rel="nofollow"><span class="wikicolor" style="color:red">公式YOUTUBE</span></a><br />
 <a href="https://ja.minecraft.wiki"  rel="nofollow"><span class="wikicolor" style="color:blue">Minecraft Wiki</span></a><br />
 <a href="https://support-sakitibi-com9.webnode.jp"  rel="nofollow"><span class="wikicolor" style="color:red">サポートセンター</span></a><br />
 <a href="https://sakitibi-com9.webnode.jp"  rel="nofollow"><span class="wikicolor" style="color:blue">公式ホームページ</span></a><br />
 <a href="https://sakitibi-com9.webnode.jp/SKNewRoles"  rel="nofollow"><span class="wikicolor" style="color:red">SKNewRoles</span></a><br />
 <a href="https://sakitibi.github.io/TrainBuildersWeb"  rel="nofollow"><span class="wikicolor" style="color:blue">TrainBuilders</span></a></p>
-<h2 id="h2_content_8_1" class="heading-after-first"><span class="wikicolor" style="color:red">メニュー</span></h2>
+<h2 id="h2_content_12_1" class="heading-after-first"><span class="wikicolor" style="color:red">メニュー</span></h2>
 <ul class="list1"><li><a href="https://sakitibi-com9.webnode.jp/page/5/"  rel="nofollow"><span class="wikicolor" style="color:blue">参加申請</span></a>
 <hr class="short_line"></li>
-<li><span class="plugin-new-body" data-timestamp="1743825753"><a href="https://wikiwiki.jp/12ninstudio/%E5%8F%82%E5%8A%A0%E8%80%85%E4%B8%80%E8%A6%A7" title="参加者一覧" class="rel-wiki-page">参加者一覧</a></span></li>
-<li><span class="plugin-new-body" data-timestamp="1742600174"><a href="https://wikiwiki.jp/12ninstudio/%E5%8F%82%E5%8A%A0%E7%A4%BE%E4%B8%80%E8%A6%A7" title="参加社一覧" class="rel-wiki-page">参加社一覧</a></span></li>
-<li><span class="plugin-new-body" data-timestamp="1746306095"><a href="https://wikiwiki.jp/12ninstudio/%E9%80%A3%E7%B5%A1%E6%8E%B2%E7%A4%BA%E6%9D%BF" title="連絡掲示板" class="rel-wiki-page">連絡掲示板</a></span>
-<ul class="list2"><li><span class="plugin-new-body" data-timestamp="1747566893"><a href="https://wikiwiki.jp/12ninstudio/%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BA%BA%E7%89%A9%E3%83%AA%E3%82%B9%E3%83%88" title="要注意人物リスト" class="rel-wiki-page">要注意人物リスト</a></span></li></ul></li>
-<li><span class="plugin-new-body" data-timestamp="1746763118"><a href="https://wikiwiki.jp/12ninstudio/%E3%83%9E%E3%82%A4%E9%89%84%E3%83%8D%E3%83%83%E3%83%88%E6%92%B2%E6%BB%85%E5%A7%94%E5%93%A1%E4%BC%9A" title="マイ鉄ネット撲滅委員会" class="rel-wiki-page">マイ鉄ネット撲滅委員会</a></span>
+<li><span class="plugin-new-body" data-timestamp="1750775773"><a href="/12ninstudio/%E5%8F%82%E5%8A%A0%E8%80%85%E4%B8%80%E8%A6%A7" title="参加者一覧" class="rel-wiki-page">参加者一覧</a></span></li>
+<li><span class="plugin-new-body" data-timestamp="1750775773"><a href="/12ninstudio/%E5%8F%82%E5%8A%A0%E7%A4%BE%E4%B8%80%E8%A6%A7" title="参加社一覧" class="rel-wiki-page">参加社一覧</a></span></li>
+<li><span class="plugin-new-body" data-timestamp="1750846104"><a href="/12ninstudio/%E9%80%A3%E7%B5%A1%E6%8E%B2%E7%A4%BA%E6%9D%BF" title="連絡掲示板" class="rel-wiki-page">連絡掲示板</a></span>
+<ul class="list2"><li><span class="plugin-new-body" data-timestamp="1751093387"><a href="/12ninstudio/%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BA%BA%E7%89%A9%E3%83%AA%E3%82%B9%E3%83%88" title="要注意人物リスト" class="rel-wiki-page">要注意人物リスト</a></span></li></ul></li>
+<li><span class="plugin-new-body" data-timestamp="1750841668"><a href="/12ninstudio/%E3%83%9E%E3%82%A4%E9%89%84%E3%83%8D%E3%83%83%E3%83%88%E6%92%B2%E6%BB%85%E5%A7%94%E5%93%A1%E4%BC%9A" title="マイ鉄ネット撲滅委員会" class="rel-wiki-page">マイ鉄ネット撲滅委員会</a></span>
 <hr class="short_line"></li>
-<li><span class="plugin-new-body" data-timestamp="1747458241"><a href="https://wikiwiki.jp/12ninstudio/%E4%BA%A4%E6%B5%81%E5%AE%A4" title="交流室" class="rel-wiki-page">交流室</a></span></li>
-<li><span class="plugin-new-body" data-timestamp="1744444166"><a href="https://wikiwiki.jp/12ninstudio/%E3%81%93%E3%82%8C%E3%81%BE%E3%81%A7%E3%81%AE%E6%AD%A9%E3%81%BF" title="これまでの歩み" class="rel-wiki-page">これまでの歩み</a></span></li></ul>
-<h3 id="h3_content_8_2" class="heading-after-first"><span class="wikicolor" style="color:red">各参加者・参加社の</span><br class="spacer"><span class="wikicolor" style="color:blue">ホームページ</span></h3>
+<li><span class="plugin-new-body" data-timestamp="1750848255"><a href="/12ninstudio/%E4%BA%A4%E6%B5%81%E5%AE%A4" title="交流室" class="rel-wiki-page">交流室</a></span></li>
+<li><span class="plugin-new-body" data-timestamp="1750769077"><a href="/12ninstudio/%E3%81%93%E3%82%8C%E3%81%BE%E3%81%A7%E3%81%AE%E6%AD%A9%E3%81%BF" title="これまでの歩み" class="rel-wiki-page">これまでの歩み</a></span></li></ul>
+<h3 id="h3_content_12_2" class="heading-after-first"><span class="wikicolor" style="color:red">各参加者・参加社の</span><br class="spacer"><span class="wikicolor" style="color:blue">ホームページ</span></h3>
 
-<ul class="list3"><li><a href="https://wikiwiki.jp/12ninstudio/SakitibiRailway.com" title="SakitibiRailway.com" class="rel-wiki-page"><span class="wikicolor" style="color:red">さきちび交通</span></a></li>
-<li><a href="https://wikiwiki.jp/12ninstudio/Otibi.com/OtibiRailway" title="Otibi.com/OtibiRailway" class="rel-wiki-page"><span class="wikicolor" style="color:blue">おちび私鉄</span></a></li>
-<li><a href="https://wikiwiki.jp/12ninstudio/Minecraft.Metro.com" title="Minecraft.Metro.com" class="rel-wiki-page"><span class="wikicolor" style="color:red">マイクラメトロ</span></a></li>
-<li><a href="https://wikiwiki.jp/12ninstudio/HinaRuka.com/TaigasetsugenRailway" title="HinaRuka.com/TaigasetsugenRailway" class="rel-wiki-page"><span class="wikicolor" style="color:blue">タイガ雪原鉄道</span></a></li>
-<li><a href="https://wikiwiki.jp/12ninstudio/Chaaaco.jp/Railway" title="Chaaaco.jp/Railway" class="rel-wiki-page"><span class="wikicolor" style="color:red">茶子鉄道</span></a></li>
+<ul class="list3"><li><a href="/12ninstudio/SakitibiRailway.com" title="SakitibiRailway.com" class="rel-wiki-page"><span class="wikicolor" style="color:red">さきちび交通</span></a></li>
+<li><a href="/12ninstudio/Otibi.com/OtibiRailway" title="Otibi.com/OtibiRailway" class="rel-wiki-page"><span class="wikicolor" style="color:blue">おちび私鉄</span></a></li>
+<li><a href="/12ninstudio/Minecraft.Metro.com" title="Minecraft.Metro.com" class="rel-wiki-page"><span class="wikicolor" style="color:red">マイクラメトロ</span></a></li>
+<li><a href="/12ninstudio/HinaRuka.com/TaigasetsugenRailway" title="HinaRuka.com/TaigasetsugenRailway" class="rel-wiki-page"><span class="wikicolor" style="color:blue">タイガ雪原鉄道</span></a></li>
+<li><a href="/12ninstudio/Chaaaco.jp/Railway" title="Chaaaco.jp/Railway" class="rel-wiki-page"><span class="wikicolor" style="color:red">茶子鉄道</span></a></li>
 <li><a href="https://discord.com/invite/zbvXxCWcg6"  rel="nofollow"><span class="wikicolor" style="color:blue">匿名のDiscord</span></a></li>
-<li><a href="https://wikiwiki.jp/12ninstudio/Mizore.jp/MememizoRailway" title="Mizore.jp/MememizoRailway" class="rel-wiki-page"><span class="wikicolor" style="color:red">めめみぞアーバンライン</span></a></li></ul>
+<li><a href="/12ninstudio/Mizore.jp" title="Mizore.jp" class="rel-wiki-page"><span class="wikicolor" style="color:red">みぞれ</span></a></li></ul>
 
-<h3 id="h3_content_8_3" class="heading-after-first"><span class="wikicolor" style="color:red">名前は長い方が有利<br class="spacer">戦争の情勢</span></h3>
-<p>Loading..</p>
-<h3 id="h3_content_8_4" class="heading-after-first"><span class="wikicolor" style="color:blue">ご乗車人数</span></h3>
+<h3 id="h3_content_12_3" class="heading-after-first"><span class="wikicolor" style="color:red">名前は長い方が有利<br class="spacer">戦争の情勢</span></h3>
+<p><span style="font-size:15px">Loading..</span></p>
+<h3 id="h3_content_12_4" class="heading-after-first"><span class="wikicolor" style="color:red">餅尾戦争の情勢</span></h3>
+<p><span style="font-size:15px">Loading..</span></p>
+<h3 id="h3_content_12_5" class="heading-after-first"><span class="wikicolor" style="color:blue">ご乗車人数</span></h3>
 <p><span class="wikicolor" style="color:red">今日</span> <span class="wikiwiki-counter wikiwiki-counter-today">?</span><br />
 <span class="wikicolor" style="color:blue">昨日</span> <span class="wikiwiki-counter wikiwiki-counter-yesterday">?</span><br />
 <span class="wikicolor" style="color:red">現在</span> <span class="wikiwiki-online">?</span><br />
@@ -1254,7 +1364,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li>...loading</li>
     </ul>
 </div>
-<div style="text-align:center">〔<a href="https://wikiwiki.jp/12ninstudio/%E4%BA%BA%E6%B0%97100" title="人気100" class="rel-wiki-page"><strong><span class="wikicolor" style="color:red">人気</span></strong></a>/<a href="https://wikiwiki.jp/12ninstudio/%E4%BB%8A%E6%97%A510" title="今日10" class="rel-wiki-page"><strong><span class="wikicolor" style="color:blue">今日人気</span></strong></a>〕〔<a href="https://wikiwiki.jp/12ninstudio/RecentChanges" title="RecentChanges" class="rel-wiki-page"><strong><span class="wikicolor" style="color:red">最新</span></strong></a>〕</div>
+<div style="text-align:center">〔<a href="/12ninstudio/%E4%BA%BA%E6%B0%97100" title="人気100" class="rel-wiki-page"><strong><span class="wikicolor" style="color:red">人気</span></strong></a>/<a href="/12ninstudio/%E4%BB%8A%E6%97%A510" title="今日10" class="rel-wiki-page"><strong><span class="wikicolor" style="color:blue">今日人気</span></strong></a>〕〔<a href="/12ninstudio/RecentChanges" title="RecentChanges" class="rel-wiki-page"><strong><span class="wikicolor" style="color:red">最新</span></strong></a>〕</div>
 <hr class="full_hr" />
 <div style="text-align:right"><span style="font-size:10px"><span class="wikicolor" style="color:blue">T.</span><span class="wikiwiki-counter wikiwiki-counter-today">?</span>　<span class="wikicolor" style="color:red">Y.</span><span class="wikiwiki-counter wikiwiki-counter-yesterday">?</span></span><br />
 <span style="font-size:10px"><span class="wikicolor" style="color:#663300"><span class="wikicolor" style="color:blue">NOW.</span><span class="wikiwiki-online">?</span></span></span>　<span style="font-size:10px"><span class="wikicolor" style="color:red">TOTAL.</span><span class="wikiwiki-counter wikiwiki-counter-total">?</span></span><br />
@@ -1295,7 +1405,9 @@ if (document.documentElement.clientWidth > 805 && !wi_ismobile && wi_group === '
     <div id="footer">
                                 <div class="container">
                 <hr />
-                <div style="text-align:center"><span style="font-size:20px"><a href="https://youtube.com/@12nintvSakitibi/?sub_confirmation=1"  rel="nofollow"><span class="wikicolor" style="color:blue">Youtube</span></a></span></div>
+                <marquee bgcolor="black" behavior="slide"><span style="color:lime;font-size:20px;">餅尾急行ワールドに軍事侵攻中</span></marquee>
+<marquee bgcolor="black" behavior="slide"><span style="color:lime;font-size:20px;">応戦にご協力をお願いします</span></marquee>
+<div style="text-align:center"><span style="font-size:20px"><a href="https://youtube.com/channel/UCJcP2mfDCtKnADrbDDjT_8g/?sub_confirmation=1"  rel="nofollow"><span class="wikicolor" style="color:blue">Youtube</span></a></span></div>
 <div style="text-align:center"><span style="font-size:20px"><a href="https://github.com/sakitibi"  rel="nofollow"><span class="wikicolor" style="color:red">Github</span></a></span></div>            </div>
                 <div class="container">
             <hr />
@@ -1303,14 +1415,14 @@ if (document.documentElement.clientWidth > 805 && !wi_ismobile && wi_group === '
                 <div class="footer-block-item-left" id="signature">
                     <!-- google_ad_section_start(weight=ignore) -->
                     レンタルWIKI by <a href="https://wikiwiki.jp/" title="無料レンタルWIKIサービス">WIKIWIKI.jp*</a>&nbsp;/&nbsp;
-                    Designed by <a href="https://wikiwiki.jp/" title="無料レンタルWIKI">Olivia</a>&nbsp;/&nbsp;
+                    Designed by <a href="https://wikiwiki.jp/pp/skin-design-policy" title="スキンデザインのご利用についてのお願い">Olivia</a>&nbsp;/&nbsp;
                     <a href="https://wikiwiki.jp/pp/aboutad" title="広告について">広告について</a>&nbsp;/&nbsp;
                     無料レンタル掲示板 <a href="https://zawazawa.jp/" title="zawazawa">zawazawa</a>
                     <!-- google_ad_section_end -->
                 </div>
                 <div class="footer-block-item-right">
                     <div class="footer-mixirss">
-                        <div class="toolbar"><a href="https://wikiwiki.jp/12ninstudio/::cmd/mixirss" title="最終更新のRSS" rel="nofollow"><span class="system-icon rss"></span></a></div>                    </div>
+                        <div class="toolbar"><a href="/12ninstudio/::cmd/mixirss" title="最終更新のRSS" rel="nofollow"><span class="system-icon rss"></span></a></div>                    </div>
                 </div>
             </div>
         </div>
@@ -1414,9 +1526,34 @@ if (int_conditions.every(Boolean) && wi_device == 'and') {
     });
 }
 </script>
-<!-- End Rise Tag --><div id="pageload" style="display: none" data-pageload="{&quot;time&quot;:{&quot;all&quot;:{&quot;real&quot;:0.00887608528137207,&quot;cost&quot;:0.055161237716674805},&quot;body&quot;:{&quot;real&quot;:0.0025081634521484375,&quot;cost&quot;:0.03905129432678223},&quot;main&quot;:{&quot;real&quot;:0.03654313087463379,&quot;cost&quot;:0.03654313087463379},&quot;menu&quot;:{&quot;real&quot;:0.004889965057373047,&quot;cost&quot;:0.004889965057373047},&quot;side&quot;:{&quot;real&quot;:0.0036962032318115234,&quot;cost&quot;:0.0036962032318115234},&quot;head&quot;:{&quot;real&quot;:0.0005948543548583984,&quot;cost&quot;:0.0005948543548583984},&quot;foot&quot;:{&quot;real&quot;:0.0005609989166259766,&quot;cost&quot;:0.0005609989166259766}},&quot;include&quot;:8,&quot;memory&quot;:1098240,&quot;io&quot;:{&quot;read&quot;:{&quot;files&quot;:1,&quot;bytes&quot;:8,&quot;locks&quot;:1},&quot;write&quot;:{&quot;files&quot;:0,&quot;bytes&quot;:0,&quot;locks&quot;:0},&quot;directory&quot;:{&quot;traversals&quot;:0,&quot;files&quot;:0},&quot;misc&quot;:59},&quot;contentSize&quot;:{&quot;all&quot;:59171,&quot;body&quot;:44034},&quot;timestamp&quot;:&quot;2025-05-18 21:41:48&quot;}"></div>
+<!-- End Rise Tag --><div id="pageload" style="display: none" data-pageload="{&quot;time&quot;:{&quot;all&quot;:{&quot;real&quot;:0.04036307334899902,&quot;cost&quot;:0.06607747077941895},&quot;body&quot;:{&quot;real&quot;:0.035069942474365234,&quot;cost&quot;:0.035069942474365234},&quot;main&quot;:{&quot;real&quot;:0.03290200233459473,&quot;cost&quot;:0.03290200233459473},&quot;menu&quot;:{&quot;real&quot;:0.016854047775268555,&quot;cost&quot;:0.016854047775268555},&quot;side&quot;:{&quot;real&quot;:0.006618976593017578,&quot;cost&quot;:0.006618976593017578},&quot;head&quot;:{&quot;real&quot;:0.0014781951904296875,&quot;cost&quot;:0.0014781951904296875},&quot;foot&quot;:{&quot;real&quot;:0.0007631778717041016,&quot;cost&quot;:0.0007631778717041016}},&quot;include&quot;:9,&quot;memory&quot;:2236968,&quot;io&quot;:{&quot;read&quot;:{&quot;files&quot;:15,&quot;bytes&quot;:16861,&quot;locks&quot;:12},&quot;write&quot;:{&quot;files&quot;:0,&quot;bytes&quot;:0,&quot;locks&quot;:0},&quot;directory&quot;:{&quot;traversals&quot;:0,&quot;files&quot;:0},&quot;misc&quot;:134},&quot;contentSize&quot;:{&quot;all&quot;:66295,&quot;body&quot;:49682},&quot;timestamp&quot;:&quot;2025-06-28 18:45:14&quot;}"></div>
 
-<script type="text/javascript" src="https://cdn.wikiwiki.jp/to/w/common/assets/dist/wikiwiki-78d4bb71fc637ef0ecb8.min.js"></script>
+<script type="text/javascript" src="https://cdn.wikiwiki.jp/to/w/common/assets/dist/wikiwiki-4ccbbd3390c758b16046.min.js"></script>
+<script type="text/javascript" src="https://cdn.wikiwiki.jp/to/w/common/assets/dist/wikiwiki-ex1-84b0c69f34af9903c18b.min.js"></script>
+    <script>
+        bootLazy.addJqPluginInit('.security-check-interrupt', function() {
+            this.securityCheckInterrupt({});
+        });
+    </script>
+<script>
+    $(function () {
+        $('.tvote-form input').on('keydown', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                return false;
+            }
+        });
+        function disableAddButtonFor(textInput) {
+            var button = textInput.closest('.tvote-form').find('input[name=add_submit]');
+            button.prop('disabled', textInput.val().match(/^\s*$/));
+        }
+        $('.tvote-form input[name=tvote_add]')
+            .on('keyup', function () { disableAddButtonFor($(this)); })
+            .on('blur', function () { disableAddButtonFor($(this)); })
+            .on('change', function() { disableAddButtonFor($(this)); })
+            .trigger('change');
+    });
+</script>
 <script type="text/javascript">
     bootLazy.addJqPluginInit('.accordion-container', function() {
         this.accordion({
@@ -1438,9 +1575,14 @@ if (int_conditions.every(Boolean) && wi_device == 'and') {
 </script>
     <script type="text/javascript">
         bootLazy.addJqPluginInit('.recent-container[data-recent-hash="6b9c4cc62bf027547b676c1211f6b1ab"]', function() {
-            this.recent({"timestamp":1747569957,"list":[{"time":1747569957,"page":"名前は長い方が有利被害者","link":"https://wikiwiki.jp/12ninstudio/%E5%90%8D%E5%89%8D%E3%81%AF%E9%95%B7%E3%81%84%E6%96%B9%E3%81%8C%E6%9C%89%E5%88%A9%E8%A2%AB%E5%AE%B3%E8%80%85"},{"time":1747567746,"page":"SideBar","link":"https://wikiwiki.jp/12ninstudio/SideBar"},{"time":1747567710,"page":"MenuBar","link":"https://wikiwiki.jp/12ninstudio/MenuBar"},{"time":1747567500,"page":"名前は長い方が有利用のテンプレ又はコメント欄","link":"https://wikiwiki.jp/12ninstudio/%E5%90%8D%E5%89%8D%E3%81%AF%E9%95%B7%E3%81%84%E6%96%B9%E3%81%8C%E6%9C%89%E5%88%A9%E7%94%A8%E3%81%AE%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E5%8F%88%E3%81%AF%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E6%AC%84"},{"time":1747566893,"page":"要注意人物リスト","link":"https://wikiwiki.jp/12ninstudio/%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BA%BA%E7%89%A9%E3%83%AA%E3%82%B9%E3%83%88"},{"time":1747473862,"page":"要注意人物リスト/コメント","link":"https://wikiwiki.jp/12ninstudio/%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BA%BA%E7%89%A9%E3%83%AA%E3%82%B9%E3%83%88/%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88"},{"time":1747458241,"page":"交流室","link":"https://wikiwiki.jp/12ninstudio/%E4%BA%A4%E6%B5%81%E5%AE%A4"},{"time":1747346460,"page":"SakitibiRailway.com","link":"https://wikiwiki.jp/12ninstudio/SakitibiRailway.com"},{"time":1747132455,"page":"Minecraft.Metro.com","link":"https://wikiwiki.jp/12ninstudio/Minecraft.Metro.com"},{"time":1746937193,"page":"マイ鉄ネット撲滅委員会/log","link":"https://wikiwiki.jp/12ninstudio/%E3%83%9E%E3%82%A4%E9%89%84%E3%83%8D%E3%83%83%E3%83%88%E6%92%B2%E6%BB%85%E5%A7%94%E5%93%A1%E4%BC%9A/log"},{"time":1746763118,"page":"マイ鉄ネット撲滅委員会","link":"https://wikiwiki.jp/12ninstudio/%E3%83%9E%E3%82%A4%E9%89%84%E3%83%8D%E3%83%83%E3%83%88%E6%92%B2%E6%BB%85%E5%A7%94%E5%93%A1%E4%BC%9A"},{"time":1746702576,"page":"お知らせ","link":"https://wikiwiki.jp/12ninstudio/%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B"},{"time":1746306095,"page":"連絡掲示板","link":"https://wikiwiki.jp/12ninstudio/%E9%80%A3%E7%B5%A1%E6%8E%B2%E7%A4%BA%E6%9D%BF"},{"time":1745977489,"page":"Chaaaco.jp/Railway","link":"https://wikiwiki.jp/12ninstudio/Chaaaco.jp/Railway"},{"time":1745977489,"page":"HinaRuka.com/TaigasetsugenRailway","link":"https://wikiwiki.jp/12ninstudio/HinaRuka.com/TaigasetsugenRailway"},{"time":1745977489,"page":"Mizore.jp/MememizoRailway","link":"https://wikiwiki.jp/12ninstudio/Mizore.jp/MememizoRailway"},{"time":1745977489,"page":"Otibi.com/OtibiRailway","link":"https://wikiwiki.jp/12ninstudio/Otibi.com/OtibiRailway"},{"time":1744668891,"page":"各参加者・参加社の ホームページ","link":"https://wikiwiki.jp/12ninstudio/%E5%90%84%E5%8F%82%E5%8A%A0%E8%80%85%E3%83%BB%E5%8F%82%E5%8A%A0%E7%A4%BE%E3%81%AE%20%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8"},{"time":1744668557,"page":"RecentCreated","link":"https://wikiwiki.jp/12ninstudio/RecentCreated"},{"time":1744460627,"page":"RecentDeleted","link":"https://wikiwiki.jp/12ninstudio/RecentDeleted"},{"time":1744450230,"page":"Otibi.com/MenuBar","link":"https://wikiwiki.jp/12ninstudio/Otibi.com/MenuBar"},{"time":1744445208,"page":"kakuka","link":"https://wikiwiki.jp/12ninstudio/kakuka"},{"time":1744445127,"page":"Otibi.com/Comment","link":"https://wikiwiki.jp/12ninstudio/Otibi.com/Comment"},{"time":1744444166,"page":"これまでの歩み","link":"https://wikiwiki.jp/12ninstudio/%E3%81%93%E3%82%8C%E3%81%BE%E3%81%A7%E3%81%AE%E6%AD%A9%E3%81%BF"},{"time":1744443183,"page":"SakitibiRailway.com/image","link":"https://wikiwiki.jp/12ninstudio/SakitibiRailway.com/image"},{"time":1743921943,"page":"このwikiについて","link":"https://wikiwiki.jp/12ninstudio/%E3%81%93%E3%81%AEwiki%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"},{"time":1743825753,"page":"参加者一覧","link":"https://wikiwiki.jp/12ninstudio/%E5%8F%82%E5%8A%A0%E8%80%85%E4%B8%80%E8%A6%A7"},{"time":1743677959,"page":"Kitikura/SouthWestMainLine","link":"https://wikiwiki.jp/12ninstudio/Kitikura/SouthWestMainLine"},{"time":1743659787,"page":"Kitikura/NorthWestMainLine","link":"https://wikiwiki.jp/12ninstudio/Kitikura/NorthWestMainLine"},{"time":1743659767,"page":"Kitikura/DokanRailway","link":"https://wikiwiki.jp/12ninstudio/Kitikura/DokanRailway"},{"time":1742639642,"page":"FrontPage","link":"https://wikiwiki.jp/12ninstudio/"},{"time":1742600174,"page":"Kitikura/参加社一覧","link":"https://wikiwiki.jp/12ninstudio/Kitikura/%E5%8F%82%E5%8A%A0%E7%A4%BE%E4%B8%80%E8%A6%A7"},{"time":1742600174,"page":"Kitikura/参加者一覧","link":"https://wikiwiki.jp/12ninstudio/Kitikura/%E5%8F%82%E5%8A%A0%E8%80%85%E4%B8%80%E8%A6%A7"},{"time":1742600174,"page":"参加社一覧","link":"https://wikiwiki.jp/12ninstudio/%E5%8F%82%E5%8A%A0%E7%A4%BE%E4%B8%80%E8%A6%A7"},{"time":1742600174,"page":"次回作のマイクラリレーとマイクラバーサスの名前募集中","link":"https://wikiwiki.jp/12ninstudio/%E6%AC%A1%E5%9B%9E%E4%BD%9C%E3%81%AE%E3%83%9E%E3%82%A4%E3%82%AF%E3%83%A9%E3%83%AA%E3%83%AC%E3%83%BC%E3%81%A8%E3%83%9E%E3%82%A4%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B5%E3%82%B9%E3%81%AE%E5%90%8D%E5%89%8D%E5%8B%9F%E9%9B%86%E4%B8%AD"},{"time":1742113591,"page":"マイ鉄バックアッパー","link":"https://wikiwiki.jp/12ninstudio/%E3%83%9E%E3%82%A4%E9%89%84%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%91%E3%83%BC"},{"time":1741317750,"page":"Kitikura","link":"https://wikiwiki.jp/12ninstudio/Kitikura"},{"time":1739432110,"page":"Otibi.com","link":"https://wikiwiki.jp/12ninstudio/Otibi.com"},{"time":1739426680,"page":"人気100","link":"https://wikiwiki.jp/12ninstudio/%E4%BA%BA%E6%B0%97100"},{"time":1739426010,"page":"今日10","link":"https://wikiwiki.jp/12ninstudio/%E4%BB%8A%E6%97%A510"},{"time":1739021343,"page":"InterWikiName","link":"https://wikiwiki.jp/12ninstudio/InterWikiName"}]});
+            this.recent({"timestamp":1751093387,"list":[{"time":1751093387,"page":"要注意人物リスト","link":"/12ninstudio/%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BA%BA%E7%89%A9%E3%83%AA%E3%82%B9%E3%83%88"},{"time":1751092205,"page":"名前は長い方が有利用のテンプレ又はコメント欄","link":"/12ninstudio/%E5%90%8D%E5%89%8D%E3%81%AF%E9%95%B7%E3%81%84%E6%96%B9%E3%81%8C%E6%9C%89%E5%88%A9%E7%94%A8%E3%81%AE%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E5%8F%88%E3%81%AF%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E6%AC%84"},{"time":1751002515,"page":"要注意人物リスト/コメント","link":"/12ninstudio/%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BA%BA%E7%89%A9%E3%83%AA%E3%82%B9%E3%83%88/%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88"},{"time":1750941718,"page":"お知らせ","link":"/12ninstudio/%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B"},{"time":1750856226,"page":"次回作のマイクラリレーとマイクラバーサスの名前募集中","link":"/12ninstudio/%E6%AC%A1%E5%9B%9E%E4%BD%9C%E3%81%AE%E3%83%9E%E3%82%A4%E3%82%AF%E3%83%A9%E3%83%AA%E3%83%AC%E3%83%BC%E3%81%A8%E3%83%9E%E3%82%A4%E3%82%AF%E3%83%A9%E3%83%90%E3%83%BC%E3%82%B5%E3%82%B9%E3%81%AE%E5%90%8D%E5%89%8D%E5%8B%9F%E9%9B%86%E4%B8%AD"},{"time":1750848255,"page":"交流室","link":"/12ninstudio/%E4%BA%A4%E6%B5%81%E5%AE%A4"},{"time":1750846104,"page":"連絡掲示板","link":"/12ninstudio/%E9%80%A3%E7%B5%A1%E6%8E%B2%E7%A4%BA%E6%9D%BF"},{"time":1750841690,"page":"マイ鉄ネット撲滅委員会/log","link":"/12ninstudio/%E3%83%9E%E3%82%A4%E9%89%84%E3%83%8D%E3%83%83%E3%83%88%E6%92%B2%E6%BB%85%E5%A7%94%E5%93%A1%E4%BC%9A/log"},{"time":1750841668,"page":"マイ鉄ネット撲滅委員会","link":"/12ninstudio/%E3%83%9E%E3%82%A4%E9%89%84%E3%83%8D%E3%83%83%E3%83%88%E6%92%B2%E6%BB%85%E5%A7%94%E5%93%A1%E4%BC%9A"},{"time":1750841149,"page":"FrontPage","link":"/12ninstudio/"},{"time":1750840965,"page":"13nin.com/vote","link":"/12ninstudio/13nin.com/vote"},{"time":1750776324,"page":"SideBar","link":"/12ninstudio/SideBar"},{"time":1750776300,"page":"MenuBar","link":"/12ninstudio/MenuBar"},{"time":1750775952,"page":"このwikiについて","link":"/12ninstudio/%E3%81%93%E3%81%AEwiki%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6"},{"time":1750775952,"page":"名前は長い方が有利被害者","link":"/12ninstudio/%E5%90%8D%E5%89%8D%E3%81%AF%E9%95%B7%E3%81%84%E6%96%B9%E3%81%8C%E6%9C%89%E5%88%A9%E8%A2%AB%E5%AE%B3%E8%80%85"},{"time":1750775952,"page":"要注意人物リスト/指定団体リスト","link":"/12ninstudio/%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BA%BA%E7%89%A9%E3%83%AA%E3%82%B9%E3%83%88/%E6%8C%87%E5%AE%9A%E5%9B%A3%E4%BD%93%E3%83%AA%E3%82%B9%E3%83%88"},{"time":1750775930,"page":"SakitibiRailway.com","link":"/12ninstudio/SakitibiRailway.com"},{"time":1750775930,"page":"SakitibiRailway.com/image","link":"/12ninstudio/SakitibiRailway.com/image"},{"time":1750775930,"page":"マイ鉄バックアッパー","link":"/12ninstudio/%E3%83%9E%E3%82%A4%E9%89%84%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%91%E3%83%BC"},{"time":1750775930,"page":"名前は長い方が有利通報文書/main","link":"/12ninstudio/%E5%90%8D%E5%89%8D%E3%81%AF%E9%95%B7%E3%81%84%E6%96%B9%E3%81%8C%E6%9C%89%E5%88%A9%E9%80%9A%E5%A0%B1%E6%96%87%E6%9B%B8/main"},{"time":1750775929,"page":"Otibi.com/MenuBar","link":"/12ninstudio/Otibi.com/MenuBar"},{"time":1750775929,"page":"Otibi.com/OtibiRailway","link":"/12ninstudio/Otibi.com/OtibiRailway"},{"time":1750775917,"page":"HinaRuka.com/TaigasetsugenRailway","link":"/12ninstudio/HinaRuka.com/TaigasetsugenRailway"},{"time":1750775888,"page":"Mizore.jp/Maitetsu-Wars","link":"/12ninstudio/Mizore.jp/Maitetsu-Wars"},{"time":1750775844,"page":"Mizore.jp/MememizoRailway","link":"/12ninstudio/Mizore.jp/MememizoRailway"},{"time":1750775773,"page":"Kitikura/参加社一覧","link":"/12ninstudio/Kitikura/%E5%8F%82%E5%8A%A0%E7%A4%BE%E4%B8%80%E8%A6%A7"},{"time":1750775773,"page":"Kitikura/参加者一覧","link":"/12ninstudio/Kitikura/%E5%8F%82%E5%8A%A0%E8%80%85%E4%B8%80%E8%A6%A7"},{"time":1750775773,"page":"参加社一覧","link":"/12ninstudio/%E5%8F%82%E5%8A%A0%E7%A4%BE%E4%B8%80%E8%A6%A7"},{"time":1750775773,"page":"参加者一覧","link":"/12ninstudio/%E5%8F%82%E5%8A%A0%E8%80%85%E4%B8%80%E8%A6%A7"},{"time":1750775720,"page":"RecentDeleted","link":"/12ninstudio/RecentDeleted"},{"time":1750769077,"page":"これまでの歩み","link":"/12ninstudio/%E3%81%93%E3%82%8C%E3%81%BE%E3%81%A7%E3%81%AE%E6%AD%A9%E3%81%BF"},{"time":1749948832,"page":"各参加者・参加社の ホームページ","link":"/12ninstudio/%E5%90%84%E5%8F%82%E5%8A%A0%E8%80%85%E3%83%BB%E5%8F%82%E5%8A%A0%E7%A4%BE%E3%81%AE%20%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8"},{"time":1749942016,"page":"名前は長い方が有利通報文書/コメント","link":"/12ninstudio/%E5%90%8D%E5%89%8D%E3%81%AF%E9%95%B7%E3%81%84%E6%96%B9%E3%81%8C%E6%9C%89%E5%88%A9%E9%80%9A%E5%A0%B1%E6%96%87%E6%9B%B8/%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88"},{"time":1749176406,"page":"要注意人物リスト/指定団体リスト/コメント","link":"/12ninstudio/%E8%A6%81%E6%B3%A8%E6%84%8F%E4%BA%BA%E7%89%A9%E3%83%AA%E3%82%B9%E3%83%88/%E6%8C%87%E5%AE%9A%E5%9B%A3%E4%BD%93%E3%83%AA%E3%82%B9%E3%83%88/%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88"},{"time":1748956425,"page":"RecentCreated","link":"/12ninstudio/RecentCreated"},{"time":1748784088,"page":"Mizore.jp","link":"/12ninstudio/Mizore.jp"},{"time":1748080016,"page":"名前は長い方が有利通報文書","link":"/12ninstudio/%E5%90%8D%E5%89%8D%E3%81%AF%E9%95%B7%E3%81%84%E6%96%B9%E3%81%8C%E6%9C%89%E5%88%A9%E9%80%9A%E5%A0%B1%E6%96%87%E6%9B%B8"},{"time":1747722677,"page":"Minecraft.Metro.com","link":"/12ninstudio/Minecraft.Metro.com"},{"time":1745977489,"page":"Chaaaco.jp/Railway","link":"/12ninstudio/Chaaaco.jp/Railway"},{"time":1744445208,"page":"kakuka","link":"/12ninstudio/kakuka"},{"time":1744445127,"page":"Otibi.com/Comment","link":"/12ninstudio/Otibi.com/Comment"},{"time":1743677959,"page":"Kitikura/SouthWestMainLine","link":"/12ninstudio/Kitikura/SouthWestMainLine"},{"time":1743659787,"page":"Kitikura/NorthWestMainLine","link":"/12ninstudio/Kitikura/NorthWestMainLine"},{"time":1743659767,"page":"Kitikura/DokanRailway","link":"/12ninstudio/Kitikura/DokanRailway"},{"time":1741317750,"page":"Kitikura","link":"/12ninstudio/Kitikura"},{"time":1739432110,"page":"Otibi.com","link":"/12ninstudio/Otibi.com"},{"time":1739426680,"page":"人気100","link":"/12ninstudio/%E4%BA%BA%E6%B0%97100"},{"time":1739426010,"page":"今日10","link":"/12ninstudio/%E4%BB%8A%E6%97%A510"},{"time":1739021343,"page":"InterWikiName","link":"/12ninstudio/InterWikiName"}]});
         });
     </script>
+<script>
+    bootLazy.addJqPluginInit('.realtime-countdown', function() {
+        this.realtimeCountdown();
+    });
+</script>
     <script>
         bootLazy.addJqPluginInit('#responsive-navigation', function() {
             this.responsiveNavigation({
@@ -1459,8 +1601,8 @@ if (int_conditions.every(Boolean) && wi_device == 'and') {
     </script>
     <script>
         $('#share-button-root').sharePanel({
-            title: "あさクラV1.21.207 Wiki*",
-            controlPanelUrl: "https:\/\/c.wikiwiki.jp\/wiki\/design",
+            title: "あさクラV1.21.2147483647 Wiki*",
+            controlPanelUrl: "https:\/\/c.wikiwiki.jp\/wiki\/12ninstudio\/design",
             imageUrl: "https:\/\/icon.wikiwiki.jp\/symbolicon\/12ninstudio\/ogImage\/edb4e8be30ea.jpg",
             description: "",
             shareUrl: "https:\/\/wikiwiki.jp\/12ninstudio\/",
@@ -1471,8 +1613,8 @@ if (int_conditions.every(Boolean) && wi_device == 'and') {
 <script>
     $('#admin-contact-root').adminContact({
         logoImgUrl: "https:\/\/icon.wikiwiki.jp\/symbolicon\/12ninstudio\/appleTouchIcon\/8c467c6e992a.jpg",
-        pageTitle: "あさクラV1.21.207 Wiki*",
-        controlPanelUrl: "https:\/\/c.wikiwiki.jp\/wiki\/settings",
+        pageTitle: "あさクラV1.21.2147483647 Wiki*",
+        controlPanelUrl: "https:\/\/c.wikiwiki.jp\/wiki\/12ninstudio\/settings",
         contact: "Youtube:https:\/\/youtube.com\/@12nintvSakitibi\r\nWebsite:https:\/\/sakitibi-com9.webnode.jp\/page\/3\/\r\nchaat:https:\/\/c.kuku.lu\/wnsw2ht7",
         helpLink: 'https://wikiwiki.jp/pp/admin_contact',
     });
@@ -1482,6 +1624,11 @@ $("#load-panel-root").loadpanel({
     dataSelector: "#pageload",
     helpLink: 'https://wikiwiki.jp/pp/page_load_panel'
 });
+</script>
+<script>
+    $('.admin-login-status').adminLoginStatus({
+        cookieName: 'login_session',
+    });
 </script>
 <script>
     $(function() {
