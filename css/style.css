@@ -112,5 +112,5 @@ a {
 }
 
 footer{
-    text-align: center;
+    text-align: center !important;
 }
