@@ -24,7 +24,6 @@ html{
 .home-window p {
     margin-bottom: 30px;
     font-size: 1.2em;
-    color: #555;
 }
 
 .home-window #SNWInstall-7z {
@@ -108,7 +107,7 @@ html{
 }
 
 a {
-    color: #ffffff;
+    color: #0000ff;
 }
 
 footer{
