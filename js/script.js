@@ -19,7 +19,7 @@ document.getElementById('SNWInstall-bzip2').addEventListener('click', function()
     // Add your game start logic here
 });
 function openPopupzip() {
-  window.open("https://sakitibi-com9.webnode.jp/api/sknewroles/login/6cdb91b6-d369-cef0-6fa7-e225c67003b3", "popupWindow", "width=800,height=600");
+  window.open("https://sakitibi-com9.webnode.jp/api/sknewroles/login/51c52b03-3c5e-b59f-f6da-646e1b0671e6", "popupWindow", "width=800,height=600");
 }
 
 function openPopup7z() {
