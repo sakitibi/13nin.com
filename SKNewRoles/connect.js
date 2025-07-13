@@ -1,6 +1,14 @@
 	document.getElementById("download").addEventListener("click", function() {
 	    location.href = "./download";
 	});
+
+	document.getElementById("langages").addEventListener("click", function() {
+	    location.href = "./開発言語";
+	});
+
+	document.getElementById("credit").addEventListener("click", function() {
+	    location.href = "./CREDIT";
+	});
 	
   let SKNewRolesAnalytics = document.getElementsByClassName("elibanalytics");
 	let Counter = localStorage.getItem("counter");
