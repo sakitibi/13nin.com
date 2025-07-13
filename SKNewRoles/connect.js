@@ -3,7 +3,7 @@
 	});
 	
   let SKNewRolesAnalytics = document.getElementsByClassName("elibanalytics");
-	export let Counter = localStorage.getItem("counter");
+	let Counter = localStorage.getItem("counter");
 	if (Counter === undefined){
 	    Counter = 0;
 	    localStorage.setItem("counter", Counter);
