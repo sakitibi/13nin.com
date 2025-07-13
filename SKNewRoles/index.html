@@ -9,6 +9,11 @@
       gtag('js', new Date());
     
       gtag('config', 'G-RZWCZGE8RZ');
+      window.dataLayer.push({
+	    event: "elibanalytics_click",
+	    counter: Counter,
+	    element: SKNewRolesAnalytics[i].id || "unknown"
+      });
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
