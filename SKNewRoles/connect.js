@@ -12,7 +12,7 @@
 	
   let SKNewRolesAnalytics = document.getElementsByClassName("elibanalytics");
 	let Counter = localStorage.getItem("counter");
-	if (Counter === undefined){
+	if (typeof Counter !== 'number'){
 	    Counter = 0;
 	    localStorage.setItem("counter", Counter);
 	    document.cookie = `counter=${Counter} max-age=2147483647`;
