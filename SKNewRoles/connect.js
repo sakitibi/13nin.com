@@ -11,8 +11,8 @@
 	});
 	
   let SKNewRolesAnalytics = document.getElementsByClassName("elibanalytics");
-	let Counter = localStorage.getItem("counter");
-	if (typeof Counter !== 'number'){
+	let Counter = parseInt(localStorage.getItem("counter"), 10);
+	if (isNaN(Counter)){
 	    Counter = 0;
 	    localStorage.setItem("counter", Counter);
 	    document.cookie = `counter=${Counter} max-age=2147483647`;
