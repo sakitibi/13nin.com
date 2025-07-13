@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SKNewRoles</title>
     <script src="https://cdn.jsdelivr.net/npm/tbw-modules/dist/main.iife.min.js"></script>
-    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="https://unpkg.com/lenis/dist/lenis.min.js"></script>
     <link rel="stylesheet" href="https://sakitibi.github.io/13nin.com/css/style.css">
     <link rel="stylesheet" href="https://www.torebiru.com/css/style.css">
     <style>
@@ -69,6 +69,17 @@
     <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js" referrerpolicy="no-referrer"></script>
     <script src="/13ninadmanager.com/js/embedded-1.js" referrerpolicy="no-referrer"></script>
     <script async="async" src="https://flux-cdn.com/client/ukiuki/flux_wikiwiki_AS_TM_AT.min.js" referrerpolicy="no-referrer"></script>
+    <script>
+        // Lenisのインスタンスを作成 慣性スクロール
+        const lenis = new Lenis();
+        // requestAnimationFrameでスムーズなアニメーションを実現
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        // アニメーションフレームのリクエストを開始
+        requestAnimationFrame(raf);
+    </script>
   </head>
   <body class="body">
     <script type="text/javascript" src="https://zinro.net/js/bookmark_bubble.js"></script>
