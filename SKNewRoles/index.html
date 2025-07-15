@@ -15,11 +15,6 @@
 		event: "elibanalytics_click",
 	        counter: Counter,
 	        element: SKNewRolesAnalytics[i].id || "unknown"
-	  },
-	  {
-		event: "other",
-		ip: ip,
-		country: countryCode
 	  }
       ];
       events.forEach(data => window.dataLayer.push(data));
