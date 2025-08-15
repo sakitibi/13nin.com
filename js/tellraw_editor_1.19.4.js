@@ -32,7 +32,9 @@
     }
     if(localStorage.getItem("isnormal") === "true" && localStorage.getItem("issknewroles_ad") === "true"){
         console.log("normalとsknewroles_adが両方あったので初期化します");
-        localStorage.clear();
+        localStorage.removeItem("tellraw_state");
+        localStorage.removeItem("isnormal");
+        localStorage.removeItem("issknewroles_ad");
     }
     if(Url.searchParams.get("type") === "sknewroles_ad"){
         titleElement.innerText = "SKNewRoles広告に挿入するテキストを編集する";
