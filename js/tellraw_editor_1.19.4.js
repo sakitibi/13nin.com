@@ -37,7 +37,6 @@
             localStorage.removeItem("isnormal");
             localStorage.removeItem("issknewroles_ad");
             refresh();
-            clearInterval(LocalStorageInit);
         }
     }, 50);
     if(Url.searchParams.get("type") === "sknewroles_ad"){
