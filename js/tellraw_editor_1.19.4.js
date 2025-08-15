@@ -31,7 +31,7 @@
         build: (ui) => ({ score: { name: ui.scoreName.value, objective: ui.scoreObj.value } })
       }
     }
-    if(searchParams.get("type") === "sknewroles_ad"){
+    if(Url.searchParams.get("type") === "sknewroles_ad"){
         titleElement.innerText = "SKNewRoles広告に挿入するテキストを編集する";
         selectorContainer.style.display = "none";
         addSelector.style.display = "none";
