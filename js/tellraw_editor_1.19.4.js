@@ -132,7 +132,7 @@
       return arr
     }
 
-    function refresh(){
+    function refresh(IsInit){
       const arr = buildJson()
       let target = el('#target').value || '@a';
       if(Url.searchParams.get("type") === "sknewroles_ad"){
@@ -141,7 +141,13 @@
               target = '@a[team=!Fusanka]';
           }
       } else {
-          target = el('#target').value || '@a';
+          if(
+              el('#target').value === "@a[team=!Fusanka]" ||
+              el('#target').value === "@a[team=!Fusanka]"
+              && IsInit === true
+          ){
+              target = el('#target').value || '@a';
+          }
       }
       el('#jsonOut').textContent = JSON.stringify(arr, null, 2)
       el('#cmdOut').textContent = `/tellraw ${target} ` + JSON.stringify(arr)
@@ -244,4 +250,4 @@
     }catch{ add('text') }
 
     // first render
-    refresh()
+    refresh(true);
