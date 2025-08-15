@@ -30,12 +30,15 @@
         build: (ui) => ({ score: { name: ui.scoreName.value, objective: ui.scoreObj.value } })
       }
     }
-    if(localStorage.getItem("isnormal") === "true" && localStorage.getItem("issknewroles_ad") === "true"){
-        console.log("normalとsknewroles_adが両方あったので初期化します");
-        localStorage.removeItem("tellraw_state");
-        localStorage.removeItem("isnormal");
-        localStorage.removeItem("issknewroles_ad");
-    }
+    const LocalStorageInit = setInterval(() => {
+        if(localStorage.getItem("isnormal") === "true" && localStorage.getItem("issknewroles_ad") === "true"){
+            console.log("normalとsknewroles_adが両方あったので初期化します");
+            localStorage.removeItem("tellraw_state");
+            localStorage.removeItem("isnormal");
+            localStorage.removeItem("issknewroles_ad");
+            removeInterval(LocalStorageInit);
+        }
+    }, 50);
     if(Url.searchParams.get("type") === "sknewroles_ad"){
         titleElement.innerText = "SKNewRoles広告に挿入するテキストを編集する";
         selectorContainer.style.display = "none";
