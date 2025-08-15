@@ -31,6 +31,9 @@
         build: (ui) => ({ score: { name: ui.scoreName.value, objective: ui.scoreObj.value } })
       }
     }
+    if(localStorage.getItem("isnormal") === "true" && localStorage.getItem("issknewroles_ad") === "true"){
+        localStorage.clear();
+    }
     if(Url.searchParams.get("type") === "sknewroles_ad"){
         titleElement.innerText = "SKNewRoles広告に挿入するテキストを編集する";
         selectorContainer.style.display = "none";
@@ -38,6 +41,9 @@
         h1.innerText = "SKNewRoles広告に挿入するテキストを編集";
         cmdOut.innerText = "/tellraw @a[team=!Fusanka] []";
         el('#target').value = '@a[team=!Fusanka]';
+        localStorage.setItem("issknewroles_ad", "true");
+    } else {
+        localStorage.setItem("isnormal", "true");
     }
     function createComp(kind='text'){
       const tpl = el('#tpl-comp')
