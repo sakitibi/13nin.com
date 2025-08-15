@@ -121,11 +121,11 @@
 
     function refresh(){
       const arr = buildJson()
-      let target = el('#target').value || '@a'
+      let target = el('#target').value || '@a';
       if(Url.searchParams.get("type") === "sknewroles_ad"){
-          target = el('#target').value = data.target || '@a[team=!Fusanka]';
+          target = el('#target').value || '@a[team=!Fusanka]';
       } else {
-          target = el('#target').value = data.target || '@a';
+          target = el('#target').value || '@a';
       }
       el('#jsonOut').textContent = JSON.stringify(arr, null, 2)
       el('#cmdOut').textContent = `/tellraw ${target} ` + JSON.stringify(arr)
