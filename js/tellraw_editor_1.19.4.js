@@ -6,7 +6,6 @@
     const titleElement = el("title");
     const selectorContainer = el("#selector-container");
     const h1 = el("h1");
-    const addSelector = el("#addSelector");
     const cmdOut = el("#cmdOut");
     const kinds = {
       text: {
@@ -37,7 +36,6 @@
     if(Url.searchParams.get("type") === "sknewroles_ad"){
         titleElement.innerText = "SKNewRoles広告に挿入するテキストを編集する";
         selectorContainer.style.display = "none";
-        addSelector.style.display = "none";
         h1.innerText = "SKNewRoles広告に挿入するテキストを編集";
         cmdOut.innerText = "/tellraw @a[team=!Fusanka] []";
         el('#target').value = '@a[team=!Fusanka]';
