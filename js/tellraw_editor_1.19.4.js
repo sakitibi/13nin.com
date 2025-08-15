@@ -31,6 +31,7 @@
       }
     }
     if(localStorage.getItem("isnormal") === "true" && localStorage.getItem("issknewroles_ad") === "true"){
+        console.log("normalとsknewroles_adが両方あったので初期化します");
         localStorage.clear();
     }
     if(Url.searchParams.get("type") === "sknewroles_ad"){
