@@ -7,6 +7,7 @@
     const selectorContainer = el("#selector-container");
     const h1 = el("h1");
     const cmdOut = el("#cmdOut");
+    const adPublishButton = el("#ad_publish");
     const kinds = {
       text: {
         title: 'テキスト',
@@ -49,6 +50,7 @@
         el('#target').value = '@a[team=!Fusanka]';
         localStorage.setItem("issknewroles_ad", "true");
     } else {
+        adPublishButton.style.display = "none";
         localStorage.setItem("isnormal", "true");
     }
     function createComp(kind='text'){
@@ -195,6 +197,9 @@
       }
       inp.click()
     })
+    adPublishButton.addEventListener('click', ()=>{
+        location.replace(`/selects/NTM0YjRlNjU3NzUyNmY2YzY1NzM0MTY0NzM=/${encodeURIComponent(el('#cmdOut').textContent)}`);
+    });
     el('#clearAll').addEventListener('click', ()=>{
       el('#components').innerHTML=''; refresh()
     })
