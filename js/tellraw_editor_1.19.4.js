@@ -198,7 +198,7 @@
       inp.click()
     })
     adPublishButton.addEventListener('click', ()=>{
-        location.replace(`/selects/NTM0YjRlNjU3NzUyNmY2YzY1NzM0MTY0NzM=/${encodeURIComponent(el('#cmdOut').textContent)}`);
+        location.replace(`/selects/534b4e6577526f6c6573416473/${encodeURIComponent(el('#cmdOut').textContent)}`);
     });
     el('#clearAll').addEventListener('click', ()=>{
       el('#components').innerHTML=''; refresh()
