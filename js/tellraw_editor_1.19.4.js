@@ -30,7 +30,7 @@
         build: (ui) => ({ score: { name: ui.scoreName.value, objective: ui.scoreObj.value } })
       }
     }
-    const LocalStorageInit = setInterval(() => {
+    setInterval(() => {
         if(localStorage.getItem("isnormal") === "true" && localStorage.getItem("issknewroles_ad") === "true"){
             console.log("normalとsknewroles_adが両方あったので初期化します");
             localStorage.removeItem("tellraw_state");
