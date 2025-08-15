@@ -37,7 +37,7 @@
         addSelector.style.display = "none";
         h1.innerText = "SKNewRoles広告に挿入するテキストを編集";
         cmdOut.innerText = "/tellraw @a[team=!Fusanka] []";
-        el('#target').value = data.target || '@a[team=!Fusanka]';
+        el('#target').value = '@a[team=!Fusanka]';
     }
     function createComp(kind='text'){
       const tpl = el('#tpl-comp')
