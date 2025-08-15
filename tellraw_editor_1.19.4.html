@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>/tellraw ジェネレーター (Minecraft Java 1.19.4)</title>
+  <link rel="stylesheet" href="/elibrary-api/css/b927c464-555d-7fa5-0b87-98c0a87879a5.min.css"/>
+</head>
+<body>
+  <div class="wrap">
+    <h1>/tellraw ジェネレーター <span class="pill">Minecraft Java 1.19.4</span></h1>
+    <div class="sub">静的HTML + 純JS。ページを保存してそのまま配布できます。右側に JSON とコマンドをプレビュー。</div>
+    <div class="grid">
+      <!-- Left: Builder -->
+      <div class="card">
+        <div class="row">
+          <div style="flex:1">
+            <label>対象ターゲット (例: <span class="mono">@a</span>, <span class="mono">@p</span>, プレイヤー名)</label>
+            <input id="target" type="text" placeholder="@a" value="@a" />
+          </div>
+          <button class="btn" id="addText">+ テキスト追加</button>
+          <button class="btn" id="addSelector">+ セレクタ追加</button>
+          <button class="btn" id="addScore">+ スコア追加</button>
+        </div>
+        <div class="small muted" style="margin:8px 0 12px">テキスト/セレクタ/スコア コンポーネントを並べて 1 つの JSON メッセージにします。</div>
+
+        <div id="components" class="list"></div>
+
+        <div class="footer">
+          <div class="row">
+            <button class="btn secondary" id="exportJson">構成をJSONエクスポート</button>
+            <button class="btn secondary" id="importJson">JSONからインポート</button>
+            <button class="btn ghost" id="clearAll">全消去</button>
+          </div>
+          <div class="small muted">⌘/Ctrl + Enter でプレビュー更新</div>
+        </div>
+      </div>
+
+      <!-- Right: Preview -->
+      <div class="card">
+        <div class="row" style="justify-content:space-between;align-items:center">
+          <div class="chip">出力プレビュー</div>
+          <div class="row">
+            <button class="btn ok" id="copyCmd">/tellraw をコピー</button>
+            <button class="btn" id="copyJson">JSON だけコピー</button>
+          </div>
+        </div>
+
+        <div style="margin-top:10px">
+          <label>JSON (読み取り専用)</label>
+          <pre id="jsonOut" class="mono">[]</pre>
+        </div>
+        <div style="margin-top:10px">
+          <label>/tellraw コマンド</label>
+          <pre id="cmdOut" class="mono">/tellraw @a []</pre>
+        </div>
+        <div class="small muted" style="margin-top:8px">
+          対応: <code>color</code>, <code>bold</code>, <code>italic</code>, <code>underlined</code>, <code>strikethrough</code>, <code>obfuscated</code>, <code>insertion</code>, <code>clickEvent</code>(run_command/suggest_command/open_url), <code>hoverEvent</code>(show_text). 1.19.4 形式。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <template id="tpl-comp">
+    <div class="comp">
+      <div class="title">
+        <h3></h3>
+        <div class="actions">
+          <button class="btn ghost btn-up">↑</button>
+          <button class="btn ghost btn-down">↓</button>
+          <button class="btn err btn-del">削除</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div style="flex:1">
+          <label>種類</label>
+          <select class="kind">
+            <option value="text">テキスト</option>
+            <option value="selector">セレクタ (@e,@p,@s などをそのまま表示)</option>
+            <option value="score">スコア (name + objective)</option>
+          </select>
+        </div>
+        <div style="flex:1">
+          <label>色</label>
+          <select class="color">
+            <option value="">(指定なし)</option>
+            <option>black</option>
+            <option>dark_blue</option>
+            <option>dark_green</option>
+            <option>dark_aqua</option>
+            <option>dark_red</option>
+            <option>dark_purple</option>
+            <option>gold</option>
+            <option>gray</option>
+            <option>dark_gray</option>
+            <option>blue</option>
+            <option>green</option>
+            <option>aqua</option>
+            <option>red</option>
+            <option>light_purple</option>
+            <option>yellow</option>
+            <option>white</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="split" style="flex:1" data-for="text">
+          <div>
+            <label>テキスト</label>
+            <input type="text" class="text" placeholder="例) こんにちは" />
+          </div>
+          <div>
+            <label>改行</label>
+            <select class="newline">
+              <option value="no">しない</option>
+              <option value="before">前に挿入</option>
+              <option value="after">後に挿入</option>
+            </select>
+          </div>
+        </div>
+        <div class="split hidden" data-for="selector">
+          <div>
+            <label>セレクタ (例: @p)</label>
+            <input type="text" class="selector" placeholder="@p" />
+          </div>
+          <div>
+            <label>プレフィックス (任意)</label>
+            <input type="text" class="selPrefix" placeholder="[" />
+          </div>
+        </div>
+        <div class="split hidden" data-for="score">
+          <div>
+            <label>name (例: @p または プレイヤー名)</label>
+            <input type="text" class="scoreName" placeholder="@p" />
+          </div>
+          <div>
+            <label>objective</label>
+            <input type="text" class="scoreObj" placeholder="kills" />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="split" style="flex:1">
+          <div>
+            <label>装飾</label>
+            <div class="row">
+              <label><input type="checkbox" class="fmt" data-k="bold"> 太字</label>
+              <label><input type="checkbox" class="fmt" data-k="italic"> 斜体</label>
+              <label><input type="checkbox" class="fmt" data-k="underlined"> 下線</label>
+              <label><input type="checkbox" class="fmt" data-k="strikethrough"> 打消し</label>
+              <label><input type="checkbox" class="fmt" data-k="obfuscated"> 雑字</label>
+            </div>
+          </div>
+          <div>
+            <label>insertion (任意・クリックで挿入)</label>
+            <input type="text" class="insertion" placeholder="挿入文字列" />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="split" style="flex:1">
+          <div>
+            <label>clickEvent</label>
+            <div class="row">
+              <select class="clickAction">
+                <option value="">(なし)</option>
+                <option value="run_command">run_command</option>
+                <option value="suggest_command">suggest_command</option>
+                <option value="open_url">open_url</option>
+              </select>
+              <input type="text" class="clickValue" placeholder="/say hello または https://..." />
+            </div>
+          </div>
+          <div>
+            <label>hoverEvent (show_text)</label>
+            <input type="text" class="hoverText" placeholder="ホバー時のテキスト" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </template>
+  <script src="/elibrary-api/js/b92f2dcf-6429-4725-3d7b-dbd0002d4a84.min.js"></script>
+</body>
+</html>
