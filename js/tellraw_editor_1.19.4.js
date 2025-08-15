@@ -30,15 +30,15 @@
         build: (ui) => ({ score: { name: ui.scoreName.value, objective: ui.scoreObj.value } })
       }
     }
+    while(localStorage.getItem("isnormal") === "true" && localStorage.getItem("issknewroles_ad") === "true"){
+        refresh();
+    }
     setInterval(() => {
         if(localStorage.getItem("isnormal") === "true" && localStorage.getItem("issknewroles_ad") === "true"){
             console.log("normalとsknewroles_adが両方あったので初期化します");
             localStorage.removeItem("tellraw_state");
             localStorage.removeItem("isnormal");
             localStorage.removeItem("issknewroles_ad");
-            while(localStorage.getItem("isnormal") === "true" && localStorage.getItem("issknewroles_ad") === "true"){
-                refresh();
-            }
         }
     }, 50);
     if(Url.searchParams.get("type") === "sknewroles_ad"){
