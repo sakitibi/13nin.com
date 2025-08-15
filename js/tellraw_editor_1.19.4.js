@@ -137,6 +137,9 @@
       let target = el('#target').value || '@a';
       if(Url.searchParams.get("type") === "sknewroles_ad"){
           target = el('#target').value || '@a[team=!Fusanka]';
+          if(el('#target').value === "@a"){
+              target = '@a[team=!Fusanka]';
+          }
       } else {
           target = el('#target').value || '@a';
       }
