@@ -178,7 +178,11 @@
 
     function loadFromData(data){
       el('#components').innerHTML=''
-      el('#target').value = data.target || '@a'
+      if(Url.searchParams.get("type") === "sknewroles_ad"){
+          el('#target').value = data.target || '@a[team=!Fusanka]';
+      } else {
+          el('#target').value = data.target || '@a';
+      }
       const comps = data.components || []
       comps.forEach(c=>{
         // guess kind
