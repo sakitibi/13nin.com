@@ -1,9 +1,13 @@
 // これは読み込み用じゃ無いよ
     const el = (sel, p=document) => p.querySelector(sel)
     const els = (sel, p=document) => Array.from(p.querySelectorAll(sel))
-
+    const Url = new URL(window.location.href);
     const state = { comps: [] }
-
+    const titleElement = el("title");
+    const selectorContainer = el("#selector-container");
+    const h1 = el("h1");
+    const addSelector = el("#addSelector");
+    const cmdOut = el("#cmdOut");
     const kinds = {
       text: {
         title: 'テキスト',
@@ -27,7 +31,13 @@
         build: (ui) => ({ score: { name: ui.scoreName.value, objective: ui.scoreObj.value } })
       }
     }
-
+    if(searchParams.get("type") === "sknewroles_ad"){
+        titleElement.innerText = "SKNewRoles広告に挿入するテキストを編集する";
+        selectorContainer.style.display = "none";
+        addSelector.style.display = "none";
+        h1.innerText = "SKNewRoles広告に挿入するテキストを編集";
+        cmdOut.innerText = "/tellraw @a[team=!Fusanka] []";
+    }
     function createComp(kind='text'){
       const tpl = el('#tpl-comp')
       const node = tpl.content.firstElementChild.cloneNode(true)
