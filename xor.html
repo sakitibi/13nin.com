@@ -35,7 +35,7 @@
     const encode_output = document.getElementById("encoded-output");
     const decode_output = document.getElementById("decoded-output");
     form.addEventListener('submit', (e) => {
-      e.preventdefault();
+      e.preventDefault();
       const originalText = strings;
       const key = keyRaw ?? Math.floor(Math.random() * 1000); // 任意の数値キー
       console.log("key: ", key);
