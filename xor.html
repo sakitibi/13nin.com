@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>文字列XORエンコード・ デコーダー</title>
+</head>
+<body>
+  <h1>文字列XORエンコード・ デコーダー</h1>
+  <form>
+    <label>
+      エンコード・デコードする文字列を入力
+      <input type="text" id="strings" required/>
+    </label>
+    <label>
+      XORキーを入力
+      <input type="number" id="key" required/>
+    </label>
+    <button type="submit">エンコード・デコード</button>
+  </form>
+  <p id="encoded-output">ここにエンコードされて出力されます</p>
+  <p id="decoded-output">ここにデコードされて出力されます</p>
+  <script>
+    function xorEncryptDecrypt(input, key) {
+      let output = '';
+      for (let i = 0; i < input.length; i++) {
+        output += String.fromCharCode(input.charCodeAt(i) ^ key);
+      }
+      return output;
+    }
+    const form = document.querySelector("form");
+    const strings = document.getElementById("strings").value;
+    const keyRaw = document.getElementById("number").value;
+    const encode_output = document.getElementById("encoded-output");
+    const decode_output = document.getElementById("decoded-output");
+    form.addEventListener('submit', (e) => {
+      e.preventdefault();
+      const originalText = strings;
+      const key = keyRaw ?? Math.floor(Math.random() * 1000); // 任意の数値キー
+      console.log("key: ", key);
+      // 難読化
+      const encryptedText = xorEncryptDecrypt(originalText, key);
+      console.log("Encrypted Text:", encryptedText);
+      // 復号化
+      const decryptedText = xorEncryptDecrypt(encryptedText, key);
+      console.log("Decrypted Text:", decryptedText);
+      encode_output.innerText = `${encryptedText}`;
+      decode_output.innerText = `${decryptedText}`;
+    });
+  </script>
+</body>
+</html>
