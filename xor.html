@@ -37,7 +37,7 @@
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const originalText = strings;
-      const key = keyRaw ?? Math.floor(Math.random() * 1000); // 任意の数値キー
+      const key = Number(keyRaw) ?? Math.floor(Math.random() * 1000); // 任意の数値キー
       console.log("key: ", key);
       // 難読化
       const encryptedText = xorEncryptDecrypt(originalText, key);
