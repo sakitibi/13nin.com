@@ -23,7 +23,7 @@
       selector: {
         title: 'セレクタ',
         build: (ui) => ({ selector: ui.selector.value, separator: '',
-                           ...(ui.selPrefix.value ? { text: ui.selPrefix.value } : {}) // ignored by MC; placeholder to avoid empty
+                           ...(ui.selPrefix.value ? { text: ui.selPrefix.value } : {})
                          })
       },
       score: {
@@ -79,7 +79,6 @@
       showKind(kind)
       kindSel.addEventListener('change', ()=>showKind(kindSel.value))
 
-      // actions
       el('.btn-del', node).addEventListener('click', ()=>{
         node.remove(); refresh()
       })
@@ -92,7 +91,6 @@
         if(next) next.after(node); refresh()
       })
 
-      // any change triggers refresh
       els('input,select,textarea', node).forEach(i=> i.addEventListener('input', refresh))
 
       return node
@@ -117,18 +115,15 @@
       }
       let obj = builder.build(ui)
 
-      // styling
       const color = ui.color.value
       if(color) obj.color = color
       ui.fmts.forEach(chk=>{ if(chk.checked) obj[chk.dataset.k] = true })
       if(ui.insertion.value) obj.insertion = ui.insertion.value
 
-      // clickEvent
       const ca = ui.clickAction.value
       const cv = ui.clickValue.value.trim()
       if(ca && cv){ obj.clickEvent = { action: ca, value: cv } }
 
-      // hoverEvent (show_text)
       if(ui.hoverText.value){ obj.hoverEvent = { action: 'show_text', contents: { text: ui.hoverText.value } } }
 
       return obj
@@ -165,14 +160,12 @@
     function add(kind='text'){
       const node = createComp(kind)
       el('#components').appendChild(node)
-      // sensible defaults
       if(kind==='text') el('.text', node).value = 'テキスト'
       if(kind==='selector') el('.selector', node).value='@p'
       if(kind==='score') { el('.scoreName', node).value='@p'; el('.scoreObj', node).value='objective' }
       refresh()
     }
 
-    // controls
     el('#addText').addEventListener('click', ()=>add('text'))
     el('#addSelector').addEventListener('click', ()=>add('selector'))
     el('#addScore').addEventListener('click', ()=>add('score'))
@@ -223,13 +216,11 @@
       }
       const comps = data.components || []
       comps.forEach(c=>{
-        // guess kind
         let kind='text'
         if('selector' in c) kind='selector'
         if('score' in c) kind='score'
         const node = createComp(kind)
         el('#components').appendChild(node)
-        // fill common fields
         if(c.color) el('.color', node).value = c.color
         ;['bold','italic','underlined','strikethrough','obfuscated'].forEach(k=>{
           if(c[k]) el(`.fmt[data-k="${k}"]`, node).checked = true
@@ -253,12 +244,10 @@
       setTimeout(()=>t.remove(), 1600)
     }
 
-    // load last state
     try{
       const saved = JSON.parse(localStorage.getItem('tellraw_state')||'null')
       if(saved){ loadFromData({target:saved.target, components:saved.arr}); }
       else{ add('text') }
     }catch{ add('text') }
 
-    // first render
     refresh(true);
