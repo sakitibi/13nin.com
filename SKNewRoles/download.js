@@ -19,21 +19,21 @@ document.getElementById('SNWInstall-bzip2').addEventListener('click', function()
     // Add your game start logic here
 });
 function openPopupzip() {
-  window.open("https://sakitibi-com9.webnode.jp/api/sknewroles/login/51c52b03-3c5e-b59f-f6da-646e1b0671e6", "popupWindow", "width=800,height=600");
+  window.open("https://sakitibi-com9.webnode.jp/api/sknewroles/login/493e5c66-0c5b-b66d-1b31-b6e6ceece98a", "popupWindow", "width=800,height=600");
 }
 
 function openPopup7z() {
-  window.open("https://sakitibi-com9.webnode.jp/api/sknewroles/login/f974b8cb-1ac4-582e-c7fa-bf6e4740e3bd", "popupWindow", "width=800,height=600");
+  window.open("https://sakitibi-com9.webnode.jp/api/sknewroles/login/f47c0e38-26a4-d8b8-bbcb-ca5d40849bab", "popupWindow", "width=800,height=600");
 }
 
 function openPopupgz() {
-  window.open("https://sakitibi-com9.webnode.jp/api/sknewroles/login/820c9725-4c8f-2606-8f63-b9e62e48d3e2", "popupWindow", "width=800,height=600");
+  window.open("https://sakitibi-com9.webnode.jp/api/sknewroles/login/144c90f4-8435-ecb6-7d90-1ed48c7d2e95", "popupWindow", "width=800,height=600");
 }
 
 function openPopupxz() {
-  window.open("https://sakitibi-com9.webnode.jp/api/sknewroles/login/cf1e5b7f-adba-d67b-5249-3da4c61b3b7b", "popupWindow", "width=800,height=600");
+  window.open("https://sakitibi-com9.webnode.jp/api/sknewroles/login/6440b2bf-324c-1ee9-6134-c42d7bcf25b3", "popupWindow", "width=800,height=600");
 }
 
 function openPopupbzip2() {
-  window.open("https://sakitibi-com9.webnode.jp/api/sknewroles/login/11f5cb71-ea20-50e0-05ed-50b08d8efb33", "popupWindow", "width=800,height=600");
+  window.open("https://sakitibi-com9.webnode.jp/api/sknewroles/login/55b2bab4-3ca1-02b4-7101-d8eb4f55cd49", "popupWindow", "width=800,height=600");
 }
