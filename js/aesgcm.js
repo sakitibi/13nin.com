@@ -83,7 +83,7 @@ encryptBtn.addEventListener('click', async ()=>{
     const iters = Number(iterationsInput.value) || 100000;
     const tag = Number(tagLengthInput.value) || 128;
     const res = await encryptText(inputText.value, pass, iters, tag);
-    output.textContent = `{\n\tres: ${JSON.stringify(res, null)},\n\n\tencrypted: "${res.ciphertext}"}`;
+    output.textContent = JSON.stringify(res, null);
   }catch(e){ output.textContent = 'エラー: ' + e.message; }
 });
 
