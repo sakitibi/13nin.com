@@ -20,6 +20,16 @@ function randomBytes(n){
   return a;
 }
 
+function generatedRandomPassphrase(){
+  // simple random passphrase generator
+  const words = ['sun','moon','river','mount','leaf','stone','blue','red','fast','silent','iron','glass','witch','magical','hypnosys','curse','devil'];
+  let out = [];
+  for(let i=0;i<4;i++) out.push(words[Math.floor(Math.random()*words.length)]);
+  const output = out.join('-') + Math.floor(Math.random()*1000);
+  passphrase.value = output;
+  return output;
+}
+
 async function encryptText(plainText, passphrase, iterations, tagLength){
   const enc = new TextEncoder();
   const salt = randomBytes(16);
@@ -73,7 +83,7 @@ encryptBtn.addEventListener('click', async ()=>{
     const iters = Number(iterationsInput.value) || 100000;
     const tag = Number(tagLengthInput.value) || 128;
     const res = await encryptText(inputText.value, pass, iters, tag);
-    output.textContent = JSON.stringify(res, null, 2);
+    output.textContent = `{\n\tres: ${JSON.stringify(res, null)},\n\n\tencrypted: "${res.ciphertext}"}`;
   }catch(e){ output.textContent = 'エラー: ' + e.message; }
 });
 
@@ -82,17 +92,10 @@ decryptBtn.addEventListener('click', async ()=>{
   try{
     let parsed;
     try{ parsed = JSON.parse(inputText.value); }catch(e){ throw new Error('入力はJSONである必要があります'); }
-    const pass = passphrase.value || prompt('復号用パスフレーズを入力してください（空の場合はキャンセル）');
+    const pass = passphrase.value || generatedRandomPassphrase();
     if(!pass){ output.textContent = 'キャンセルされました'; return; }
     const plain = await decryptObject(parsed, pass);
     output.textContent = plain;
   }catch(e){ output.textContent = 'エラー: ' + e.message; }
 });
-
-genKeyBtn.addEventListener('click', ()=>{
-  // simple random passphrase generator
-  const words = ['sun','moon','river','mount','leaf','stone','blue','red','fast','silent','iron','glass','witch','magical','hypnosys','curse','devil'];
-  let out = [];
-  for(let i=0;i<4;i++) out.push(words[Math.floor(Math.random()*words.length)]);
-  passphrase.value = out.join('-') + Math.floor(Math.random()*1000);
-});
+genKeyBtn.addEventListener('click', generatedRandomPassphrase);
