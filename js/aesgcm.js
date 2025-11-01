@@ -78,8 +78,8 @@ const genKeyBtn = document.getElementById('genKeyBtn');
 encryptBtn.addEventListener('click', async ()=>{
   output.textContent = '処理中...';
   try{
-    const pass = passphrase.value || prompt('パスフレーズを入力してください（空の場合はキャンセル）');
-    if(!pass){ output.textContent = 'キャンセルされました'; return; }
+    const pass = passphrase.value
+    if(!pass){ output.textContent = 'passphraseを入力して下さい'; return; }
     const iters = Number(iterationsInput.value) || 100000;
     const tag = Number(tagLengthInput.value) || 128;
     const res = await encryptText(inputText.value, pass, iters, tag);
@@ -92,8 +92,8 @@ decryptBtn.addEventListener('click', async ()=>{
   try{
     let parsed;
     try{ parsed = JSON.parse(inputText.value); }catch(e){ throw new Error('入力はJSONである必要があります'); }
-    const pass = passphrase.value || generatedRandomPassphrase();
-    if(!pass){ output.textContent = 'キャンセルされました'; return; }
+    const pass = passphrase.value;
+    if(!pass){ output.textContent = 'passphraseを入力して下さい'; return; }
     const plain = await decryptObject(parsed, pass);
     output.textContent = plain;
   }catch(e){ output.textContent = 'エラー: ' + e.message; }
