@@ -35,7 +35,7 @@ export default function waterWitch(){
   	`);
   } else if(etaMessageRandom === 4){
   	message2.innerHTML = (`
-  		<p>渦よ!${username}を包めー!</p>
+  		<p>渦よ!あなたを包めー!</p>
   		<p>ヒッヒッヒーッ、</p>
   		<p>あなたは女子だから渦魔法耐性が無いわね〜</p>
   		<p>ヒーッヒッヒッヒーッ、</p>
