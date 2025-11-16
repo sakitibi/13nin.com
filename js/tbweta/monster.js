@@ -1,3 +1,7 @@
+let     message1 = document.getElementById("message1");
+let     message2 = document.getElementById("message2");
+let     message3 = document.getElementById("message3");
+let etaMessageRandom;
 export default function monster(){
   etaMessageRandom = Math.floor(Math.random() * 4);
     message1.innerHTML = "";
