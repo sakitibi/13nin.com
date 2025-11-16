@@ -1,3 +1,7 @@
+let     message1 = document.getElementById("message1");
+let     message2 = document.getElementById("message2");
+let     message3 = document.getElementById("message3");
+let etaMessageRandom;
 export default function redWitch(){
   etaMessageRandom = Math.floor(Math.random() * 4);
   message1.innerHTML = '<img src="https://th.bing.com/th/id/OIP.1l2CqH940epVbfy04Op1tgHaLH?pid=ImgDet&w=202&h=303&c=7&dpr=2" width="400" height="400" onselect="return false" onmousedown="return false">';
