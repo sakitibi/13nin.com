@@ -5,6 +5,7 @@ import redWitch from '../js/tbweta/red-witch.js';
 import dominateWitch from '../js/tbweta/dominate-witch.js';
 import skyWitch from '../js/tbweta/sky-witch.js';
 import waterWitch from '../js/tbweta/water-witch.js';
+import forestWitch from '../js/tbweta/forest-witch.js';
 
 // eta関連テキスト表示
 document.getElementById("witch").addEventListener("click", witch);
@@ -14,3 +15,4 @@ document.getElementById("boss").addEventListener("click", boss);
 document.getElementById("dominates-witch").addEventListener("click", dominateWitch);
 document.getElementById("skys-witch").addEventListener("click", skyWitch);
 document.getElementById("water-witch").addEventListener("click", waterWitch);
+document.getElementById("forest-witch").addEventListener("click", forestWitch);
