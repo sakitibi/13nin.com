@@ -4,7 +4,7 @@ let     message3 = document.getElementById("message3");
 let etaMessageRandom;
 export default function waterWitch(){
   etaMessageRandom = Math.floor(Math.random() * 13);
-  message1.innerHTML = '<img src="../enemys/witch/water-witch.png" width="400" height="400" onselect="return false" onmousedown="return false">';
+  message1.innerHTML = '<img src="../enemys/witch/waterwitch.png" width="400" height="400" onselect="return false" onmousedown="return false">';
   if(etaMessageRandom === 0){
   	message2.innerHTML = (`
   		<p>ヒッヒッヒーッ、</p>
