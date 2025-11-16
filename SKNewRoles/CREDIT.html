@@ -16,16 +16,16 @@
         }
     </style>
     <script>
-        const otibich = "https://youtube.com/@otibinominecraft";
-        const agerukun = "https://youtube.com/@shimajiroch";
-
-        function otibi() {
-            location.href = otibich;
-        }
-
-        function ageru() {
-            location.href = agerukun;
-        }
+        document.addEventListener("DOMContentLoaded", function(){
+            const Otibidoms = document.getElementsByClassName("otibi");
+            const Agerudoms = document.getElementsByClassName("ageru");
+            for(const dom of Otibidoms){
+                dom.href = "https://youtube.com/@otibinominecraft";
+            }
+            for(const dom of Agerudoms){
+                dom.href = "https://youtube.com/@shimajiroch";
+            }
+        });
     </script>
 </head>
 <body>
@@ -33,12 +33,12 @@
     <div id="programmer">
         <h2>Programmer</h2>
         <p><a href="https://youtube.com/channel/UCJcP2mfDCtKnADrbDDjT_8g">Sakitibi</a></p>
-        <p><a onclick="ageru()">Agerukunn</a></p>
-        <p><a onclick="otibi()">Tibichann</a></p>
-        <p><a onclick="otibi()">Tubakikunn</a></p>
-        <p><a onclick="otibi()">Tubakichann</a></p>
-        <p><a onclick="ageru()">Ageruchann</a></p>
-        <p><a onclick="ageru()">Amiri</a></p>
+        <p><a class="ageru">Agerukunn</a></p>
+        <p><a class="otibi">TsubakiTsubakichann</a></p>
+        <p><a class="otibi">Tubakikunn</a></p>
+        <p><a class="otibi">Tubakichann</a></p>
+        <p><a class="ageru">Ageruchann</a></p>
+        <p><a class="ageru">Amiri</a></p>
     </div>
     <div id="worldcreator">
         <h2>WorldCreator</h2>
