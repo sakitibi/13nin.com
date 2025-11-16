@@ -1,3 +1,7 @@
+let     message1 = document.getElementById("message1");
+let     message2 = document.getElementById("message2");
+let     message3 = document.getElementById("message3");
+let etaMessageRandom;
 export default function dominateWitch(){
   etaMessageRandom = Math.floor(Math.random() * 24);
   message1.innerHTML = '<img src="../enemys/witch/dominateswitch.png" width="400" height="400" onselect="return false" onmousedown="return false">';
