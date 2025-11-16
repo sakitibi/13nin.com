@@ -1,9 +1,8 @@
 export default function forestWitch(){
   let     message1 = document.getElementById("message1");
-let     message2 = document.getElementById("message2");
-let     message3 = document.getElementById("message3");
-let etaMessageRandom;
-export default function waterWitch(){
+  let     message2 = document.getElementById("message2");
+  let     message3 = document.getElementById("message3");
+  let etaMessageRandom;
   etaMessageRandom = Math.floor(Math.random() * 7);
   message1.innerHTML = '<img src="../enemys/witch/forestwitch.png" width="400" height="400" onselect="return false" onmousedown="return false">';
   if(etaMessageRandom === 0){
