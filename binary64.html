@@ -61,12 +61,6 @@
           const buffer = event.target.result;
           const view = new DataView(buffer);
           const decoder = new TextDecoder();
-          function readString() {
-              const len = view.getUint16(offset); offset += 2;
-              const bytes = new Uint8Array(buffer, offset, len);
-              offset += len;
-              return decoder.decode(bytes);
-          }
           decodedB64Binary = view;
           for(let i = 0;i < decodedB64Binary.length;i++){
             if(decodedB64Binary[i] >= 0x00 && decodedB64Binary[i] <= 0x19){
@@ -88,7 +82,7 @@
           a.download = "rawB64";
           a.click();
         }
-        reader.readAsArrayBuffer();
+        reader.readAsArrayBuffer(file);
       });
     });
   </script>
