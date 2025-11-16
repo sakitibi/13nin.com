@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>base64Binaryエンコード・ デコーダー</title>
+</head>
+<body>
+  <h1>base64Binaryエンコード・ デコーダー</h1>
+  <form id="encode-form">
+    <label>
+      エンコードするbase64を入力
+      <input type="text" id="strings" required/>
+    </label>
+    <button type="submit">エンコード</button>
+  </form>
+  <form id="decode-form">
+    <label>
+      デコードするバイナリファイルをアタッチ
+      <input type="file" id="file" required/>
+    </label>
+    <button type="submit">デコード</button>
+  </form>
+  <script>
+    document.addEventListener("DOMContentLoaded", function(){
+      let encodedB64Binary = null;
+      let decodedB64Binary = null;
+      const encodeform = document.getElementById("encode-form");
+      const decodeform = document.getElementById("decode-form");
+      encodeform.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const b64 = document.getElementById("strings").value;
+        const encoder = new TextEncoder();
+        const encodedB64 = encoder.encode(b64);
+        encodedB64Binary = encodedB64;
+        for(let i = 0;i < encodedB64Binary.length;i++){
+          if(encodedB64Binary[i] >= 0x2f && encodedB64Binary[i] <= 0x39){
+            encodedB64Binary[i] = encodedB64Binary[i] - 0x2f;
+          } else if(encodedB64Binary[i] === 0x3d){
+            encodedB64Binary[i] = 0x7f;
+          } else if(encodedB64Binary[i] >= 0x41 && encodedB64Binary <= 0x5a){
+            encodedB64Binary[i] = 0x80 + (encodedB64Binary[i] - 0x41);
+          } else if(encodedB64Binary[i] === 0x2b){
+            encodedB64Binary[i] = 0x1f;
+          } else if(encodedB64Binary[i] >= 0x61 && encodedB64Binary <= 0x7a){
+            encodedB64Binary[i] = 0xa0 + (encodedB64Binary[i] - 0x61);
+          }
+        }
+        const blob = new Blob([encodedB64Binary], {type: "application/octet-stream"});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "b64Binary";
+        a.click();
+      );
+      decodeform.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const file = document.getElementById("file").files[0];
+        const reader = new FileReader();
+        reader.onload = function(event){
+          const buffer = event.target.result;
+          const view = new DataView(buffer);
+          const decoder = new TextDecoder();
+          function readString() {
+              const len = view.getUint16(offset); offset += 2;
+              const bytes = new Uint8Array(buffer, offset, len);
+              offset += len;
+              return decoder.decode(bytes);
+          }
+          decodedB64Binary = view;
+          for(let i = 0;i < decodedB64Binary.length;i++){
+            if(decodedB64Binary[i] >= 0x00 && decodedB64Binary[i] <= 0x19){
+              decodedB64Binary[i] = decodedB64Binary[i] + 0x2f;
+            } else if(decodedB64Binary[i] === 0x7f){
+              decodedB64Binary[i] = 0x3d;
+            } else if(decodedB64Binary[i] >= 0x80 && decodedB64Binary <= 0x99){
+              decodedB64Binary[i] = decodedB64Binary[i] - 0x80 + 0x41;
+            } else if(decodedB64Binary[i] === 0x1f){
+              decodedB64Binary[i] = 0x2b;
+            } else if(decodedB64Binary[i] >= 0xa0 && decodedB64Binary <= 0xb9){
+              decodedB64Binary[i] = decodedB64Binary[i] - 0xa0 + 0x61;
+            }
+          }
+          const blob = new Blob([decodedB64Binary], {type: "application/octet-stream"});
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "rawB64";
+          a.click();
+        }
+        reader.readAsArrayBuffer();
+      );
+    });
+  </script>
+</body>
+</html>
