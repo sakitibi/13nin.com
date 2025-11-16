@@ -1,10 +1,10 @@
-import monster from '../js/tbweta/monster';
-import boss from '../js/tbweta/boss';
-import witch from '../js/tbweta/witch';
-import redWitch from '../js/tbweta/red-witch';
-import dominateWitch from '../js/tbweta/dominate-witch';
-import skyWitch from '../js/tbweta/sky-witch';
-import waterWitch from '../js/tbweta/water-witch';
+import monster from '../js/tbweta/monster.js';
+import boss from '../js/tbweta/boss.js';
+import witch from '../js/tbweta/witch.js';
+import redWitch from '../js/tbweta/red-witch.js';
+import dominateWitch from '../js/tbweta/dominate-witch.js';
+import skyWitch from '../js/tbweta/sky-witch.js';
+import waterWitch from '../js/tbweta/water-witch.js';
 
 // eta関連テキスト表示
 let     message1 = document.getElementById("message1");
