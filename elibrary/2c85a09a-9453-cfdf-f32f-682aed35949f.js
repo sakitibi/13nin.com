@@ -7,11 +7,6 @@ import skyWitch from '../js/tbweta/sky-witch.js';
 import waterWitch from '../js/tbweta/water-witch.js';
 
 // eta関連テキスト表示
-let     message1 = document.getElementById("message1");
-let     message2 = document.getElementById("message2");
-let     message3 = document.getElementById("message3");
-let etaMessageRandom;
-
 document.getElementById("witch").addEventListener("click", witch);
 document.getElementById("red-witch").addEventListener("click", redWitch);
 document.getElementById("enemy").addEventListener("click", monster);
