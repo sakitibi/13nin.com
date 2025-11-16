@@ -4,7 +4,7 @@ let     message3 = document.getElementById("message3");
 let etaMessageRandom;
 export default function redWitch(){
   etaMessageRandom = Math.floor(Math.random() * 4);
-  message1.innerHTML = '<img src="https://th.bing.com/th/id/OIP.1l2CqH940epVbfy04Op1tgHaLH?pid=ImgDet&w=202&h=303&c=7&dpr=2" width="400" height="400" onselect="return false" onmousedown="return false">';
+  message1.innerHTML = '<img src="https://th.bing.com/th/id/OIP.wPq9dWcAAECZMH3cvyOqbAHaJQ?w=194&h=242&c=7&r=0&o=7&cb=ucfimg2&dpr=2&pid=1.7&rm=3&ucfimg=1" width="400" height="400" onselect="return false" onmousedown="return false">';
   if(etaMessageRandom === 0){
     message2.innerHTML = '<p>あなたには呪文をかけてあげましょう</p>';
   } else if(etaMessageRandom === 1){
