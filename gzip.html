@@ -8,7 +8,7 @@
 </head>
 <body>
   <h1>gzip&ungzipフォーム</h1>
-  <p class="muted">テキストを圧縮してBase64 表示<br/>ダウンロード、または.gzファイルを読み込んで展開できます</p>
+  <p class="muted">テキストを圧縮してBase64 表示<br/>ダウンロード、またはgzipファイルを読み込んで展開できます</p>
   <div class="panel">
     <label for="inputText">入力テキスト（圧縮する）</label>
     <textarea id="inputText" placeholder="ここに圧縮したいテキストを入れてください">Hello Hello Hello — Hello Hello Hello</textarea>
@@ -28,35 +28,30 @@
         <div class="small">圧縮サイズ: <span id="compressedSize">-</span></div>
       </div>
     </div>
-
     <div style="margin-top:12px">
       <label for="outBase64">圧縮結果（Base64）</label>
       <textarea id="outBase64" placeholder="ここに Base64 が出ます" readonly></textarea>
     </div>
   </div>
-
   <div class="panel">
-    <label for="gzipFile">.gz ファイルを読み込む（展開する）</label>
-    <input type="file" id="gzipFile" accept=".gz,application/gzip" />
+    <label for="gzipFile">gzipファイルを読み込む（展開する）</label>
+    <input type="file" id="gzipFile"/>
     <div class="row" style="margin-top:8px">
-      <button id="btnUngzipFile">読み込んだ .gz を展開</button>
+      <button id="btnUngzipFile">読み込んだgzipを展開</button>
       <button id="btnUngzipFromBase64">Base64 から展開</button>
     </div>
-
     <div style="margin-top:12px">
       <label for="outText">展開結果（テキスト）</label>
       <textarea id="outText" readonly placeholder="ここに展開したテキストが表示されます"></textarea>
     </div>
   </div>
-
   <div class="panel small">
     <strong>注意</strong>
     <ul>
-      <li>ブラウザでの圧縮はクライアント側で実行されます。</li>
-      <li>大量の巨大データはメモリ消費が増えるため注意してください。</li>
+      <li>13nin利用規約が適応されます、</li>
+      <li>規約に違反している内容は削除します</li>
     </ul>
   </div>
-
   <!-- pako を CDN で読み込む -->
   <script src="https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js"></script>
   <script src="/elibrary-api/js/5f81ea27-14d0-b9ae-d863-2080dde70538.min.js"></script>
