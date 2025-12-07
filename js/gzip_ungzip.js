@@ -32,7 +32,7 @@ const levelSelect = document.getElementById('level');
 
 const gzipFileInput = document.getElementById('gzipFile');
 const btnUngzipFile = document.getElementById('btnUngzipFile');
-const btnUngzipFileDownload = document.getElementById('btnGzipDownload');
+const btnUngzipFileDownload = document.getElementById('btnUngzipFileAndDownload');
 const btnUngzipFromBase64 = document.getElementById('btnUngzipFromBase64');
 const outText = document.getElementById('outText');
 
