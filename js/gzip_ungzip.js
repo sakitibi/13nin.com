@@ -32,6 +32,7 @@ const levelSelect = document.getElementById('level');
 
 const gzipFileInput = document.getElementById('gzipFile');
 const btnUngzipFile = document.getElementById('btnUngzipFile');
+const btnUngzipFileDownload = document.getElementById('btnGzipDownload');
 const btnUngzipFromBase64 = document.getElementById('btnUngzipFromBase64');
 const outText = document.getElementById('outText');
 
@@ -84,9 +85,7 @@ btnGzipDownload.addEventListener('click', () => {
   const a = document.createElement('a');
   a.href = url;
   a.download = 'data.txt.gz';
-  document.body.appendChild(a);
   a.click();
-  a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 3000);
 });
 
@@ -109,6 +108,19 @@ btnUngzipFile.addEventListener('click', () => {
   if (!lastLoadedUint8) return alert('まず .gz ファイルを選択してください');
   const text = doUngzip(lastLoadedUint8);
   outText.value = text;
+});
+
+btnUngzipFileDownload.addEventListener('click', () => {
+  if (!lastLoadedUint8) return alert('まず .gz ファイルを選択してください');
+  const text = doUngzip(lastLoadedUint8);
+  const bytes = new TextEncoder().encode(text);
+  const blob = new Blob([bytes], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'rawdata.txt';
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 3000);
 });
 
 btnUngzipFromBase64.addEventListener('click', () => {
