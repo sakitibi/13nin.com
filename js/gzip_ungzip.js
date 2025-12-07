@@ -56,9 +56,13 @@ function doGzip(text, level = 6) {
 }
 
 // ungzip（Uint8Array -> string）
-function doUngzip(u8) {
+function doUngzip(u8, type) {
   try {
-    return pako.ungzip(u8, { to: 'string' });
+    if(type === "bin"){
+      return pako.ungzip(u8);
+    } else {
+      return pako.ungzip(u8, { to: 'string' });
+    }
   } catch (e) {
     // pako のエラーをそのまま表示
     alert('ungzip でエラー: ' + e.message);
@@ -112,8 +116,7 @@ btnUngzipFile.addEventListener('click', () => {
 
 btnUngzipFileDownload.addEventListener('click', () => {
   if (!lastLoadedUint8) return alert('まず .gz ファイルを選択してください');
-  const text = doUngzip(lastLoadedUint8);
-  const bytes = new TextEncoder().encode(text);
+  const bytes = doUngzip(lastLoadedUint8, "bin");
   const blob = new Blob([bytes], { type: 'application/octet-stream' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
