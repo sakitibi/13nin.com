@@ -114,7 +114,7 @@ btnUngzipFileDownload.addEventListener('click', () => {
   if (!lastLoadedUint8) return alert('まず .gz ファイルを選択してください');
   const text = doUngzip(lastLoadedUint8);
   const bytes = new TextEncoder().encode(text);
-  const blob = new Blob([bytes], { type: 'text/plain' });
+  const blob = new Blob([bytes], { type: 'application/octet-stream' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
