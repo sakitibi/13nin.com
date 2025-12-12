@@ -1,23 +1,24 @@
 // これは読み込み用じゃ無いよ
+/* ===========================
+   7z-wasm 初期化
+=========================== */
 let seven = null;
 
-// WASM 初期化（UMD版）
 async function init7z() {
   if (!seven) {
     seven = await SevenZip();
-    await seven.loadWasm("https://cdn.jsdelivr.net/npm/7z-wasm@latest/7zz.wasm");
+    await seven.loadWasm("https://cdn.jsdelivr.net/npm/7z-wasm@1.2.0/bin/7zz.wasm");
   }
 }
 init7z();
 
-// Base64 <-> Uint8Array
+/* Base64 ⇄ Uint8Array */
 function uint8ToBase64(u8) {
   const CHUNK = 0x8000;
   let index = 0;
   let result = '';
   while (index < u8.length) {
-    const slice = u8.subarray(index, index + CHUNK);
-    result += String.fromCharCode.apply(null, slice);
+    result += String.fromCharCode.apply(null, u8.subarray(index, index + CHUNK));
     index += CHUNK;
   }
   return btoa(result);
@@ -29,14 +30,14 @@ function base64ToUint8(b64) {
   return u8;
 }
 
-// DOM
+/* DOM */
 const inputText = document.getElementById('inputText');
 const btn7z = document.getElementById('btn7z');
 const btn7zDownload = document.getElementById('btn7zDownload');
 const outBase64 = document.getElementById('outBase64');
 const inputSizeEl = document.getElementById('inputSize');
 const compressedSizeEl = document.getElementById('compressedSize');
-const levelSelect = document.getElementById('level');
+const levelSel = document.getElementById('level');
 
 const sevenFileInput = document.getElementById('sevenFile');
 const btnUn7zFile = document.getElementById('btnUn7zFile');
@@ -44,90 +45,84 @@ const btnUn7zFileDownload = document.getElementById('btnUn7zFileDownload');
 const btnUn7zFromBase64 = document.getElementById('btnUn7zFromBase64');
 const outText = document.getElementById('outText');
 
-// サイズ計算
+/* サイズ表示 */
 function updateInputSize() {
-  const bytes = new TextEncoder().encode(inputText.value).length;
-  inputSizeEl.textContent = bytes;
+  const size = new TextEncoder().encode(inputText.value).length;
+  inputSizeEl.textContent = size;
 }
 updateInputSize();
-inputText.addEventListener('input', updateInputSize);
+inputText.addEventListener("input", updateInputSize);
 
-// ---------- 圧縮 （7z） ----------
+/* ===========================
+   7z 圧縮
+=========================== */
 async function do7z(text, level = 6) {
   await init7z();
 
-  // 仮想 FS を初期化
   seven.FS.writeFile("data.txt", new TextEncoder().encode(text));
 
-  // 7z 圧縮コマンド
-  seven.callMain([
-    "a",
-    "-t7z",
-    `-mx=${level}`,
-    "out.7z",
-    "data.txt"
-  ]);
+  seven.callMain(["a", "-t7z", `-mx=${level}`, "out.7z", "data.txt"]);
 
   const bytes = seven.FS.readFile("out.7z");
 
-  // FSの掃除
   seven.FS.unlink("data.txt");
   seven.FS.unlink("out.7z");
 
   return bytes;
 }
 
-btn7z.addEventListener('click', async () => {
+btn7z.addEventListener("click", async () => {
   const text = inputText.value;
-  const level = levelSelect.value;
+  const level = levelSel.value;
 
   const compressed = await do7z(text, level);
   outBase64.value = uint8ToBase64(compressed);
   compressedSizeEl.textContent = compressed.length;
 });
 
-btn7zDownload.addEventListener('click', async () => {
+btn7zDownload.addEventListener("click", async () => {
   const text = inputText.value;
-  const level = levelSelect.value;
+  const level = levelSel.value;
 
   const compressed = await do7z(text, level);
 
   const blob = new Blob([compressed], { type: "application/x-7z-compressed" });
   const url = URL.createObjectURL(blob);
+
   const a = document.createElement("a");
   a.href = url;
   a.download = "data.7z";
   a.click();
+
   setTimeout(() => URL.revokeObjectURL(url), 3000);
 });
 
-// ---------- 解凍 （7z） ----------
+/* ===========================
+   7z 解凍
+=========================== */
 let lastLoadedUint8 = null;
 
-sevenFileInput.addEventListener('change', async (e) => {
-  const f = e.target.files && e.target.files[0];
+sevenFileInput.addEventListener("change", async (e) => {
+  const f = e.target.files?.[0];
   if (!f) return;
 
-  const ab = await f.arrayBuffer();
-  lastLoadedUint8 = new Uint8Array(ab);
-
-  alert(".7z ファイルを読み込みました。");
+  lastLoadedUint8 = new Uint8Array(await f.arrayBuffer());
+  alert("7z ファイルを読み込みました。");
 });
 
+// 共通：解凍処理
 async function extract7z(u8) {
   await init7z();
 
   seven.FS.writeFile("in.7z", u8);
-
   seven.callMain(["x", "in.7z", "-y"]);
 
-  // 展開された最初のファイルを探す
   const list = seven.FS.readdir(".");
-  const realFiles = list.filter(f => f !== "." && f !== ".." && f !== "in.7z");
+  const files = list.filter(f => f !== "." && f !== ".." && f !== "in.7z");
 
-  if (realFiles.length === 0) return "";
+  if (files.length === 0) return "";
 
-  const first = realFiles[0];
+  const first = files[0];
   const bytes = seven.FS.readFile(first);
 
   seven.FS.unlink("in.7z");
@@ -137,14 +132,13 @@ async function extract7z(u8) {
 }
 
 btnUn7zFile.addEventListener("click", async () => {
-  if (!lastLoadedUint8) return alert("まず .7z ファイルを選択してください");
+  if (!lastLoadedUint8) return alert("まず 7z ファイルを選択してください");
 
-  const text = await extract7z(lastLoadedUint8);
-  outText.value = text;
+  outText.value = await extract7z(lastLoadedUint8);
 });
 
 btnUn7zFileDownload.addEventListener("click", async () => {
-  if (!lastLoadedUint8) return alert("まず .7z ファイルを選択してください");
+  if (!lastLoadedUint8) return alert("まず 7z ファイルを選択してください");
 
   await init7z();
 
@@ -155,10 +149,11 @@ btnUn7zFileDownload.addEventListener("click", async () => {
   const files = list.filter(f => f !== "." && f !== ".." && f !== "in.7z");
 
   const first = files[0];
-  const bytes = seven.FS.readFile(first);
+  const data = seven.FS.readFile(first);
 
-  const blob = new Blob([bytes], { type: "application/octet-stream" });
+  const blob = new Blob([data], { type: "application/octet-stream" });
   const url = URL.createObjectURL(blob);
+
   const a = document.createElement("a");
   a.href = url;
   a.download = first;
@@ -174,8 +169,5 @@ btnUn7zFromBase64.addEventListener("click", async () => {
   const b64 = outBase64.value.trim();
   if (!b64) return alert("Base64 を入力してください");
 
-  const u8 = base64ToUint8(b64);
-  const text = await extract7z(u8);
-
-  outText.value = text;
+  outText.value = await extract7z(base64ToUint8(b64));
 });
