@@ -3,19 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>pako gzip / ungzip フォーム</title>
+  <title>7z 圧縮 / 解凍 フォーム</title>
   <link rel="stylesheet" href="/elibrary-api/css/457b9ec1-de6e-5f41-f1e4-6e246c83c895.min.css"/>
 </head>
 <body>
-  <h1>gzip&ungzipフォーム</h1>
-  <p class="muted">テキストを圧縮してBase64 表示<br/>ダウンロード、またはgzipファイルを読み込んで展開できます</p>
+  <h1>7z 圧縮・解凍 フォーム</h1>
+  <p class="muted">テキストを 7z 形式で圧縮して Base64 表示<br/>または 7z ファイルを読み込んで展開できます</p>
+
+  <!-- ▼ 圧縮 -->
   <div class="panel">
-    <label for="inputText">入力テキスト（圧縮する）</label>
-    <textarea id="inputText" placeholder="ここに圧縮したいテキストを入れてください">Hello Hello Hello — Hello Hello Hello</textarea>
+    <label for="inputText">入力テキスト（7zに圧縮）</label>
+    <textarea id="inputText" placeholder="ここに圧縮したいテキストを入れてください">
+Hello Hello Hello — Hello Hello Hello
+</textarea>
+
     <div class="row" style="margin-top:8px">
       <div class="col controls">
-        <button id="btnGzip">gzip 圧縮 → Base64 表示</button>
-        <button id="btnGzipDownload">gzip 圧縮 → .gz ダウンロード</button>
+        <button id="btn7z">7z 圧縮 → Base64 表示</button>
+        <button id="btn7zDownload">7z 圧縮 → .7z ダウンロード</button>
         <label style="align-self:center;" class="small muted">圧縮レベル:</label>
         <select id="level">
           <option value="6">6 (デフォルト)</option>
@@ -28,33 +33,40 @@
         <div class="small">圧縮サイズ: <span id="compressedSize">-</span></div>
       </div>
     </div>
+
     <div style="margin-top:12px">
       <label for="outBase64">圧縮結果（Base64）</label>
       <textarea id="outBase64" placeholder="ここに Base64 が出ます" readonly></textarea>
     </div>
   </div>
+
+  <!-- ▼ 解凍 -->
   <div class="panel">
-    <label for="gzipFile">gzipファイルを読み込む（展開する）</label>
-    <input type="file" id="gzipFile"/>
+    <label for="sevenFile">7z ファイルを読み込む（展開）</label>
+    <input type="file" id="sevenFile" />
+
     <div class="row" style="margin-top:8px">
-      <button id="btnUngzipFile">読み込んだgzipを展開</button>
-      <button id="btnUngzipFileAndDownload">読み込んだgzipを展開して<br/>元データをダウンロード</button>
-      <button id="btnUngzipFromBase64">Base64 から展開</button>
+      <button id="btnUn7zFile">読み込んだ 7z を展開</button>
+      <button id="btnUn7zFileDownload">読み込んだ 7z を展開して<br/>元データをダウンロード</button>
+      <button id="btnUn7zFromBase64">Base64 から展開</button>
     </div>
+
     <div style="margin-top:12px">
       <label for="outText">展開結果（テキスト）</label>
       <textarea id="outText" readonly placeholder="ここに展開したテキストが表示されます"></textarea>
     </div>
   </div>
+
   <div class="panel small">
     <strong>注意</strong>
     <ul>
-      <li>13nin利用規約が適応されます、</li>
-      <li>規約に違反している内容は削除します</li>
+      <li>13nin 利用規約が適用されます。</li>
+      <li>規約に違反している内容は削除します。</li>
     </ul>
   </div>
-  <!-- pako を CDN で読み込む -->
-  <script src="https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js"></script>
+  <!-- ▼ 7z-wasm UMD版 -->
+  <script src="https://cdn.jsdelivr.net/npm/7z-wasm@1.2.0/bin/7zz.umd.js"></script>
+  <!-- ▼ 7z 処理スクリプト -->
   <script src="/elibrary-api/js/5f81ea27-14d0-b9ae-d863-2080dde70538.min.js"></script>
 </body>
 </html>
