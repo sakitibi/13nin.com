@@ -7,7 +7,7 @@ let seven = null;
 async function init7z() {
   if (!seven) {
     seven = await SevenZip();
-    await seven.loadWasm("https://cdn.jsdelivr.net/npm/7z-wasm@1.2.0/bin/7zz.wasm");
+    await seven.loadWasm("https://cdn.jsdelivr.net/npm/7z-wasm@latest/7zz.wasm");
   }
 }
 init7z();
