@@ -148,5 +148,3 @@ outBase64.addEventListener('paste', () => setTimeout(() => {
     }
   }
 }, 50));
-
-これをすべて7zip用に修正で
