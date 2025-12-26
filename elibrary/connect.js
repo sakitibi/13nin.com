@@ -5,7 +5,7 @@ setInterval(()=>{
 let copyright = document.getElementById("copyright")
 let osusume = document.getElementsByClassName("osusume")
 let date = new Date().getFullYear()
-let osusumerandom = Math.floor(Math.random() * 7);
+let osusumerandom = Math.floor(Math.random() * 8);
 
 copyright.innerHTML=`${date}`
 
