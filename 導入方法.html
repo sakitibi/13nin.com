@@ -161,5 +161,14 @@
     <script src="https://sakitibi.github.io/NMNGyuri-hihan-api/nmngyuri-loop-alert.js"></script>
     <script src="https://sakitibi.github.io/13ninadmanager.com/js/13ninadmanager.min.js"></script>
     <script src="https://sakitibi.github.io/13ninadmanager.com/js/13nin_vignette.js"></script>
+	<script>
+		let copyright = document.getElementById("copyright");
+		let date = new Date().getFullYear();	
+		copyright.innerHTML=`${date}`;
+		setInterval(()=>{
+		  	date=new Date().getFullYear();
+		  	copyright.innerHTML=`${date}`;
+		}, 1000);
+	</script>
 </body>
 </html>
