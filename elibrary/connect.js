@@ -23,5 +23,6 @@ for(let i=0; i < osusume.length; i++){
     case 4: osusume[i].innerHTML="イビルゲッサー"; break;
     case 5: osusume[i].innerHTML="イビルシーア"; break;
     case 6: osusume[i].innerHTML="コミュナー"; break;
+    case 7: osusume[i].innerHTML="ポイゾナー"; break;
   }
 }
