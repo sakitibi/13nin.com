@@ -60,7 +60,7 @@ async function do7z(text, level = 6) {
 
   seven.FS.writeFile("data.txt", new TextEncoder().encode(text));
 
-  seven.callMain(["a", "-t7z", `-mx=${level}`, "out.7z", "data.txt"]);
+  seven.callMain(["a", "-t7z", "-spf-", `-mx=${level}`, "out.7z", "data.txt"]);
 
   const bytes = seven.FS.readFile("out.7z");
 
