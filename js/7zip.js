@@ -56,18 +56,17 @@ inputText.addEventListener("input", updateInputSize);
    7z 圧縮
 =========================== */
 async function do7z(text, level = 6) {
-  await init7z();
-
-  seven.FS.writeFile("data.txt", new TextEncoder().encode(text));
-
-  seven.callMain(["a", "-t7z", "-spf-", `-mx=${level}`, "out.7z", "data.txt"]);
-
-  const bytes = seven.FS.readFile("out.7z");
-
-  seven.FS.unlink("data.txt");
-  seven.FS.unlink("out.7z");
-
-  return bytes;
+   try{
+     await init7z();
+     seven.FS.writeFile("data.txt", new TextEncoder().encode(text));
+     seven.callMain(["a", "-t7z", "-spf-", `-mx=${level}`, "out.7z", "data.txt"])
+     const bytes = seven.FS.readFile("out.7z");
+     seven.FS.unlink("data.txt");
+     seven.FS.unlink("out.7z");
+     return bytes;
+   } catch(e){
+      console.error("do7zError: ", e);
+   }
 }
 
 btn7z.addEventListener("click", async () => {
