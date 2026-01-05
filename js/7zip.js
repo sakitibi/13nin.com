@@ -1,13 +1,14 @@
 // これは読み込み用じゃ無いよ
-/* ===========================
-   7z-wasm 初期化
-=========================== */
-let sevenPromise = SevenZip(); // ← ここでロード開始
-let seven = null;
 
-async function init7z() {
-  if (!seven) {
-    seven = await sevenPromise; // ← 完全に初期化されるまで待つ
+/* ===========================
+   LZMA-JS 初期化
+=========================== */
+
+// LZMA-JS はグローバル LZMA をそのまま使う前提
+// 非同期初期化は不要だが、存在チェックだけしておく
+function ensureLzma() {
+  if (typeof LZMA === "undefined") {
+    throw new Error("LZMA-JS が読み込まれていません");
   }
 }
 
@@ -22,6 +23,7 @@ function uint8ToBase64(u8) {
   }
   return btoa(result);
 }
+
 function base64ToUint8(b64) {
   const bin = atob(b64);
   const u8 = new Uint8Array(bin.length);
@@ -53,51 +55,89 @@ updateInputSize();
 inputText.addEventListener("input", updateInputSize);
 
 /* ===========================
-   7z 圧縮
+   LZMA 圧縮
 =========================== */
-async function do7z(text, level = 6) {
-   try{
-     await init7z();
-     seven.FS.writeFile("data.txt", new TextEncoder().encode(text));
-     seven.callMain(["a", "-t7z", "-spf-", `-mx=${level}`, "out.7z", "data.txt"])
-     const bytes = seven.FS.readFile("out.7z");
-     seven.FS.unlink("data.txt");
-     seven.FS.unlink("out.7z");
-     return bytes;
-   } catch(e){
-      console.error("do7zError: ", e);
-   }
+
+function lzmaCompress(text, level = 6) {
+  ensureLzma();
+  return new Promise((resolve, reject) => {
+    // LZMA.compress(入力, 圧縮レベル 0–9, コールバック, 進捗)
+    LZMA.compress(text, Number(level), (result, error) => {
+      if (error) {
+        console.error("lzmaCompress error:", error);
+        reject(error);
+        return;
+      }
+      // result は Uint8Array か Array
+      const u8 = result instanceof Uint8Array ? result : new Uint8Array(result);
+      resolve(u8);
+    });
+  });
 }
 
+function lzmaDecompress(u8) {
+  ensureLzma();
+  return new Promise((resolve, reject) => {
+    // Uint8Array / Array どちらでも OK
+    const input = u8 instanceof Uint8Array ? u8 : new Uint8Array(u8);
+    LZMA.decompress(input, (result, error) => {
+      if (error) {
+        console.error("lzmaDecompress error:", error);
+        reject(error);
+        return;
+      }
+      // result は文字列
+      resolve(result);
+    });
+  });
+}
+
+// 旧 do7z を LZMA 用に差し替え（名前そのままでも良いならこのまま）
+async function do7z(text, level = 6) {
+  try {
+    const compressed = await lzmaCompress(text, level);
+    return compressed;
+  } catch (e) {
+    console.error("do7zError: ", e);
+    return undefined;
+  }
+}
+
+/* ボタンクリック: 圧縮して Base64 に表示 */
 btn7z.addEventListener("click", async () => {
   const text = inputText.value;
   const level = levelSel.value;
 
   const compressed = await do7z(text, level);
+  if (!compressed) return;
+
   outBase64.value = uint8ToBase64(compressed);
   compressedSizeEl.textContent = compressed.length;
 });
 
+/* ボタンクリック: 圧縮して .lzma としてダウンロード */
 btn7zDownload.addEventListener("click", async () => {
   const text = inputText.value;
   const level = levelSel.value;
 
   const compressed = await do7z(text, level);
+  if (!compressed) return;
 
-  const blob = new Blob([compressed], { type: "application/x-7z-compressed" });
+  const blob = new Blob([compressed], { type: "application/x-lzma" });
   const url = URL.createObjectURL(blob);
 
   const a = document.createElement("a");
   a.href = url;
-  a.download = "data.7z";
+  a.download = "data.lzma";
   a.click();
 
   setTimeout(() => URL.revokeObjectURL(url), 3000);
 });
 
 /* ===========================
-   7z 解凍
+   LZMA 解凍
 =========================== */
+
 let lastLoadedUint8 = null;
 
 sevenFileInput.addEventListener("change", async (e) => {
@@ -105,67 +145,41 @@ sevenFileInput.addEventListener("change", async (e) => {
   if (!f) return;
 
   lastLoadedUint8 = new Uint8Array(await f.arrayBuffer());
-  alert("7z ファイルを読み込みました。");
+  alert("LZMA ファイルを読み込みました。");
 });
 
-// 共通：解凍処理
+// 共通：解凍処理（旧 extract7z）
 async function extract7z(u8) {
-  await init7z();
-
-  seven.FS.writeFile("in.7z", u8);
-  seven.callMain(["x", "in.7z", "-y"]);
-
-  const list = seven.FS.readdir(".");
-  const files = list.filter(f => f !== "." && f !== ".." && f !== "in.7z");
-
-  if (files.length === 0) return "";
-
-  const first = files[0];
-  const bytes = seven.FS.readFile(first);
-
-  seven.FS.unlink("in.7z");
-  seven.FS.unlink(first);
-
-  return new TextDecoder().decode(bytes);
+  const text = await lzmaDecompress(u8);
+  return text;
 }
 
 btnUn7zFile.addEventListener("click", async () => {
-  if (!lastLoadedUint8) return alert("まず 7z ファイルを選択してください");
+  if (!lastLoadedUint8) return alert("まず LZMA ファイルを選択してください");
 
   outText.value = await extract7z(lastLoadedUint8);
 });
 
 btnUn7zFileDownload.addEventListener("click", async () => {
-  if (!lastLoadedUint8) return alert("まず 7z ファイルを選択してください");
+  if (!lastLoadedUint8) return alert("まず LZMA ファイルを選択してください");
 
-  await init7z();
-
-  seven.FS.writeFile("in.7z", lastLoadedUint8);
-  seven.callMain(["x", "in.7z", "-y"]);
-
-  const list = seven.FS.readdir(".");
-  const files = list.filter(f => f !== "." && f !== ".." && f !== "in.7z");
-
-  const first = files[0];
-  const data = seven.FS.readFile(first);
-
-  const blob = new Blob([data], { type: "application/octet-stream" });
+  // LZMA で展開した “元データ” をバイナリとして保存したい場合
+  const text = await extract7z(lastLoadedUint8);
+  const blob = new Blob([text], { type: "text/plain; charset=utf-8" });
   const url = URL.createObjectURL(blob);
 
   const a = document.createElement("a");
   a.href = url;
-  a.download = first;
+  a.download = "data.txt";
   a.click();
 
   setTimeout(() => URL.revokeObjectURL(url), 3000);
-
-  seven.FS.unlink("in.7z");
-  seven.FS.unlink(first);
 });
 
 btnUn7zFromBase64.addEventListener("click", async () => {
   const b64 = outBase64.value.trim();
   if (!b64) return alert("Base64 を入力してください");
 
-  outText.value = await extract7z(base64ToUint8(b64));
+  const u8 = base64ToUint8(b64);
+  outText.value = await extract7z(u8);
 });
