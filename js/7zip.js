@@ -4,7 +4,15 @@
 =========================== */
 
 // Worker 版 LZMA の正しい初期化
-const lzma = new LZMA("https://cdn.jsdelivr.net/npm/lzma@2.3.2/src/lzma_worker-min.js");
+// Worker を自前で作る
+const workerBlob = new Blob([
+  `importScripts("https://cdn.jsdelivr.net/npm/lzma@2.3.2/src/lzma_worker-min.js");`
+], { type: "application/javascript" });
+
+const workerURL = URL.createObjectURL(workerBlob);
+
+// これで LZMA は constructor になる
+const lzma = new LZMA(workerURL);
 
 /* Base64 ⇄ Uint8Array */
 function uint8ToBase64(u8) {
