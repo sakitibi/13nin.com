@@ -6,7 +6,7 @@
 // Worker 版 LZMA の正しい初期化
 // Worker を自前で作る
 const workerBlob = new Blob([
-  `importScripts("/elibrary-api/js/b479c0cf-67c5-53f5-a493-0fe32e019261.js");`
+  `importScripts("https://sakitibi.github.io/elibrary-api/js/b479c0cf-67c5-53f5-a493-0fe32e019261.js");`
 ], { type: "application/javascript" });
 
 const workerURL = URL.createObjectURL(workerBlob);
