@@ -5,9 +5,7 @@
 let seven = null;
 
 async function init7z() {
-  if (!seven) {
-    seven = await SevenZip();
-  }
+   seven = await SevenZip();
 }
 init7z();
 
