@@ -2,12 +2,14 @@
 /* ===========================
    7z-wasm 初期化
 =========================== */
+let sevenPromise = SevenZip(); // ← ここでロード開始
 let seven = null;
 
 async function init7z() {
-   seven = await SevenZip();
+  if (!seven) {
+    seven = await sevenPromise; // ← 完全に初期化されるまで待つ
+  }
 }
-init7z();
 
 /* Base64 ⇄ Uint8Array */
 function uint8ToBase64(u8) {
