@@ -1,16 +1,10 @@
 // これは読み込み用じゃ無いよ
-
 /* ===========================
-   LZMA-JS 初期化
+   LZMA Worker 初期化
 =========================== */
 
-// LZMA-JS はグローバル LZMA をそのまま使う前提
-// 非同期初期化は不要だが、存在チェックだけしておく
-function ensureLzma() {
-  if (typeof LZMA === "undefined") {
-    throw new Error("LZMA-JS が読み込まれていません");
-  }
-}
+// Worker 版 LZMA の正しい初期化
+const lzma = new LZMA("https://cdn.jsdelivr.net/npm/lzma@2.3.2/src/lzma_worker-min.js");
 
 /* Base64 ⇄ Uint8Array */
 function uint8ToBase64(u8) {
@@ -58,80 +52,53 @@ inputText.addEventListener("input", updateInputSize);
    LZMA 圧縮
 =========================== */
 
-function lzmaCompress(text, level = 6) {
-  ensureLzma();
+function do7z(text, level = 6) {
   return new Promise((resolve, reject) => {
-    // LZMA.compress(入力, 圧縮レベル 0–9, コールバック, 進捗)
-    LZMA.compress(text, Number(level), (result, error) => {
+    lzma.compress(text, Number(level), (result, error) => {
       if (error) {
-        console.error("lzmaCompress error:", error);
+        console.error("do7zError:", error);
         reject(error);
         return;
       }
-      // result は Uint8Array か Array
-      const u8 = result instanceof Uint8Array ? result : new Uint8Array(result);
-      resolve(u8);
+      resolve(new Uint8Array(result));
     });
   });
 }
 
-function lzmaDecompress(u8) {
-  ensureLzma();
-  return new Promise((resolve, reject) => {
-    // Uint8Array / Array どちらでも OK
-    const input = u8 instanceof Uint8Array ? u8 : new Uint8Array(u8);
-    LZMA.decompress(input, (result, error) => {
-      if (error) {
-        console.error("lzmaDecompress error:", error);
-        reject(error);
-        return;
-      }
-      // result は文字列
-      resolve(result);
-    });
-  });
-}
-
-// 旧 do7z を LZMA 用に差し替え（名前そのままでも良いならこのまま）
-async function do7z(text, level = 6) {
-  try {
-    const compressed = await lzmaCompress(text, level);
-    return compressed;
-  } catch (e) {
-    console.error("do7zError: ", e);
-    return undefined;
-  }
-}
-
-/* ボタンクリック: 圧縮して Base64 に表示 */
+/* 圧縮 → Base64 表示 */
 btn7z.addEventListener("click", async () => {
-  const text = inputText.value;
-  const level = levelSel.value;
+  try {
+    const text = inputText.value;
+    const level = levelSel.value;
 
-  const compressed = await do7z(text, level);
-  if (!compressed) return;
-
-  outBase64.value = uint8ToBase64(compressed);
-  compressedSizeEl.textContent = compressed.length;
+    const compressed = await do7z(text, level);
+    outBase64.value = uint8ToBase64(compressed);
+    compressedSizeEl.textContent = compressed.length;
+  } catch (e) {
+    console.error(e);
+  }
 });
 
-/* ボタンクリック: 圧縮して .lzma としてダウンロード */
+/* 圧縮 → ダウンロード */
 btn7zDownload.addEventListener("click", async () => {
-  const text = inputText.value;
-  const level = levelSel.value;
+  try {
+    const text = inputText.value;
+    const level = levelSel.value;
 
-  const compressed = await do7z(text, level);
-  if (!compressed) return;
+    const compressed = await do7z(text, level);
 
-  const blob = new Blob([compressed], { type: "application/x-lzma" });
-  const url = URL.createObjectURL(blob);
+    const blob = new Blob([compressed], { type: "application/x-lzma" });
+    const url = URL.createObjectURL(blob);
 
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "data.lzma";
-  a.click();
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "data.lzma";
+    a.click();
 
-  setTimeout(() => URL.revokeObjectURL(url), 3000);
+    setTimeout(() => URL.revokeObjectURL(url), 3000);
+  } catch (e) {
+    console.error(e);
+  }
 });
 
 /* ===========================
@@ -148,10 +115,18 @@ sevenFileInput.addEventListener("change", async (e) => {
   alert("LZMA ファイルを読み込みました。");
 });
 
-// 共通：解凍処理（旧 extract7z）
-async function extract7z(u8) {
-  const text = await lzmaDecompress(u8);
-  return text;
+// 解凍
+function extract7z(u8) {
+  return new Promise((resolve, reject) => {
+    lzma.decompress(u8, (result, error) => {
+      if (error) {
+        console.error("extract7zError:", error);
+        reject(error);
+        return;
+      }
+      resolve(result);
+    });
+  });
 }
 
 btnUn7zFile.addEventListener("click", async () => {
@@ -163,8 +138,8 @@ btnUn7zFile.addEventListener("click", async () => {
 btnUn7zFileDownload.addEventListener("click", async () => {
   if (!lastLoadedUint8) return alert("まず LZMA ファイルを選択してください");
 
-  // LZMA で展開した “元データ” をバイナリとして保存したい場合
   const text = await extract7z(lastLoadedUint8);
+
   const blob = new Blob([text], { type: "text/plain; charset=utf-8" });
   const url = URL.createObjectURL(blob);
 
