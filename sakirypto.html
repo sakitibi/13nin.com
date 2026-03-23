@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>完全ブラウザ暗号ジェネレーター</title>
+<style>
+body{font-family:sans-serif;margin:20px;background:#f4f4f4}
+textarea{width:100%;height:100px;margin:5px 0}
+button{margin:5px 0;padding:10px}
+.output{white-space:pre-wrap;background:#fff;padding:10px;border:1px solid #ccc;min-height:100px}
+</style>
+</head>
+<body>
+
+<h2>暗号化ジェネレーター + ファイル入出力</h2>
+
+<label>パスワード:</label>
+<input type="text" id="password" value="abc"/>
+
+<label>文字列 / ファイル入力:</label>
+<textarea id="inputText">Hello World</textarea>
+<input type="file" id="fileInput"/>
+
+<button id="encodeBtn">暗号化</button>
+<button id="decodeBtn">復号化</button>
+<button id="saveBtn">ファイルに保存</button>
+
+<h3>出力:</h3>
+<div class="output" id="output"></div>
+
+<script type="module">
+import upack from 'https://cdn.jsdelivr.net/npm/upack.js@latest/dist/index.js';
+
+const output=document.getElementById("output");
+const inputText=document.getElementById("inputText");
+const passwordInput=document.getElementById("password");
+const fileInput=document.getElementById("fileInput");
+
+document.getElementById("encodeBtn").onclick=async()=>{
+    try{
+        output.textContent=await upack.encode(inputText.value,passwordInput.value);
+    }catch(e){output.textContent="Error: "+e;}
+};
+
+document.getElementById("decodeBtn").onclick=async()=>{
+    try{
+        output.textContent=await upack.decode(inputText.value,passwordInput.value);
+    }catch(e){output.textContent="Error: "+e;}
+};
+
+// ファイル保存
+document.getElementById("saveBtn").onclick=()=>{
+    const blob=new Blob([output.textContent||""],{type:"text/plain"});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
+    a.href=url; a.download="output.txt"; a.click();
+    URL.revokeObjectURL(url);
+};
+
+// ファイル読み込み
+fileInput.onchange=()=>{
+    if(!fileInput.files || fileInput.files.length===0) return;
+    const file=fileInput.files[0];
+    const reader=new FileReader();
+    reader.onload=e=>{
+        if(e.target?.result) inputText.value=e.target.result.toString();
+    };
+    reader.readAsText(file);
+};
+</script>
+</body>
+</html>
