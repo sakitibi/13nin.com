@@ -38,20 +38,13 @@ let lastEncryptedBytes = null;
 let lastDecryptedText = null;
 let lastAction = null; // "encrypt" or "decrypt"
 
-// ===== Base64 表示 =====
-function toBase64(bytes) {
-    let binary = '';
-    for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
-    return btoa(binary);
-}
-
 // ===== 暗号化 =====
 document.getElementById("encodeBtn").onclick = async () => {
     try {
         const bytes = await upack.encode(inputText.value, passwordInput.value);
         lastEncryptedBytes = bytes;
         lastAction = "encrypt";
-        output.textContent = toBase64(bytes); // 表示は Base64
+        output.textContent = bytes; // 表示は Base64
         lastDecryptedText = null;
     } catch (e) {
         output.textContent = "Error: " + e;
