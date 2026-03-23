@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>完全ブラウザ暗号ジェネレーター</title>
+<title>ブラウザ暗号ジェネレーター</title>
 <style>
 body{font-family:sans-serif;margin:20px;background:#f4f4f4}
 textarea{width:100%;height:100px;margin:5px 0}
@@ -12,43 +12,37 @@ button{margin:5px 0;padding:10px}
 </head>
 <body>
 
-<h2>暗号化ジェネレーター + ファイル入出力（バイナリ対応）</h2>
+<h2>暗号化ジェネレーター + バイナリ/テキスト保存対応</h2>
 
 <label>パスワード:</label>
 <input type="text" id="password" value="abc"/>
 
-<label>文字列 / ファイル入力:</label>
+<label>文字列入力:</label>
 <textarea id="inputText">Hello World</textarea>
-<input type="file" id="fileInput"/>
 
 <button id="encodeBtn">暗号化</button>
 <button id="decodeBtn">復号化</button>
-<button id="saveBtn">ファイルに保存</button>
+<button id="saveBtn">ファイル保存</button>
 
-<h3>出力 (Base64表示):</h3>
+<h3>出力:</h3>
 <div class="output" id="output"></div>
 
 <script type="module">
-import upack from 'https://cdn.jsdelivr.net/npm/upack.js@latest/dist/index.js'; // encode.js モジュールを読み込む
+import upack from 'https://cdn.jsdelivr.net/npm/upack.js@latest/dist/index.js';
 
 const output = document.getElementById("output");
 const inputText = document.getElementById("inputText");
 const passwordInput = document.getElementById("password");
-const fileInput = document.getElementById("fileInput");
 
-let lastEncryptedBytes = null; // バイナリ保持
+let lastEncryptedBytes = null;
+let lastDecryptedText = null;
+let lastAction = null; // "encrypt" or "decrypt"
 
-// ===== Base64 変換 =====
+// ===== Base64 表示 =====
 function toBase64(bytes) {
     let binary = '';
     for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
     return btoa(binary);
-}
-function fromBase64(str) {
-    const binary = atob(str);
-    const bytes = new Uint8Array(binary.length);
-    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-    return bytes;
 }
 
 // ===== 暗号化 =====
@@ -56,7 +50,9 @@ document.getElementById("encodeBtn").onclick = async () => {
     try {
         const bytes = await upack.encode(inputText.value, passwordInput.value);
         lastEncryptedBytes = bytes;
-        output.textContent = toBase64(bytes);
+        lastAction = "encrypt";
+        output.textContent = toBase64(bytes); // 表示は Base64
+        lastDecryptedText = null;
     } catch (e) {
         output.textContent = "Error: " + e;
     }
@@ -65,32 +61,32 @@ document.getElementById("encodeBtn").onclick = async () => {
 // ===== 復号化 =====
 document.getElementById("decodeBtn").onclick = async () => {
     try {
-        // Base64からUint8Arrayに変換
-        const bytes = lastEncryptedBytes || fromBase64(output.textContent || "");
-        const text = await upack.decode(bytes, passwordInput.value);
-        output.textContent = text;
+        if (!lastEncryptedBytes) return alert("暗号化したデータがありません");
+        const text = await upack.decode(lastEncryptedBytes, passwordInput.value);
+        lastDecryptedText = text;
+        lastAction = "decrypt";
+        output.textContent = text; // 表示は平文
     } catch (e) {
         output.textContent = "Error: " + e;
     }
 };
 
-// ===== ファイル保存（バイナリ） =====
+// ===== ファイル保存 =====
 document.getElementById("saveBtn").onclick = () => {
-    if (!lastEncryptedBytes) return alert("暗号化したデータがありません");
-    upack.saveBinaryFile(lastEncryptedBytes, "output.skrpt");
-};
-
-// ===== ファイル読み込み =====
-fileInput.onchange = async () => {
-    if (!fileInput.files || fileInput.files.length === 0) return;
-    const file = fileInput.files[0];
-    if (file.type.startsWith("text/")) {
-        const text = await file.text();
-        inputText.value = text;
+    if (lastAction === "encrypt") {
+        if (!lastEncryptedBytes) return alert("暗号化したデータがありません");
+        upack.saveBinaryFile(lastEncryptedBytes, "encrypted.skrpt");
+    } else if (lastAction === "decrypt") {
+        if (!lastDecryptedText) return alert("復号化したデータがありません");
+        const blob = new Blob([lastDecryptedText], {type: "text/plain"});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "decrypted.txt";
+        a.click();
+        URL.revokeObjectURL(url);
     } else {
-        const bytes = await upack.readBinaryFile(file);
-        lastEncryptedBytes = bytes;
-        output.textContent = toBase64(bytes);
+        alert("保存するデータがありません");
     }
 };
 </script>
