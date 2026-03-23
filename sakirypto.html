@@ -19,6 +19,8 @@
 
     <label>文字列入力:</label>
     <textarea id="inputText">Hello World</textarea>
+    <label>暗号化済みファイル読み込み (.skrpt):</label>
+    <input type="file" id="fileInput" accept=".skrpt"/>
 
     <button id="encodeBtn">暗号化</button>
     <button id="decodeBtn">復号化</button>
@@ -37,6 +39,26 @@
         let lastEncryptedBytes = null;
         let lastDecryptedText = null;
         let lastAction = null; // "encrypt" or "decrypt"
+
+        const fileInput = document.getElementById("fileInput");
+
+        fileInput.onchange = async () => {
+            if (!fileInput.files || fileInput.files.length === 0) return;
+            const file = fileInput.files[0];
+
+            try {
+                // バイナリとして読み込む
+                const bytes = await upack.readBinaryFile(file);
+                lastEncryptedBytes = bytes;
+                lastAction = "encrypt"; // 暗号化済みデータ扱い
+                lastDecryptedText = null;
+
+                // 表示は baseEncode で見やすく
+                output.textContent = upack.baseEncode(bytes);
+            } catch (e) {
+                output.textContent = "Error reading file: " + e;
+            }
+        };
 
         // ===== 暗号化 =====
         document.getElementById("encodeBtn").onclick = async () => {
