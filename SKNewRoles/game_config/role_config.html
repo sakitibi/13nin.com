@@ -1,119 +1,257 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+    <script src="/elibrary-api/js/1db35307-3da1-1a6c-7210-6fe830b4cdcf.min.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RZWCZGE8RZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        gtag('config', 'G-RZWCZGE8RZ');
+        const events = [
+        {
+            event: "elibanalytics_click",
+                counter: localStorage.getItem("counter"),
+                element: SKNewRolesAnalytics[i].id || "unknown"
+        }
+        ];
+        events.forEach(data => window.dataLayer.push(data));
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SKNewRoles Role Configuration Manager</title>
     <link rel="stylesheet" href="./role_config.min.css">
+    <!-- 広告 -->
+    <script data-ad-client="ca-pub-1495090989864060" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" referrerpolicy="no-referrer"></script>
+    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js" referrerpolicy="no-referrer"></script>
+    <script src="/13ninadmanager.com/js/embedded-1.js" referrerpolicy="no-referrer"></script>
+    <script async="async" src="https://flux-cdn.com/client/ukiuki/flux_wikiwiki_AS_TM_AT.min.js" referrerpolicy="no-referrer"></script>
 </head>
 <body>
+    <div class="container">
+        <h1>役職構成エディタ</h1>
 
-<div class="container">
-    <h1>役職構成エディタ</h1>
-
-    <div class="id-section">
-        <div>
-            <label>構成ID (config_id)</label>
-            <input type="text" id="config_id" placeholder="UUIDを入力">
+        <div class="id-section">
+            <div>
+                <label>構成ID (config_id)</label>
+                <input type="text" id="config_id" placeholder="UUIDを入力">
+            </div>
+            <div>
+                <label>管理者ID (admin_id)</label>
+                <input type="password" id="admin_id" placeholder="自分のUUIDを入力">
+            </div>
         </div>
-        <div>
-            <label>管理者ID (admin_id)</label>
-            <input type="password" id="admin_id" placeholder="自分のUUIDを入力">
+
+        <div class="role-grid">
+            <div class="role-item"><label>人狼</label><input type="number" id="jinrouCount" value="0"></div>
+            <div class="role-item"><label>狂人</label><input type="number" id="kyoujinCount" value="0"></div>
+            <div class="role-item"><label>狂信者</label><input type="number" id="kyoushinCount" value="0"></div>
+            <div class="role-item"><label>魔法少女</label><input type="number" id="magical_girlCount" value="0"></div>
+            <div class="role-item"><label>罠師</label><input type="number" id="wanashiCount" value="0"></div>
+            <div class="role-item"><label>かに</label><input type="number" id="crabCount" value="0"></div>
+            <div class="role-item"><label>クラッカー</label><input type="number" id="crackerCount" value="0"></div>
+            <div class="role-item"><label>テレポーター</label><input type="number" id="teleporterCount" value="0"></div>
+            <div class="role-item"><label>村人</label><input type="number" id="muraCount" value="0"></div>
+            <div class="role-item"><label>占い師</label><input type="number" id="uranaiCount" value="0"></div>
+            <div class="role-item"><label>霊能者</label><input type="number" id="reinouCount" value="0"></div>
+            <div class="role-item"><label>保安官</label><input type="number" id="hoankanCount" value="0"></div>
+            <div class="role-item"><label>騎士</label><input type="number" id="kishiCount" value="0"></div>
+            <div class="role-item"><label>魔法少年</label><input type="number" id="magical_boyCount" value="0"></div>
+            <div class="role-item"><label>ポンコツ</label><input type="number" id="ponkotsuCount" value="0"></div>
+            <div class="role-item"><label>共有者</label><input type="number" id="kyouyuuCount" value="0"></div>
+            <div class="role-item"><label>ナイステレポーター</label><input type="number" id="niceteleporterCount" value="0"></div>
+            <div class="role-item"><label>死神</label><input type="number" id="shinigamiCount" value="0"></div>
+            <div class="role-item"><label>妖狐</label><input type="number" id="youkoCount" value="0"></div>
+            <div class="role-item"><label>キューピッド</label><input type="number" id="cupidCount" value="0"></div>
         </div>
+
+        <div class="actions">
+            <button class="btn-put" onclick="sendData('PUT')">既存設定を更新 (PUT)</button>
+            <button class="btn-post" onclick="sendData('POST')">新規作成 (POST)</button>
+        </div>
+
+        <div id="console"></div>
     </div>
+    <br>
+	<footer>
+        <div id="main-contents-bottom">
+            <div id="pc-bottom-parent-ad-container" style="min-height:250px;">
+                <div id="pc-bottom-left-ad-container">
+                    <!-- /19033742/WIKIWIKI_PC_BOTTOM_LEFT or /19033742/WIKIWIKI_SP_SECOND -->
+                    <div id='div-gpt-ad-1567408559923-0' class="hidden-switch-class"></div>
+                </div>
+                <div id="pc-bottom-right-ad-container">
+                    <!-- /19033742/WIKIWIKI_PC_BOTTOM_RIGHT -->
+                    <div id='div-gpt-ad-1658912377789-0'></div>
+                </div>
+            </div>
+            <style>
+                .pc-bottom-ad-default{
+                    margin-top:120px;
+                    margin-bottom:20px;
+                    display:flex;
+                    justify-content:center;
+                    flex-wrap:wrap;
+                    gap: 10px 5px;
+                }
+            </style>
+            
+            <script>
+                (function() {
+                    var body = document.querySelector('sknewroles-contents');
+                    var co = document.getElementById("pc-bottom-parent-ad-container");
+                    var fh = 50;
+                    if (!wi_ismobile && body.clientHeight < 620) {
+                        co.style.marginTop = '-18px';
+                    }
+                    if (wi_ismobile && body.clientWidth < 400){
+                        co.classList.add("pc-bottom-ad-mobile");
+                    } else if (co.clientWidth < 769) {
+                        co.classList.add("pc-bottom-ad-center");
+                    } else {
+                        co.classList.add("pc-bottom-ad-default");
+                    }
+                }());
+            </script>
+            
+            <style>
+                @media (max-width: 430px) {
+                    body {
+                        margin-bottom: 100px !important;
+                    }
+                }
+                
+                @keyframes fadeInOverlay {
+                    0% {
+                        opacity: 0;
+                    }
+                    100% {
+                        opacity: 1;
+                    }
+                }
+                
+                #pc-overlay-ad-parent-container {
+                    position: fixed;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    width: 100%;
+                    z-index: 99998;
+                    background: rgba(0, 0, 0, .5);
+                    opacity: 0;
+                    animation: fadeInOverlay 1s ease-in-out 0.5s forwards;
+                }
+                
+                .overlay-ad-container {
+                    display: flex;
+                    justify-content: center;
+                }
+                
+                #pc-overlay-ad-close-button {
+                    position: absolute;
+                    top: -21px;
+                    right: 10px;
+                    width: 21px;
+                    height: 21px;
+                    background: none;
+                    border: none;
+                    padding: 0;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    visibility:hidden;
+                }
+                
+                #pc-overlay-ad-close-button svg {
+                    width: 100%;
+                    height: 100%;
+                    fill: rgba(0, 0, 0, .5);
+                }
+            </style>
+            <div id="pc-overlay-ad-parent-container" class="hidden-switch-class">
+                <button id="pc-overlay-ad-close-button" onclick="document.getElementById(
+                    'pc-overlay-ad-parent-container').style.visibility = 'hidden';
+                        document.getElementById('pc-overlay-ad-close-button').style.visibility = 'hidden'">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                    <!--!Font Awesome Pro 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2024 Fonticons, Inc. -->
+                    <path d="M326.6 166.6L349.3 144 304 98.7l-22.6 22.6L192 210.7l-89.4-89.4L80 98.7 34.7 144l22.6 22.6L146.7 256 57.4 345.4 34.7 368 80 413.3l22.6-22.6L192 301.3l89.4 89.4L304 413.3 349.3 368l-22.6-22.6L237.3 256l89.4-89.4z"https://wikiwiki.jp/></svg>
+                </button>
+                <div id="pc-overlay-ad-container-hidden" class="overlay-ad-container">
+                    <div id="pc-overlay-ad-container">
+                        <div id='div-gpt-ad-1563441919648-0' class="overlay-ad-wrapper"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="copyright">Copyright 2023~<span id="copyright">2026</span> 13ninstudio &amp; SKNewRoles</p>
+	</footer>
+    <script>
+        async function sendData(method) {
+            const consoleEl = document.getElementById('console');
+            const configId = document.getElementById('config_id').value;
+            const adminId = document.getElementById('admin_id').value;
 
-    <div class="role-grid">
-        <div class="role-item"><label>人狼</label><input type="number" id="jinrouCount" value="0"></div>
-        <div class="role-item"><label>狂人</label><input type="number" id="kyoujinCount" value="0"></div>
-        <div class="role-item"><label>狂信者</label><input type="number" id="kyoushinCount" value="0"></div>
-        <div class="role-item"><label>魔法少女</label><input type="number" id="magical_girlCount" value="0"></div>
-        <div class="role-item"><label>罠師</label><input type="number" id="wanashiCount" value="0"></div>
-        <div class="role-item"><label>カニ</label><input type="number" id="crabCount" value="0"></div>
-        <div class="role-item"><label>クラッカー</label><input type="number" id="crackerCount" value="0"></div>
-        <div class="role-item"><label>テレポーター</label><input type="number" id="teleporterCount" value="0"></div>
-        <div class="role-item"><label>村人</label><input type="number" id="muraCount" value="0"></div>
-        <div class="role-item"><label>占い師</label><input type="number" id="uranaiCount" value="0"></div>
-        <div class="role-item"><label>霊能者</label><input type="number" id="reinouCount" value="0"></div>
-        <div class="role-item"><label>保安官</label><input type="number" id="hoankanCount" value="0"></div>
-        <div class="role-item"><label>騎士</label><input type="number" id="kishiCount" value="0"></div>
-        <div class="role-item"><label>魔法少年</label><input type="number" id="magical_boyCount" value="0"></div>
-        <div class="role-item"><label>ポンコツ</label><input type="number" id="ponkotsuCount" value="0"></div>
-        <div class="role-item"><label>共有者</label><input type="number" id="kyouyuuCount" value="0"></div>
-        <div class="role-item"><label>ナイスT</label><input type="number" id="niceteleporterCount" value="0"></div>
-        <div class="role-item"><label>死神</label><input type="number" id="shinigamiCount" value="0"></div>
-        <div class="role-item"><label>妖狐</label><input type="number" id="youkoCount" value="0"></div>
-        <div class="role-item"><label>キューピッド</label><input type="number" id="cupidCount" value="0"></div>
-    </div>
+            if (!configId || !adminId) {
+                alert("IDと管理者パスワード(UUID)を入力してください。");
+                return;
+            }
 
-    <div class="actions">
-        <button class="btn-put" onclick="sendData('PUT')">既存設定を更新 (PUT)</button>
-        <button class="btn-post" onclick="sendData('POST')">新規作成 (POST)</button>
-    </div>
+            // 全ての役職IDをリスト化
+            const roles = [
+                'jinrouCount', 'kyoujinCount', 'kyoushinCount', 'magical_girlCount',
+                'wanashiCount', 'crabCount', 'crackerCount', 'teleporterCount',
+                'muraCount', 'uranaiCount', 'reinouCount', 'hoankanCount',
+                'kishiCount', 'magical_boyCount', 'ponkotsuCount', 'kyouyuuCount',
+                'niceteleporterCount', 'shinigamiCount', 'youkoCount', 'cupidCount'
+            ];
 
-    <div id="console"></div>
-</div>
-
-<script>
-    async function sendData(method) {
-        const consoleEl = document.getElementById('console');
-        const configId = document.getElementById('config_id').value;
-        const adminId = document.getElementById('admin_id').value;
-
-        if (!configId || !adminId) {
-            alert("IDと管理者パスワード(UUID)を入力してください。");
-            return;
-        }
-
-        // 全ての役職IDをリスト化
-        const roles = [
-            'jinrouCount', 'kyoujinCount', 'kyoushinCount', 'magical_girlCount',
-            'wanashiCount', 'crabCount', 'crackerCount', 'teleporterCount',
-            'muraCount', 'uranaiCount', 'reinouCount', 'hoankanCount',
-            'kishiCount', 'magical_boyCount', 'ponkotsuCount', 'kyouyuuCount',
-            'niceteleporterCount', 'shinigamiCount', 'youkoCount', 'cupidCount'
-        ];
-
-        // configオブジェクトの作成
-        const configData = {};
-        roles.forEach(role => {
-            configData[role] = parseInt(document.getElementById(role).value) || 0;
-        });
-
-        const payload = {
-            config_id: configId,
-            admin_id: adminId,
-            config: configData
-        };
-
-        consoleEl.style.display = 'block';
-        consoleEl.style.background = '#eee';
-        consoleEl.innerText = "通信中...";
-
-        try {
-            const response = await fetch('https://asakura-wiki.vercel.app/api/snr2/role_config', {
-                method: method,
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-admin-id': adminId
-                },
-                body: JSON.stringify(payload)
+            // configオブジェクトの作成
+            const configData = {};
+            roles.forEach(role => {
+                configData[role] = parseInt(document.getElementById(role).value) || 0;
             });
 
-            const result = await response.json();
+            const payload = {
+                config_id: configId,
+                admin_id: adminId,
+                config: configData
+            };
 
-            if (response.ok) {
-                consoleEl.style.background = '#d4edda';
-                consoleEl.innerText = `[${method}] 成功: ${JSON.stringify(result, null, 2)}`;
-            } else {
+            consoleEl.style.display = 'block';
+            consoleEl.style.background = '#eee';
+            consoleEl.innerText = "通信中...";
+
+            try {
+                const response = await fetch('https://asakura-wiki.vercel.app/api/snr2/role_config', {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-admin-id': adminId
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    consoleEl.style.background = '#d4edda';
+                    consoleEl.innerText = `[${method}] 成功: ${JSON.stringify(result, null, 2)}`;
+                } else {
+                    consoleEl.style.background = '#f8d7da';
+                    consoleEl.innerText = `[${method}] 失敗 (${response.status}): ${result.error || JSON.stringify(result)}`;
+                }
+            } catch (e) {
                 consoleEl.style.background = '#f8d7da';
-                consoleEl.innerText = `[${method}] 失敗 (${response.status}): ${result.error || JSON.stringify(result)}`;
+                consoleEl.innerText = `通信エラー: ${e.message}`;
             }
-        } catch (e) {
-            consoleEl.style.background = '#f8d7da';
-            consoleEl.innerText = `通信エラー: ${e.message}`;
         }
-    }
-</script>
-
+    </script>
+    <script src="https://sakitibi.github.io/NMNGyuri-hihan-api/nmngyuri-popup.js"></script>
+    <!-- 広告 -->
+    <script src="/13ninadmanager.com/js/13nin_vignette.js"></script>
+    <script src="/13ninadmanager.com/js/13ninadmanager.min.js"></script>
 </body>
 </html>
