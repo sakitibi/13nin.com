@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKNewRoles Role Configuration Manager</title>
+    <style>
+        :root { --primary: #2196F3; --success: #4CAF50; --bg: #f8f9fa; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        h1 { text-align: center; color: #444; margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        
+        .id-section { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; background: #fffde7; padding: 15px; border-radius: 8px; border: 1px solid #fff9c4; }
+        label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 0.9em; }
+        input[type="text"], input[type="password"], input[type="number"] { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+        
+        .role-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
+        .role-item { background: #f1f3f5; padding: 10px; border-radius: 6px; transition: 0.2s; }
+        .role-item:hover { background: #e9ecef; }
+        .role-item label { color: #555; }
+
+        .actions { margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        button { padding: 15px; border: none; border-radius: 8px; cursor: pointer; font-size: 1em; font-weight: bold; transition: 0.3s; color: white; }
+        .btn-put { background-color: var(--primary); }
+        .btn-put:hover { background-color: #1976D2; }
+        .btn-post { background-color: var(--success); }
+        .btn-post:hover { background-color: #43A047; }
+        
+        #console { margin-top: 20px; padding: 15px; border-radius: 8px; display: none; font-family: monospace; font-size: 0.9em; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>役職構成エディタ</h1>
+
+    <div class="id-section">
+        <div>
+            <label>構成ID (config_id)</label>
+            <input type="text" id="config_id" placeholder="UUIDを入力">
+        </div>
+        <div>
+            <label>管理者ID (admin_id)</label>
+            <input type="password" id="admin_id" placeholder="自分のUUIDを入力">
+        </div>
+    </div>
+
+    <div class="role-grid">
+        <div class="role-item"><label>人狼</label><input type="number" id="jinrouCount" value="0"></div>
+        <div class="role-item"><label>狂人</label><input type="number" id="kyoujinCount" value="0"></div>
+        <div class="role-item"><label>狂信者</label><input type="number" id="kyoushinCount" value="0"></div>
+        <div class="role-item"><label>魔法少女</label><input type="number" id="magical_girlCount" value="0"></div>
+        <div class="role-item"><label>罠師</label><input type="number" id="wanashiCount" value="0"></div>
+        <div class="role-item"><label>カニ</label><input type="number" id="crabCount" value="0"></div>
+        <div class="role-item"><label>クラッカー</label><input type="number" id="crackerCount" value="0"></div>
+        <div class="role-item"><label>テレポーター</label><input type="number" id="teleporterCount" value="0"></div>
+        <div class="role-item"><label>村人</label><input type="number" id="muraCount" value="0"></div>
+        <div class="role-item"><label>占い師</label><input type="number" id="uranaiCount" value="0"></div>
+        <div class="role-item"><label>霊能者</label><input type="number" id="reinouCount" value="0"></div>
+        <div class="role-item"><label>保安官</label><input type="number" id="hoankanCount" value="0"></div>
+        <div class="role-item"><label>騎士</label><input type="number" id="kishiCount" value="0"></div>
+        <div class="role-item"><label>魔法少年</label><input type="number" id="magical_boyCount" value="0"></div>
+        <div class="role-item"><label>ポンコツ</label><input type="number" id="ponkotsuCount" value="0"></div>
+        <div class="role-item"><label>共有者</label><input type="number" id="kyouyuuCount" value="0"></div>
+        <div class="role-item"><label>ナイスT</label><input type="number" id="niceteleporterCount" value="0"></div>
+        <div class="role-item"><label>死神</label><input type="number" id="shinigamiCount" value="0"></div>
+        <div class="role-item"><label>妖狐</label><input type="number" id="youkoCount" value="0"></div>
+        <div class="role-item"><label>キューピッド</label><input type="number" id="cupidCount" value="0"></div>
+    </div>
+
+    <div class="actions">
+        <button class="btn-put" onclick="sendData('PUT')">既存設定を更新 (PUT)</button>
+        <button class="btn-post" onclick="sendData('POST')">新規作成 (POST)</button>
+    </div>
+
+    <div id="console"></div>
+</div>
+
+<script>
+    async function sendData(method) {
+        const consoleEl = document.getElementById('console');
+        const configId = document.getElementById('config_id').value;
+        const adminId = document.getElementById('admin_id').value;
+
+        if (!configId || !adminId) {
+            alert("IDと管理者パスワード(UUID)を入力してください。");
+            return;
+        }
+
+        // 全ての役職IDをリスト化
+        const roles = [
+            'jinrouCount', 'kyoujinCount', 'kyoushinCount', 'magical_girlCount',
+            'wanashiCount', 'crabCount', 'crackerCount', 'teleporterCount',
+            'muraCount', 'uranaiCount', 'reinouCount', 'hoankanCount',
+            'kishiCount', 'magical_boyCount', 'ponkotsuCount', 'kyouyuuCount',
+            'niceteleporterCount', 'shinigamiCount', 'youkoCount', 'cupidCount'
+        ];
+
+        // configオブジェクトの作成
+        const configData = {};
+        roles.forEach(role => {
+            configData[role] = parseInt(document.getElementById(role).value) || 0;
+        });
+
+        const payload = {
+            config_id: configId,
+            admin_id: adminId,
+            config: configData
+        };
+
+        consoleEl.style.display = 'block';
+        consoleEl.style.background = '#eee';
+        consoleEl.innerText = "通信中...";
+
+        try {
+            const response = await fetch('https://asakura-wiki.vercel.app/api/snr2/role_config', {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-admin-id': adminId
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                consoleEl.style.background = '#d4edda';
+                consoleEl.innerText = `[${method}] 成功: ${JSON.stringify(result, null, 2)}`;
+            } else {
+                consoleEl.style.background = '#f8d7da';
+                consoleEl.innerText = `[${method}] 失敗 (${response.status}): ${result.error || JSON.stringify(result)}`;
+            }
+        } catch (e) {
+            consoleEl.style.background = '#f8d7da';
+            consoleEl.innerText = `通信エラー: ${e.message}`;
+        }
+    }
+</script>
+
+</body>
+</html>
