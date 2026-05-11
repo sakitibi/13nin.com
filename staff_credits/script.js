@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 headers
             });
         }
-        if (!isLogined) {
+        if (!isLogined && !isBot) {
             document.body.style.display = "block";
             document.body.style.textAlign = "center";
             document.body.innerHTML = `
