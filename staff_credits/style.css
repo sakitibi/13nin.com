@@ -1,0 +1,194 @@
+/* 全体のレイアウト */
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    background-color: #beffe5; /* 指定の背景色 */
+    display: flex;
+    justify-content: center;
+    padding-top: 60px;
+    margin: 0;
+}
+
+.search-container {
+    width: 380px;
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+h2 {
+    margin: 0 0 15px;
+    font-size: 1.1rem;
+    color: #444;
+}
+
+/* 検索入力欄 */
+#searchInput {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+/* 検索結果リスト（仮想スクロール用） */
+#staffList {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0 0;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    /* スクロール計算のために高さを固定 */
+    height: 250px; 
+    overflow-y: auto;
+    display: none; /* JSで制御 */
+    background: #fff;
+    position: relative;
+}
+
+/* 仮想スクロール内のスペーサー（上下の余白）用 */
+#staffList div {
+    width: 100%;
+    pointer-events: none; /* クリックを無効化 */
+}
+
+/* スタッフアイテム */
+.staff-item {
+    /* JSのITEM_HEIGHT(50px)と厳密に一致させる */
+    height: 50px;
+    padding: 0 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    box-sizing: border-box; /* パディングを含めて50pxにする */
+}
+
+.staff-item:hover {
+    background-color: #f8faff;
+}
+
+/* IDタグのスタイル */
+.id-tag {
+    font-size: 0.75rem;
+    background: #e9ecef;
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: #666;
+    font-weight: bold;
+}
+
+/* 該当なしメッセージ */
+#noResult {
+    display: none;
+    text-align: center;
+    color: #999;
+    font-size: 0.9rem;
+    margin-top: 20px;
+}
+
+/* 詳細表示エリア */
+#staffDetail {
+    display: none; /* JSで制御 */
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #d1e7ff;
+    border-radius: 8px;
+    background-color: #f8fbff;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+#staffDetail h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 1rem;
+    color: #0056b3;
+    border-bottom: 1px solid #d1e7ff;
+    padding-bottom: 5px;
+}
+
+/* 詳細項目の基本スタイル */
+#staffDetail p {
+    margin: 10px 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #444;
+}
+
+/* ラベル（項目名）の幅を揃える */
+#staffDetail strong {
+    display: inline-block;
+    width: 85px; 
+    color: #666;
+    margin-right: 5px;
+    vertical-align: top;
+}
+
+/* 区切り線 */
+.detail-divider {
+    border: none;
+    border-top: 1px solid #d1e7ff;
+    margin: 15px 0;
+}
+
+/* 自己紹介・コメント用のテキスト表示ボックス */
+.text-box {
+    display: block;
+    margin-top: 5px;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #eef2f7;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: #333;
+    white-space: pre-wrap; /* 改行を反映 */
+    word-wrap: break-word; /* 長い単語の折り返し */
+}
+
+/* とじるボタン */
+#closeDetail {
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background-color 0.2s;
+}
+
+#closeDetail:hover {
+    background-color: #5a6268;
+}
+
+/* モバイル表示時の調整 */
+@media (max-width: 400px) {
+    #staffDetail strong {
+        display: block;
+        width: auto;
+        margin-bottom: 2px;
+    }
+}
+
+/* アニメーション */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Base122 Tool</title>
+        <style>
+        body{
+            font-family:monospace;
+            padding:20px;
+        }
+
+        textarea{
+            width:100%;
+            height:120px;
+            margin-top:10px;
+        }
+
+        button{
+            margin-top:10px;
+            margin-right:10px;
+        }
+
+        #compare{
+            margin-top:10px;
+        }
+        </style>
+    </head>
+
+    <body>
+        <h2>Base122 Tool</h2>
+
+        <textarea id="input" placeholder="入力"></textarea>
+        <br>
+        <button onclick="encode()">Encode</button>
+        <button onclick="decode()">Decode</button>
+        <button onclick="copy()">Copy</button>
+        <br><br>
+        <input type="file" id="file" onchange="fileEncode()">
+        <br>
+        <textarea id="output" placeholder="結果"></textarea>
+        <div id="compare"></div>
+
+        <script>
+            const illegal=[0,10,13,34,38,92];
+
+            function base122encode(bytes){
+                let out="";
+                let bitBuffer=0;
+                let bitCount=0;
+                for(let b of bytes){
+                    bitBuffer=(bitBuffer<<8)|b;
+                    bitCount+=8;
+                    while(bitCount>=7){
+                        bitCount-=7;
+                        let val=(bitBuffer>>bitCount)&0x7F;
+                        if(illegal.includes(val)){
+                            out+=String.fromCharCode(127);
+                            out+=String.fromCharCode(val+1);
+                        }else{
+                            out+=String.fromCharCode(val);
+                        }
+                    }
+                }
+
+                if(bitCount>0){
+                    let val=(bitBuffer<<(7-bitCount))&0x7F;
+                    out+=String.fromCharCode(val);
+                }
+
+                return out;
+            }
+
+            function base122decode(str){
+                let bytes=[];
+                let bitBuffer=0;
+                let bitCount=0;
+                for(let i=0;i<str.length;i++){
+                    let code=str.charCodeAt(i);
+                    if(code===127){
+                        i++;
+                        code=str.charCodeAt(i)-1;
+                    }
+                    bitBuffer=(bitBuffer<<7)|code;
+                    bitCount+=7;
+                    if(bitCount>=8){
+                        bitCount-=8;
+                        bytes.push((bitBuffer>>bitCount)&255);
+                    }
+                }
+                return new Uint8Array(bytes);
+            }
+
+            function encode(){
+                let text=document.getElementById("input").value;
+                let bytes=new TextEncoder().encode(text);
+                let encoded=base122encode(bytes);
+                document.getElementById("output").value=encoded;
+                compare(bytes,encoded);
+            }
+
+            function decode(){
+                let text=document.getElementById("input").value;
+                let bytes=base122decode(text);
+                let decoded=new TextDecoder().decode(bytes);
+                document.getElementById("output").value=decoded;
+            }
+
+            function fileEncode(){
+                let file=document.getElementById("file").files[0];
+                let reader=new FileReader();
+                reader.onload=function(){
+                    let bytes=new Uint8Array(reader.result);
+                    let encoded=base122encode(bytes);
+                    document.getElementById("output").value=encoded;
+                    compare(bytes,encoded);
+                }
+                reader.readAsArrayBuffer(file);
+            }
+
+            function copy(){
+                let out=document.getElementById("output");
+                out.select();
+                document.execCommand("copy");
+            }
+
+            function compare(bytes,base122){
+                let base64=btoa(
+                    String.fromCharCode(...bytes)
+                );
+                let html="";
+                html+="Base64 size: "+base64.length+"<br>";
+                html+="Base122 size: "+base122.length+"<br>";
+                html+="Compression: "+(100*(base122.length/base64.length)).toFixed(2)+"%";
+                document.getElementById("compare").innerHTML=html;
+            }
+        </script>
+    </body>
+</html>

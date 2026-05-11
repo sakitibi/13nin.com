@@ -1,0 +1,64 @@
+h2 {
+    font-size: 15px;
+    font-weight: bold;
+    color: #ffffff;
+    font-style: normal;
+    }
+h3 {
+    font-size: 15px;
+    font-weight: bold;
+    color: #ff0000;
+    font-style: normal;
+  }
+p {
+    font-style: normal;
+    font-size: 15px;
+    font-weight: bold;
+    color: #ffffff;
+  }
+#dl {
+    padding: 10px 20px;
+    background-color: darkorange;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+#dl:hover {
+    background-color: orangered;
+  }
+
+body {
+    background-color: darkgreen;
+}
+button{
+	padding: 10px 20px;
+	font-size: 16px;
+	margin: 10px;
+	cursor: pointer;
+	border: none;
+	border-radius: 5px;
+	color: #ffffff;
+	background-color: #002aff;
+	transition: background-color 0.3s;
+}
+
+button:hover{
+	background-color: #002b9c;
+}
+button[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+button:not([aria-disabled]) {
+    cursor: pointer;
+}
+
+button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+}

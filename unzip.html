@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+</head>
+<body>
+    <h3>AES-256 ZIP 解凍</h3>
+    <input type="file" id="fileInput" accept=".zip">
+    <input type="password" id="password" placeholder="パスワードを入力">
+    <button id="unzipBtn">解凍開始</button>
+    <div id="output"></div>
+    <script type="module">
+        // 信頼性の高い zip.js を使用
+        import * as zip from "https://unpkg.com/@zip.js/zip.js@2.7.34/lib/zip-full.js";
+
+        document.getElementById('unzipBtn').addEventListener('click', async () => {
+            const fileInput = document.getElementById('fileInput');
+            const password = document.getElementById('password').value;
+            const output = document.getElementById('output');
+
+            if (!fileInput.files[0]) return alert("ファイルを選択してください");
+
+            // リーダーの初期化
+            const reader = new zip.ZipReader(new zip.BlobReader(fileInput.files[0]));
+
+            try {
+                output.innerText = "解凍中...";
+                const entries = await reader.getEntries();
+                output.innerHTML = "<h4>解凍結果:</h4>";
+
+                for (const entry of entries) {
+                    if (!entry.directory) {
+                        // ここでパスワードを渡して解凍
+                        const writer = new zip.BlobWriter();
+                        const blob = await entry.getData(writer, { password });
+                        console.log("blob: ", await blob.bytes());
+                        const url = URL.createObjectURL(blob);
+                        output.innerHTML += `
+                        <p>
+                            ${entry.filename} 
+                            <a href="${url}" download="${entry.filename}">保存</a>
+                        </p>`;
+                    }
+                }
+            } catch (err) {
+                console.error(err);
+                output.innerText = "エラー: パスワードが違うか、AES-256の形式が特殊です。";
+            } finally {
+                await reader.close();
+            }
+        });
+    </script>
+</body>
+</html>

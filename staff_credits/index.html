@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>13ninstudio 公式スタッフ検索システム</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="search-container">
+        <h2>13ninstudio 公式スタッフ検索</h2>
+        <p>注意 まだ制作中です、 一部の情報しか掲載されていません。</p>
+        <div class="input-group">
+            <input type="text" id="searchInput" placeholder="名前またはフリガナを入力..." autocomplete="off">
+        </div>
+        
+        <ul id="staffList" role="listbox"></ul>
+        
+        <ul hidden id="staffList-hidden"></ul>
+        
+        <p id="noResult" aria-live="polite">該当するスタッフは見つかりませんでした。</p>
+
+        <div id="staffDetail" class="detail-card" style="display: none;" role="region" aria-labelledby="detailTitle">
+            <h3 id="detailTitle">スタッフ詳細</h3>
+            
+            <div class="detail-content">
+                <p><strong>ID:</strong> <span id="detailId"></span></p>
+                <p><strong>名前:</strong> <span id="detailName"></span></p>
+                <p><strong>ふりがな:</strong> <span id="detailKana"></span></p>
+                <p><strong>部署:</strong> <span id="detailDept"></span></p>
+                <p><strong>拠点:</strong> <span id="detailLocation"></span></p>
+                <p><strong>座席:</strong> <span id="detailSeat"></span></p>
+                <p><strong>入社日:</strong> <span id="detailJoined"></span></p>
+                <p><strong>チーム:</strong> <span id="detailTeam"></span></p>
+
+                <hr class="detail-divider">
+
+                <p><strong>誕生日:</strong> <span id="detailBirthday"></span></p>
+                
+                <p><strong>自己紹介:</strong><br>
+                    <span id="detailIntro" class="text-box"></span>
+                </p>
+                
+                <p><strong>コメント:</strong><br>
+                    <span id="detailComment" class="text-box"></span>
+                </p>
+            </div>
+
+            <button id="closeDetail" type="button">閉じる</button>
+        </div>
+    </div>
+    
+    <script src="script.js" type="module"></script>
+</body>
+</html>
