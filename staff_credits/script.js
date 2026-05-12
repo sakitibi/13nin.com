@@ -3,17 +3,27 @@ import renderVirtualList from './renderVirtualList.js';
 
 let isBot = true;
 
-// --- 1. 詳細表示（必須 8項目 + オプション 3項目） ---
+// --- 1. 詳細表示（必須 8項目 + オプション 3項目 + スタイル切り替え） ---
 export const showDetail = (staff) => {
-    // 【必須項目】
-    detailId.textContent = staff.id;
-    detailName.textContent = staff.name;
-    detailKana.textContent = staff.kana;
-    detailDept.textContent = staff.dept;
-    detailLocation.textContent = staff.location;
-    detailSeat.textContent = staff.seat;
-    detailJoined.textContent = staff.joined;
-    detailTeam.textContent = staff.team;
+    const staffDetail = document.getElementById('staffDetail');
+    const staffList = document.getElementById('staffList');
+
+    // ★追加：スタイルリセットと条件付きクラス付与
+    // 前回のクラスが残らないよう一旦削除
+    staffDetail.classList.remove('highlight-executive-detail');
+    if (staff.dept === "総務部 部長") {
+        staffDetail.classList.add('highlight-executive-detail');
+    }
+
+    // 【必須項目】の流し込み
+    document.getElementById('detailId').textContent = staff.id;
+    document.getElementById('detailName').textContent = staff.name;
+    document.getElementById('detailKana').textContent = staff.kana;
+    document.getElementById('detailDept').textContent = staff.dept;
+    document.getElementById('detailLocation').textContent = staff.location;
+    document.getElementById('detailSeat').textContent = staff.seat;
+    document.getElementById('detailJoined').textContent = staff.joined;
+    document.getElementById('detailTeam').textContent = staff.team;
 
     // 表示制御用サブ関数
     const setOptionalSection = (id, value) => {
@@ -58,16 +68,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const staffListHidden = document.getElementById("staffList-hidden");
     const noResult = document.getElementById('noResult');
     const staffDetail = document.getElementById('staffDetail');
-    
-    // 詳細表示用要素の取得
-    const detailId = document.getElementById('detailId');
-    const detailName = document.getElementById('detailName');
-    const detailKana = document.getElementById('detailKana');
-    const detailDept = document.getElementById('detailDept');
-    const detailLocation = document.getElementById('detailLocation');
-    const detailSeat = document.getElementById('detailSeat');
-    const detailJoined = document.getElementById('detailJoined');
-    const detailTeam = document.getElementById('detailTeam');
     const closeDetail = document.getElementById('closeDetail');
     
     let allStaffData = []; 

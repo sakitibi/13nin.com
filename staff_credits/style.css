@@ -155,6 +155,21 @@ h2 {
     vertical-align: top;
 }
 
+/* 詳細画面：総務部 部長用のスタイル */
+#staffDetail.highlight-executive-detail {
+    background-color: #fff3cd; /* 薄い黄色 */
+    border-color: #ffc107;      /* ボーダーを強調 */
+}
+
+#staffDetail.highlight-executive-detail h3 {
+    color: #856404;            /* 見出しの色を変更 */
+    border-bottom-color: #ffeeba;
+}
+
+#staffDetail.highlight-executive-detail .text-box {
+    background-color: #fff9e6; /* テキストボックス内も少し色を合わせる */
+}
+
 /* 区切り線 */
 .detail-divider {
     border: none;
