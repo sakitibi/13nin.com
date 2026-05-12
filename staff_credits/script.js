@@ -8,9 +8,7 @@ export const showDetail = (staff) => {
     const staffDetail = document.getElementById('staffDetail');
     const staffList = document.getElementById('staffList');
 
-    // ★追加：スタイルリセットと条件付きクラス付与
     // 前回のクラスが残らないよう一旦削除
-    console.log("staff: ", staff);
     staffDetail.classList.remove('highlight-executive-detail');
     if (staff.dept === "総務部 部長") {
         staffDetail.classList.add('highlight-executive-detail');

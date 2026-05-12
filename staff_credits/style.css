@@ -95,7 +95,7 @@ h2 {
 
 /* IDタグも色を合わせる場合 */
 .staff-item.highlight-executive .id-tag {
-    background-color: #ffc107;
+    background-color: #ffde7a;
     color: #fff;
 }
 
@@ -158,7 +158,7 @@ h2 {
 /* 詳細画面：総務部 部長用のスタイル */
 #staffDetail.highlight-executive-detail {
     background-color: #fff3cd; /* 薄い黄色 */
-    border-color: #ffc107;      /* ボーダーを強調 */
+    border-color: #ffde7a;      /* ボーダーを強調 */
 }
 
 #staffDetail.highlight-executive-detail h3 {
