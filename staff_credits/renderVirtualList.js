@@ -4,6 +4,10 @@ import { showDetail } from './script.js';
 export default function renderVirtualList(filteredData) {
     const ITEM_HEIGHT = 50; // CSSの.staff-itemの高さと合わせる
     const VISIBLE_RANGE = 4; // 真ん中から上下に表示する個数
+    const staffList = document.getElementById('staffList'); // 要素を明示的に取得
+    
+    if (!staffList) return;
+
     const scrollTop = staffList.scrollTop;
     const containerHeight = staffList.clientHeight;
     const centerIndex = Math.floor((scrollTop + containerHeight / 2) / ITEM_HEIGHT);
@@ -24,6 +28,11 @@ export default function renderVirtualList(filteredData) {
     visibleData.forEach((staff) => {
         const li = document.createElement('li');
         li.className = 'staff-item';
+        
+        if (staff.dept === "総務部 部長") {
+            li.classList.add('highlight-executive');
+        }
+
         li.style.height = `${ITEM_HEIGHT}px`;
         li.innerHTML = `
             <span>${staff.name}</span>

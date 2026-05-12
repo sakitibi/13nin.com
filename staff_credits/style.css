@@ -77,6 +77,28 @@ h2 {
     background-color: #f8faff;
 }
 
+/* 総務部 部長用の特別な見た目 */
+.staff-item.highlight-executive {
+    background-color: #fff3cd !important; /* 薄い黄色 */
+    border-left: 5px solid #ffc107;      /* 左側にアクセント線 */
+    font-weight: bold;
+}
+
+.staff-item.highlight-executive span {
+    color: #856404; /* 文字色を濃い茶色に */
+}
+
+/* ホバー時も色を維持または少し濃くする */
+.staff-item.highlight-executive:hover {
+    background-color: #ffeeba !important;
+}
+
+/* IDタグも色を合わせる場合 */
+.staff-item.highlight-executive .id-tag {
+    background-color: #ffc107;
+    color: #fff;
+}
+
 /* IDタグのスタイル */
 .id-tag {
     font-size: 0.75rem;
