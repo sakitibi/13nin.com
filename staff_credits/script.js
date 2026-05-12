@@ -10,7 +10,7 @@ export const showDetail = (staff) => {
 
     // 前回のクラスが残らないよう一旦削除
     staffDetail.classList.remove('highlight-executive-detail');
-    if (staff.dept === "総務部 部長") {
+    if (staff.dept === "総務部 部長" || staff.dept === "総務部 副部長") {
         staffDetail.classList.add('highlight-executive-detail');
     }
 

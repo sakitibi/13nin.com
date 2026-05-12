@@ -29,7 +29,7 @@ export default function renderVirtualList(filteredData) {
         const li = document.createElement('li');
         li.className = 'staff-item';
         
-        if (staff.dept === "総務部 部長") {
+        if (staff.dept === "総務部 部長" || staff.dept === "総務部 副部長") {
             li.classList.add('highlight-executive');
         }
 
