@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LED Matrix Generator 128x32</title>
+    <style>
+        :root {
+            --bg-color: #050505;
+            --panel-bg: #000000;
+            --control-bg: #1a1a1a;
+            --accent: #0070f3;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: #eee;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 1.2rem;
+            letter-spacing: 0.2rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        /* LEDパネルのコンテナ */
+        .matrix-outer {
+            background-color: #111;
+            padding: 10px;
+            border-radius: 4px;
+            border: 4px solid #222;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            margin-bottom: 30px;
+        }
+
+        /* 128x32を適切なサイズで表示 */
+        #led-canvas {
+            background-color: var(--panel-bg);
+            display: block;
+            /* 表示サイズを調整（横幅1024px程度にスケーリング） */
+            width: 1024px; 
+            height: 256px;
+            image-rendering: pixelated; /* ドット感を強調 */
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--control-bg);
+            padding: 20px 30px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        input[type="text"] {
+            background: #2a2a2a;
+            border: 1px solid #444;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            outline: none;
+            width: 250px;
+            font-size: 1rem;
+        }
+
+        input[type="color"] {
+            -webkit-appearance: none;
+            border: none;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            background: none;
+        }
+
+        input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+        input[type="color"]::-webkit-color-swatch {
+            border: 2px solid #444;
+            border-radius: 50%;
+        }
+
+        button {
+            padding: 12px 25px;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.1s, background 0.2s;
+        }
+
+        button:hover {
+            background-color: #005bc4;
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>LED MATRIX DISPLAY SYSTEM</h1>
+
+    <div class="matrix-outer">
+        <canvas id="led-canvas" width="1024" height="256"></canvas>
+    </div>
+
+    <div class="controls">
+        <input type="text" id="text-input" placeholder="日本語・英数字を入力" value="LED掲示板">
+        <input type="color" id="color-picker" value="#ff3300">
+        <button id="update-btn">SEND DATA</button>
+    </div>
+
+    <script>
+        const ROWS = 32;
+        const COLS = 128;
+        const canvas = document.getElementById('led-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // 描画用の設定
+        const CELL_SIZE = 8; // Canvas内部での1ドットの描画サイズ
+
+        /**
+         * マトリックス描画関数
+         * @param {number[][]} matrix - 32x128の0/1配列
+         * @param {string} color - HEXカラーコード
+         */
+        function draw(matrix, color) {
+            // 背景クリア（真っ暗）
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            matrix.forEach((row, y) => {
+                row.forEach((bit, x) => {
+                    const posX = x * CELL_SIZE;
+                    const posY = y * CELL_SIZE;
+
+                    if (bit === 1) {
+                        // 点灯LEDのグロー（光彩）エフェクト
+                        ctx.shadowBlur = 8;
+                        ctx.shadowColor = color;
+                        
+                        // LEDチップの描画
+                        ctx.fillStyle = color;
+                        ctx.beginPath();
+                        // 少し丸みを持たせてリアルにする
+                        const r = 1.5; 
+                        ctx.roundRect(posX + 1, posY + 1, CELL_SIZE - 2, CELL_SIZE - 2, r);
+                        ctx.fill();
+
+                        // 中央にハイライトを入れて発光感を出す
+                        ctx.shadowBlur = 0;
+                        ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+                        ctx.fillRect(posX + 3, posY + 3, 2, 2);
+                    } else {
+                        // 消灯LED（うっすら見える基板感）
+                        ctx.shadowBlur = 0;
+                        ctx.fillStyle = '#111';
+                        ctx.beginPath();
+                        ctx.roundRect(posX + 1, posY + 1, CELL_SIZE - 2, CELL_SIZE - 2, 1);
+                        ctx.fill();
+                    }
+                });
+            });
+        }
+
+        /**
+         * API通信
+         */
+        async function updateDisplay() {
+            const text = document.getElementById('text-input').value;
+            const color = document.getElementById('color-picker').value;
+            const btn = document.getElementById('update-btn');
+
+            btn.disabled = true;
+            btn.innerText = 'WAIT...';
+
+            try {
+                const response = await fetch('/api/led', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text, color })
+                });
+
+                if (!response.ok) throw new Error('Network Error');
+
+                const data = await response.json();
+                
+                // data.matrix (32x128) を描画
+                if (data.matrix) {
+                    draw(data.matrix, color);
+                }
+
+            } catch (err) {
+                console.error("API Error:", err);
+                // 接続できない場合のデモパターン表示
+                showDemoPattern(color);
+            } finally {
+                btn.disabled = false;
+                btn.innerText = 'SEND DATA';
+            }
+        }
+
+        /**
+         * デモ用：ランダム点灯
+         */
+        function showDemoPattern(color) {
+            const dummyData = Array.from({ length: ROWS }, () => 
+                Array.from({ length: COLS }, () => (Math.random() > 0.95 ? 1 : 0))
+            );
+            draw(dummyData, color);
+        }
+
+        // 初期表示
+        document.getElementById('update-btn').addEventListener('click', updateDisplay);
+        
+        // ページ読み込み時に空のパネルを描画
+        const emptyMatrix = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
+        draw(emptyMatrix, "#444");
+
+    </script>
+</body>
+</html>
