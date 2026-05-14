@@ -1,7 +1,84 @@
 import { decompressBrotli } from '../js/brotli.js';
 import renderVirtualList from './renderVirtualList.js';
 
+const url = new URL(window.location.href);
+const loginParams = url.searchParams.get("login");
+
 let isBot = true;
+let res0 = { ok: false };
+let isLogined = false;
+let isAdmin = false;
+let allStaffData = []; 
+let filteredData = []; // 検索結果を含めた「現在表示すべき全データ」
+
+if (typeof window === 'undefined') {
+    isBot = true;
+    return;
+}
+
+const ua = navigator.userAgent;
+const bot = /(Googlebot|Google-InspectionTool|AdsBot-Google|bingbot|Slurp|DuckDuckBot|YandexBot|Baiduspider)/i.test(ua);
+isBot = bot;
+
+if (loginParams) {
+    var headers = new Headers();
+    headers.set("Authorization", `Bearer ${loginParams}`);
+    const res = await fetch("https://asakura-wiki.vercel.app/api/accounts/login_check", {
+        headers
+    });
+    const data = await res.json();
+    isLogined = data.success;
+    isAdmin = data.isAdmin;
+}
+
+if (isAdmin) {
+    var headers = new Headers();
+    headers.set("Authorization", loginParams);
+    res0 = await fetch("https://asakura-wiki.vercel.app/api/staff_credits", {
+        headers
+    });
+}
+if (!isLogined && !isBot) {
+    document.body.style.display = "block";
+    document.body.style.textAlign = "center";
+    document.body.innerHTML = `
+    <h1>Error 401 unauthorized.</h1>
+    <p><a href="https://asakura-wiki.vercel.app/login">認証して下さい。</a></p>
+    `
+}
+if (res0.ok) {
+    const data = await res0.arrayBuffer();
+    const decompressed = await decompressBrotli(new Uint8Array(data));
+    allStaffData = JSON.parse(decompressed);
+} else {
+    const [res1, res2, res3] = await Promise.all([
+        fetch('staff_data_1_64.json.br'),
+        fetch('staff_data_65_128.json.br'),
+        fetch('staff_data_129_192.json.br')
+    ]);
+
+    if (!res1.ok || !res2.ok || !res3.ok) throw new Error("ファイルの取得に失敗しました");
+
+    const [buf1, buf2, buf3] = await Promise.all([
+        res1.arrayBuffer(),
+        res2.arrayBuffer(),
+        res3.arrayBuffer()
+    ]);
+
+    const jsonStr1 = await decompressBrotli(new Uint8Array(buf1));
+    const jsonStr2 = await decompressBrotli(new Uint8Array(buf2));
+    const jsonStr3 = await decompressBrotli(new Uint8Array(buf3));
+
+    const data1 = JSON.parse(jsonStr1);
+    const data2 = JSON.parse(jsonStr2);
+    const data3 = JSON.parse(jsonStr3);
+    
+    allStaffData = [
+        ...data1.staff_data,
+        ...data2.staff_data,
+        ...data3.staff_data
+    ];
+}
 
 // --- 1. 詳細表示（必須 8項目 + オプション 3項目 + スタイル切り替え） ---
 export const showDetail = (staff) => {
@@ -50,91 +127,15 @@ export const showDetail = (staff) => {
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
-    if (typeof window === 'undefined') {
-        isBot = true;
-        return;
-    }
-
-    const ua = navigator.userAgent;
-    const bot = /(Googlebot|Google-InspectionTool|AdsBot-Google|bingbot|Slurp|DuckDuckBot|YandexBot|Baiduspider)/i.test(ua);
-    isBot = bot;
-
-    const url = new URL(window.location.href);
-
-    const loginParams = url.searchParams.get("login");
     const searchInput = document.getElementById('searchInput');
     const staffList = document.getElementById('staffList');
     const staffListHidden = document.getElementById("staffList-hidden");
     const noResult = document.getElementById('noResult');
     const staffDetail = document.getElementById('staffDetail');
     const closeDetail = document.getElementById('closeDetail');
-    
-    let allStaffData = []; 
-    let filteredData = []; // 検索結果を含めた「現在表示すべき全データ」
 
     // --- 3. データ読み込み (Brotli解凍処理) ---
     try {
-        let res0 = { ok: false };
-        let isLogined = false;
-        let isAdmin = false;
-        if (loginParams) {
-            var headers = new Headers();
-            headers.set("Authorization", `Bearer ${loginParams}`);
-            const res = await fetch("https://asakura-wiki.vercel.app/api/accounts/login_check", {
-                headers
-            });
-            const data = await res.json();
-            isLogined = data.success;
-            isAdmin = data.isAdmin;
-        }
-        if (isAdmin) {
-            var headers = new Headers();
-            headers.set("Authorization", loginParams);
-            res0 = await fetch("https://asakura-wiki.vercel.app/api/staff_credits", {
-                headers
-            });
-        }
-        if (!isLogined && !isBot) {
-            document.body.style.display = "block";
-            document.body.style.textAlign = "center";
-            document.body.innerHTML = `
-            <h1>Error 401 unauthorized.</h1>
-            <p><a href="https://asakura-wiki.vercel.app/login">認証して下さい。</a></p>
-            `
-        }
-        if (res0.ok) {
-            const data = await res0.arrayBuffer();
-            const decompressed = await decompressBrotli(new Uint8Array(data));
-            allStaffData = JSON.parse(decompressed);
-        } else {
-            const [res1, res2, res3] = await Promise.all([
-                fetch('staff_data_1_64.json.br'),
-                fetch('staff_data_65_128.json.br'),
-                fetch('staff_data_129_192.json.br')
-            ]);
-
-            if (!res1.ok || !res2.ok || !res3.ok) throw new Error("ファイルの取得に失敗しました");
-
-            const [buf1, buf2, buf3] = await Promise.all([
-                res1.arrayBuffer(),
-                res2.arrayBuffer(),
-                res3.arrayBuffer()
-            ]);
-
-            const jsonStr1 = await decompressBrotli(new Uint8Array(buf1));
-            const jsonStr2 = await decompressBrotli(new Uint8Array(buf2));
-            const jsonStr3 = await decompressBrotli(new Uint8Array(buf3));
-
-            const data1 = JSON.parse(jsonStr1);
-            const data2 = JSON.parse(jsonStr2);
-            const data3 = JSON.parse(jsonStr3);
-            
-            allStaffData = [
-                ...data1.staff_data,
-                ...data2.staff_data,
-                ...data3.staff_data
-            ];
-        }
         // Bot用隠しリストの生成
         if (staffListHidden) {
             allStaffData.forEach(staff => {
