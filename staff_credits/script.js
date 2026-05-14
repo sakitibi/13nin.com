@@ -107,22 +107,33 @@ document.addEventListener('DOMContentLoaded', async () => {
             const decompressed = await decompressBrotli(new Uint8Array(data));
             allStaffData = JSON.parse(decompressed);
         } else {
-            const [res1, res2] = await Promise.all([
+            const [res1, res2, res3] = await Promise.all([
                 fetch('staff_data_1_64.json.br'),
-                fetch('staff_data_65_128.json.br')
+                fetch('staff_data_65_128.json.br'),
+                fetch('staff_data_129_192.json.br')
             ]);
 
-            if (!res1.ok || !res2.ok) throw new Error("ファイルの取得に失敗しました");
+            if (!res1.ok || !res2.ok || !res3.ok) throw new Error("ファイルの取得に失敗しました");
 
-            const [buf1, buf2] = await Promise.all([res1.arrayBuffer(), res2.arrayBuffer()]);
+            const [buf1, buf2, buf3] = await Promise.all([
+                res1.arrayBuffer(),
+                res2.arrayBuffer(),
+                res3.arrayBuffer()
+            ]);
 
             const jsonStr1 = await decompressBrotli(new Uint8Array(buf1));
             const jsonStr2 = await decompressBrotli(new Uint8Array(buf2));
+            const jsonStr3 = await decompressBrotli(new Uint8Array(buf3));
 
             const data1 = JSON.parse(jsonStr1);
             const data2 = JSON.parse(jsonStr2);
+            const data3 = JSON.parse(jsonStr3);
             
-            allStaffData = [...data1.staff_data, ...data2.staff_data];
+            allStaffData = [
+                ...data1.staff_data,
+                ...data2.staff_data,
+                ...data3.staff_data
+            ];
         }
         // Bot用隠しリストの生成
         if (staffListHidden) {
