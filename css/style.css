@@ -1,0 +1,115 @@
+html{
+	background-color: #21bb5c;
+}
+
+.body {
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #21bb5c;
+}
+
+.home-window {
+    text-align: center;
+    background-color: #21bb5c;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.home-window h1 {
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.home-window p {
+    margin-bottom: 30px;
+    font-size: 1.2em;
+}
+
+.home-window #SNWInstall-7z {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #169e02;
+    color: #ffffff;
+    transition: background-color 0.3s;
+}
+
+.home-window #SNWInstall-7z:hover {
+    background-color: #0f6a02;
+}
+
+.home-window #SNWInstall-zip {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff0000;
+    color: #ffffff;
+    transition: background-color 0.3s;
+}
+
+.home-window #SNWInstall-zip:hover {
+    background-color: #a70202;
+}
+
+.home-window #SNWInstall-gz {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: #ffffff;
+    transition: background-color 0.3s;
+}
+
+.home-window #SNWInstall-gz:hover {
+    background-color: #0056b3;
+}
+
+.home-window #SNWInstall-xz {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: aqua;
+    color: #ffffff;
+    transition: background-color 0.3s;
+}
+
+.home-window #SNWInstall-xz:hover {
+    background-color: #007f81;
+}
+
+.home-window #SNWInstall-bzip2 {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff9000;
+    color: #ffffff;
+    transition: background-color 0.3s;
+}
+
+.home-window #SNWInstall-bzip2:hover {
+    background-color: #844b00;
+}
+
+a {
+    color: #0000ff;
+}
+
+footer{
+    text-align: center !important;
+}

@@ -1,0 +1,24 @@
+{
+  "name": "SKNewRoles2 Dashboard",
+  "short_name": "SKNewRoles2 Dashboard",
+  "description": "SKNewRoles2 Dashboard",
+  "start_url": "/13nin.com/SKNewRoles/dashboard/index.html",
+  "display": "standalone",
+  "background_color": "#f0f9ff",
+  "theme_color": "#6366f1",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "../SNR_Logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "../SNR_Logo-521.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

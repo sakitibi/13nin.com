@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>/tellraw ジェネレーター (Minecraft Java)</title>
+  <link rel="stylesheet" href="/elibrary-api/css/b927c464-555d-7fa5-0b87-98c0a87879a5.min.css"/>
+</head>
+<body>
+  <div class="wrap">
+    <h1>/tellraw ジェネレーター <span class="pill">Minecraft Java</span></h1>
+    <div class="sub">最新のチャットコンポーネント仕様に対応（<code>hoverEvent/show_item</code>, <code>show_entity</code>, RGB色）。</div>
+
+    <div class="grid">
+      <!-- Left: Builder -->
+      <div class="card">
+        <div class="row">
+          <div style="flex:1">
+            <label>対象ターゲット (例: <span class="mono">@a</span>, <span class="mono">@p</span>, プレイヤー名)</label>
+            <input id="target" type="text" placeholder="@a" value="@a" />
+          </div>
+          <button class="btn" id="addText">+ テキスト</button>
+          <button class="btn" id="addSelector">+ セレクタ</button>
+          <button class="btn" id="addScore">+ スコア</button>
+          <button class="btn" id="addTranslate">+ 翻訳キー</button>
+          <button class="btn" id="addKeybind">+ キーバインド</button>
+        </div>
+        <div class="small muted" style="margin:8px 0 12px">コンポーネントを並べて 1 つの JSON メッセージにします。</div>
+
+        <div id="components" class="list"></div>
+
+        <div class="footer">
+          <div class="row">
+            <button class="btn secondary" id="exportJson">構成をJSONエクスポート</button>
+            <button class="btn secondary" id="importJson">JSONからインポート</button>
+            <button class="btn ghost" id="clearAll">全消去</button>
+          </div>
+          <div class="small muted">⌘/Ctrl + Enter でプレビュー更新</div>
+        </div>
+      </div>
+
+      <!-- Right: Preview -->
+      <div class="card">
+        <div class="row" style="justify-content:space-between;align-items:center">
+          <div class="chip">出力プレビュー</div>
+          <div class="row">
+            <button class="btn ok" id="copyCmd">/tellraw をコピー</button>
+            <button class="btn" id="copyJson">JSON だけコピー</button>
+          </div>
+        </div>
+
+        <div style="margin-top:10px">
+          <label>JSON (読み取り専用)</label>
+          <pre id="jsonOut" class="mono">[]</pre>
+        </div>
+        <div style="margin-top:10px">
+          <label>/tellraw コマンド</label>
+          <pre id="cmdOut" class="mono">/tellraw @a []</pre>
+        </div>
+        <div class="small muted" style="margin-top:8px">
+          対応: 標準テキスト, セレクタ, スコア, 翻訳(<code>translate</code> + <code>with</code>), キーバインド(<code>keybind</code>), RGB/プリセット色, 装飾, <code>insertion</code>, <code>clickEvent</code>(run/suggest/open_url), <code>hoverEvent</code>(show_text/show_item/show_entity)。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <template id="tpl-comp">
+    <div class="comp">
+      <div class="title">
+        <h3></h3>
+        <div class="actions">
+          <button class="btn ghost btn-up">↑</button>
+          <button class="btn ghost btn-down">↓</button>
+          <button class="btn err btn-del">削除</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div style="flex:1">
+          <label>種類</label>
+          <select class="kind">
+            <option value="text">テキスト</option>
+            <option value="selector">セレクタ</option>
+            <option value="score">スコア</option>
+            <option value="translate">翻訳キー</option>
+            <option value="keybind">キーバインド</option>
+          </select>
+        </div>
+
+        <div style="flex:1">
+          <label>色（プリセット または RGB #RRGGBB）</label>
+          <div class="row">
+            <select class="colorPreset">
+              <option value="">(プリセット)</option>
+              <option>black</option>
+              <option>dark_blue</option>
+              <option>dark_green</option>
+              <option>dark_aqua</option>
+              <option>dark_red</option>
+              <option>dark_purple</option>
+              <option>gold</option>
+              <option>gray</option>
+              <option>dark_gray</option>
+              <option>blue</option>
+              <option>green</option>
+              <option>aqua</option>
+              <option>red</option>
+              <option>light_purple</option>
+              <option>yellow</option>
+              <option>white</option>
+            </select>
+            <input type="text" class="colorHex" placeholder="#RRGGBB (任意)" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Kind specific fields -->
+      <div class="row">
+        <div class="split kind-area" data-for="text">
+          <div>
+            <label>テキスト</label>
+            <input type="text" class="text" placeholder="例) こんにちは" />
+          </div>
+          <div>
+            <label>改行</label>
+            <select class="newline">
+              <option value="no">しない</option>
+              <option value="before">前に挿入</option>
+              <option value="after">後に挿入</option>
+            </select>
+          </div>
+        </div>
+        <div class="split kind-area hidden" data-for="selector">
+          <div>
+            <label>セレクタ (例: @p)</label>
+            <input type="text" class="selector" placeholder="@p" />
+          </div>
+          <div>
+            <label>区切り (任意)</label>
+            <input type="text" class="separator" placeholder="," />
+          </div>
+        </div>
+        <div class="split kind-area hidden" data-for="score">
+          <div>
+            <label>name (例: @p または プレイヤー名)</label>
+            <input type="text" class="scoreName" placeholder="@p" />
+          </div>
+          <div>
+            <label>objective</label>
+            <input type="text" class="scoreObj" placeholder="kills" />
+          </div>
+        </div>
+        <div class="split kind-area hidden" data-for="translate">
+          <div>
+            <label>翻訳キー (例: chat.type.text)</label>
+            <input type="text" class="trKey" placeholder="translation.key" />
+          </div>
+          <div>
+            <label>with（置換用・カンマ区切り）</label>
+            <input type="text" class="trWith" placeholder="値1, 値2 (テキストまたはJSON)" />
+          </div>
+        </div>
+        <div class="split kind-area hidden" data-for="keybind">
+          <div>
+            <label>キー名 (例: key.jump)</label>
+            <input type="text" class="kbKey" placeholder="key.forward" />
+          </div>
+          <div>
+            <label>（参考: <span class="mono">key.attack</span>, <span class="mono">key.jump</span> など）</label>
+            <div class="small"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="split" style="flex:1">
+          <div>
+            <label>装飾</label>
+            <div class="row">
+              <label><input type="checkbox" class="fmt" data-k="bold"> 太字</label>
+              <label><input type="checkbox" class="fmt" data-k="italic"> 斜体</label>
+              <label><input type="checkbox" class="fmt" data-k="underlined"> 下線</label>
+              <label><input type="checkbox" class="fmt" data-k="strikethrough"> 打消し</label>
+              <label><input type="checkbox" class="fmt" data-k="obfuscated"> 雑字</label>
+            </div>
+          </div>
+          <div>
+            <label>insertion (任意・クリックで挿入)</label>
+            <input type="text" class="insertion" placeholder="挿入文字列" />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="split" style="flex:1">
+          <div>
+            <label>clickEvent</label>
+            <div class="row">
+              <select class="clickAction">
+                <option value="">(なし)</option>
+                <option value="run_command">run_command</option>
+                <option value="suggest_command">suggest_command</option>
+                <option value="open_url">open_url</option>
+              </select>
+              <input type="text" class="clickValue" placeholder="/say hello または https://..." />
+            </div>
+          </div>
+          <div>
+            <label>hoverEvent</label>
+            <div class="row">
+              <select class="hoverAction">
+                <option value="">(なし)</option>
+                <option value="show_text">show_text</option>
+                <option value="show_item">show_item</option>
+                <option value="show_entity">show_entity</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- hover specific fields -->
+      <div class="row hover-area hidden" data-hover="show_text">
+        <div style="flex:1">
+          <label>テキスト (hover)</label>
+          <input type="text" class="hoverText" placeholder="ホバー時のテキスト" />
+        </div>
+      </div>
+      <div class="row hover-area hidden" data-hover="show_item">
+        <div class="split" style="flex:1">
+          <div>
+            <label>item (例: minecraft:diamond_sword)</label>
+            <input type="text" class="hoverItemId" placeholder="minecraft:stone" />
+          </div>
+          <div>
+            <label>count</label>
+            <input type="number" class="hoverItemCount" placeholder="1" min="1" />
+          </div>
+        </div>
+        <div style="flex:1">
+          <label>NBT (任意・JSON文字列)</label>
+          <input type="text" class="hoverItemNbt" placeholder='{"Enchantments":[{"id":"minecraft:sharpness","lvl":5s}]}' />
+        </div>
+      </div>
+      <div class="row hover-area hidden" data-hover="show_entity">
+        <div class="split" style="flex:1">
+          <div>
+            <label>type (例: minecraft:zombie)</label>
+            <input type="text" class="hoverEntityType" placeholder="minecraft:player" />
+          </div>
+          <div>
+            <label>id (UUID 形式)</label>
+            <input type="text" class="hoverEntityId" placeholder="00000000-0000-0000-0000-000000000000" />
+          </div>
+        </div>
+        <div style="flex:1">
+          <label>name（コンポーネントJSON または 平文）</label>
+          <input type="text" class="hoverEntityName" placeholder='{"text":"Mob"}' />
+        </div>
+      </div>
+
+    </div>
+  </template>
+  <script src="/elibrary-api/js/ee7a60c5-bd78-5a6e-cbf5-f837686200f9.min.js"></script>
+</body>
+</html>
