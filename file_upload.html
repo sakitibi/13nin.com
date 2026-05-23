@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ファイルアップローダー</title>
+</head>
+<body>
+
+    <h2>ファイルアップローダー</h2>
+    
+    <label for="fileInput">アップロードするファイルを選択してください（どんな名前でも自動認識されます）:</label><br>
+    <input type="file" id="fileInput"><br><br>
+
+    <button id="sendBtn">送信</button>
+
+    <script>
+        document.getElementById('sendBtn').addEventListener('click', async () => {
+            const fileInput = document.getElementById('fileInput');
+            
+            if (!fileInput.files || fileInput.files.length === 0) {
+                alert("ファイルを選択してください。");
+                return;
+            }
+
+            // 3. FormDataオブジェクトを作成
+            const formData = new FormData();
+
+            formData.append("file_1", fileInput.files[0]);
+
+            try {
+                console.log("送信中...");
+                const response = await fetch('https://asakura-wiki.vercel.app/api/filenow', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                // レスポンスの解析
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.error || `エラーが発生しました (Status: ${response.status})`);
+                }
+
+                console.log("サーバーからのレスポンス:", result);
+                
+                // サーバー側で認識されたファイル名をアラートで確認
+                alert(`送信成功!\nサーバーが認識したファイル名: ${result.extractedFileName}`);
+
+            } catch (error) {
+                console.error("送信エラー:", error);
+                alert("送信に失敗しました:\n" + error.message);
+            }
+        });
+    </script>
+</body>
+</html>
