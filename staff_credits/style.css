@@ -99,7 +99,6 @@ h2 {
     color: #fff;
 }
 
-/* ★追加：委員長用の特別な見た目（リスト側） */
 .staff-item.highlight-committee {
     background-color: #e8f5e9 !important; /* 薄い緑色 */
     border-left: 5px solid #4caf50;      /* 左側に緑のアクセント線 */
@@ -140,7 +139,7 @@ h2 {
 
 /* 詳細表示エリア */
 #staffDetail {
-    display: none; /* JSで制御 */
+    display: none;
     margin-top: 20px;
     padding: 15px;
     border: 1px solid #d1e7ff;
