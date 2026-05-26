@@ -19,10 +19,13 @@ export const showDetail = (staff) => {
 
     if (!staffDetail || !staffList) return;
 
-    // 前回のクラスが残らないよう一旦削除
-    staffDetail.classList.remove('highlight-executive-detail');
+    // 前回のクラスが残らないよう一旦すべてリセット
+    staffDetail.classList.remove('highlight-executive-detail', 'highlight-committee-detail');
+    
     if (staff.dept === "総務部 部長" || staff.dept === "総務部 副部長") {
         staffDetail.classList.add('highlight-executive-detail');
+    } else if (staff.dept && staff.dept.includes("委員長")) {
+        staffDetail.classList.add('highlight-committee-detail');
     }
 
     document.getElementById('detailId').textContent = staff.id;

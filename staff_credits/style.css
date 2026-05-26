@@ -99,6 +99,26 @@ h2 {
     color: #fff;
 }
 
+/* ★追加：委員長用の特別な見た目（リスト側） */
+.staff-item.highlight-committee {
+    background-color: #e8f5e9 !important; /* 薄い緑色 */
+    border-left: 5px solid #4caf50;      /* 左側に緑のアクセント線 */
+    font-weight: bold;
+}
+
+.staff-item.highlight-committee span {
+    color: #1b5e20; /* 文字色を濃い緑色に */
+}
+
+.staff-item.highlight-committee:hover {
+    background-color: #c8e6c9 !important;
+}
+
+.staff-item.highlight-committee .id-tag {
+    background-color: #a5d6a7;
+    color: #fff;
+}
+
 /* IDタグのスタイル */
 .id-tag {
     font-size: 0.75rem;
@@ -168,6 +188,21 @@ h2 {
 
 #staffDetail.highlight-executive-detail .text-box {
     background-color: #fff9e6; /* テキストボックス内も少し色を合わせる */
+}
+
+/* ★追加：詳細画面：委員長用のスタイル */
+#staffDetail.highlight-committee-detail {
+    background-color: #e8f5e9; /* 薄い緑色 */
+    border-color: #a5d6a7;      /* ボーダーを強調 */
+}
+
+#staffDetail.highlight-committee-detail h3 {
+    color: #1b5e20;            /* 見出しの色を変更 */
+    border-bottom-color: #c8e6c9;
+}
+
+#staffDetail.highlight-committee-detail .text-box {
+    background-color: #f1f8e9; /* テキストボックス内も少し色を合わせる */
 }
 
 /* 区切り線 */
