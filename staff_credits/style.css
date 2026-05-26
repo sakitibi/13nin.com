@@ -189,7 +189,6 @@ h2 {
     background-color: #fff9e6; /* テキストボックス内も少し色を合わせる */
 }
 
-/* ★追加：詳細画面：委員長用のスタイル */
 #staffDetail.highlight-committee-detail {
     background-color: #e8f5e9; /* 薄い緑色 */
     border-color: #a5d6a7;      /* ボーダーを強調 */
