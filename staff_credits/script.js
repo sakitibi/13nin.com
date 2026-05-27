@@ -135,6 +135,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const staffDetail = document.getElementById('staffDetail');
     const closeDetail = document.getElementById('closeDetail');
 
+    const currentUrl = new URL(window.location.href);
+    const targetId = currentUrl.searchParams.get("id");
+
     const initResult = await dataInitializationPromise;
 
     if (initResult && initResult.error401) {
@@ -150,6 +153,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Bot用隠しリストの生成
     if (staffListHidden && allStaffData) {
         staffListHidden.textContent = JSON.stringify(allStaffData);
+    }
+
+    if (targetId && allStaffData.length > 0) {
+        // スタッフデータ内の id とパラメータの文字列を比較して一致するものを探す
+        const matchedStaff = allStaffData.find(staff => String(staff.id) === String(targetId).trim());
+        if (matchedStaff) {
+            showDetail(matchedStaff);
+        }
     }
 
     try {
