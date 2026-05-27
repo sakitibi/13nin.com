@@ -149,11 +149,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Bot用隠しリストの生成
     if (staffListHidden && allStaffData) {
-        allStaffData.forEach(staff => {
-            const li = document.createElement("li");
-            li.textContent = staff.name;
-            staffListHidden.appendChild(li);
-        });
+        staffListHidden.textContent = JSON.stringify(allStaffData);
     }
 
     try {
