@@ -22,7 +22,7 @@ export const showDetail = (staff) => {
     // 前回のクラスが残らないよう一旦すべてリセット
     staffDetail.classList.remove('highlight-executive-detail', 'highlight-committee-detail');
     
-    if (staff.dept === "総務部 部長" || staff.dept === "総務部 副部長") {
+    if (staff.dept.includes("部長")) {
         staffDetail.classList.add('highlight-executive-detail');
     } else if (staff.dept && staff.dept.includes("委員長")) {
         staffDetail.classList.add('highlight-committee-detail');
