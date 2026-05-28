@@ -228,7 +228,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    allStaffDataCounter.textContent = allStaffDataLength;
+    if (allStaffDataCounter) {
+        allStaffDataCounter.textContent = allStaffDataLength;
+    }
 });
 
 // Botではない場合、隠しリストを削除する
