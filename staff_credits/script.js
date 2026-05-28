@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const noResult = document.getElementById('noResult');
     const staffDetail = document.getElementById('staffDetail');
     const closeDetail = document.getElementById('closeDetail');
-    const allStaffDataCounter = document.getElementById('allStaffDataLength');
+    const allStaffDataCounter = document.getElementById('allStaffDataCounter');
 
     const currentUrl = new URL(window.location.href);
     const targetId = currentUrl.searchParams.get("id");
