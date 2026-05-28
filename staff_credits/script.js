@@ -4,6 +4,7 @@ import renderVirtualList from './renderVirtualList.js';
 let isBot = true;
 let allStaffData = []; 
 let filteredData = []; // 検索結果を含めた「現在表示すべき全データ」
+let allStaffDataLength = 0;
 
 if (typeof window === 'undefined') {
     isBot = true;
@@ -119,6 +120,7 @@ const dataInitializationPromise = (async () => {
         }
 
         filteredData = allStaffData;
+        allStaffDataLength = allStaffData.length;
         return { success: true };
 
     } catch (error) {
@@ -134,6 +136,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const noResult = document.getElementById('noResult');
     const staffDetail = document.getElementById('staffDetail');
     const closeDetail = document.getElementById('closeDetail');
+    const allStaffDataCounter = document.getElementById('allStaffDataLength');
 
     const currentUrl = new URL(window.location.href);
     const targetId = currentUrl.searchParams.get("id");
@@ -224,6 +227,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     }
+
+    allStaffDataCounter.textContent = allStaffDataLength;
 });
 
 // Botではない場合、隠しリストを削除する

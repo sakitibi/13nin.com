@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>13ninstudio 公式スタッフ検索システム</title>
+    <title>13ninstudio 公式関係者検索システム</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="search-container">
-        <h2>13ninstudio 公式スタッフ検索</h2>
+        <h2>13ninstudio 公式関係者検索</h2>
         <p>注意 まだ制作中です、 一部の情報しか掲載されていません。</p>
+        <p>現在の関係者数: <span id="allStaffDataLength"></span></p>
         <div class="input-group">
             <input type="text" id="searchInput" placeholder="名前またはフリガナを入力..." autocomplete="off">
         </div>
@@ -18,10 +19,10 @@
         
         <ul hidden id="staffList-hidden"></ul>
         
-        <p id="noResult" aria-live="polite">該当するスタッフは見つかりませんでした。</p>
+        <p id="noResult" aria-live="polite">該当する関係者は見つかりませんでした。</p>
 
         <div id="staffDetail" class="detail-card" style="display: none;" role="region" aria-labelledby="detailTitle">
-            <h3 id="detailTitle">スタッフ詳細</h3>
+            <h3 id="detailTitle">関係者詳細</h3>
             
             <div class="detail-content">
                 <p><strong>ID:</strong> <span id="detailId"></span></p>
