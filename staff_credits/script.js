@@ -98,7 +98,7 @@ const dataInitializationPromise = (async () => {
                 fetch('staff_data_1_64.json.br'),
                 fetch('staff_data_65_128.json.br'),
                 fetch('staff_data_129_192.json.br'),
-                fetch('staff_data_193_255.json.br')
+                fetch('staff_data_193_256.json.br')
             ]);
 
             if (!res1.ok || !res2.ok || !res3.ok || !res4.ok) throw new Error("ファイルの取得に失敗しました");
