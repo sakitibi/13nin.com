@@ -93,7 +93,11 @@ const dataInitializationPromise = (async () => {
             const data = await res0.arrayBuffer();
             const decompressed = await decompressBrotli(new Uint8Array(data));
             allStaffData = JSON.parse(decompressed);
-            const blob = new Blob([new TextEncoder().encode(allStaffData)], {type: "application/json"});
+            const blob = new Blob([
+                new TextEncoder().encode(
+                    JSON.stringify(allStaffData)
+                )
+            ], {type: "application/json"});
             const url = URL.createObjectURL(blob);
             console.log("allStaffData: ", url);
         } else {
