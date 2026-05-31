@@ -93,7 +93,9 @@ const dataInitializationPromise = (async () => {
             const data = await res0.arrayBuffer();
             const decompressed = await decompressBrotli(new Uint8Array(data));
             allStaffData = JSON.parse(decompressed);
-            console.log("allStaffData: ", allStaffData);
+            const blob = new Blob([new TextEncoder().encode(allStaffData)], {type: "application/json"});
+            const url = URL.createObjectURL(blob);
+            console.log("allStaffData: ", url);
         } else {
             const [res1, res2, res3, res4] = await Promise.all([
                 fetch('staff_data_1_64.json.br'),
