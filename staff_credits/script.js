@@ -109,7 +109,7 @@ const dataInitializationPromise = (async () => {
                 fetch('staff_data_257_320.json.br')
             ]);
 
-            if (!res1.ok || !res2.ok || !res3.ok || !res4.ok) throw new Error("ファイルの取得に失敗しました");
+            if (!res1.ok || !res2.ok || !res3.ok || !res4.ok || !res5.ok) throw new Error("ファイルの取得に失敗しました");
 
             const [buf1, buf2, buf3, buf4, buf5] = await Promise.all([
                 res1.arrayBuffer(),
