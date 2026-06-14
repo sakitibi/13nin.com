@@ -101,32 +101,36 @@ const dataInitializationPromise = (async () => {
             const url = URL.createObjectURL(blob);
             console.log("allStaffData: ", url);
         } else {
-            const [res1, res2, res3, res4] = await Promise.all([
+            const [res1, res2, res3, res4, res5] = await Promise.all([
                 fetch('staff_data_1_64.json.br'),
                 fetch('staff_data_65_128.json.br'),
                 fetch('staff_data_129_192.json.br'),
-                fetch('staff_data_193_256.json.br')
+                fetch('staff_data_193_256.json.br'),
+                fetch('staff_data_257_320.json.br')
             ]);
 
             if (!res1.ok || !res2.ok || !res3.ok || !res4.ok) throw new Error("ファイルの取得に失敗しました");
 
-            const [buf1, buf2, buf3, buf4] = await Promise.all([
+            const [buf1, buf2, buf3, buf4, buf5] = await Promise.all([
                 res1.arrayBuffer(),
                 res2.arrayBuffer(),
                 res3.arrayBuffer(),
-                res4.arrayBuffer()
+                res4.arrayBuffer(),
+                res5.arrayBuffer()
             ]);
 
             const jsonStr1 = await decompressBrotli(new Uint8Array(buf1));
             const jsonStr2 = await decompressBrotli(new Uint8Array(buf2));
             const jsonStr3 = await decompressBrotli(new Uint8Array(buf3));
             const jsonStr4 = await decompressBrotli(new Uint8Array(buf4));
+            const jsonStr5 = await decompressBrotli(new Uint8Array(buf5));
 
             allStaffData = [
                 ...JSON.parse(jsonStr1).staff_data,
                 ...JSON.parse(jsonStr2).staff_data,
                 ...JSON.parse(jsonStr3).staff_data,
-                ...JSON.parse(jsonStr4).staff_data
+                ...JSON.parse(jsonStr4).staff_data,
+                ...JSON.parse(jsonStr5).staff_data
             ];
         }
 
