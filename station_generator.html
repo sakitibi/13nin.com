@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>駅名標ジェネレーター</title>
+    <link rel="stylesheet" href="/13nin.com/css/station_generator.css">
+</head>
+<body>
+
+    <h1>駅名標ジェネレーター (指定フォント対応版)</h1>
+
+    <div class="container">
+
+        <div class="form-group">
+            <label for="stationName">現在駅（漢字など）</label>
+            <input type="text" id="stationName" value="駅名">
+        </div>
+        <div class="form-group">
+            <label for="hiragana">現在駅（ふりがな）</label>
+            <input type="text" id="hiragana" value="ふりがな駅名">
+        </div>
+        <div class="form-group">
+            <label for="romaji">現在駅（英語）</label>
+            <input type="text" id="romaji" value="英語駅名">
+        </div>
+
+        <div class="form-group">
+            <label for="leftStationJa">左駅（日本語）</label>
+            <input type="text" id="leftStationJa" value="左駅日本語">
+        </div>
+        <div class="form-group">
+            <label for="leftStationEn">左駅（英語）</label>
+            <input type="text" id="leftStationEn" value="左駅英語">
+        </div>
+
+        <div class="form-group">
+            <label for="rightStationJa">右駅（日本語）</label>
+            <input type="text" id="rightStationJa" value="右駅日本語">
+        </div>
+        <div class="form-group">
+            <label for="rightStationEn">右駅（英語）</label>
+            <input type="text" id="rightStationEn" value="右駅英語">
+        </div>
+
+        <div class="form-group">
+            <label>配色設定</label>
+            <div class="color-pickers">
+                <div class="color-group">
+                    <label for="bgColor" style="font-size:12px; font-weight:normal;">上部背景</label>
+                    <input type="color" id="bgColor" value="#e6e6e6">
+                </div>
+                <div class="color-group">
+                    <label for="lineColor" style="font-size:12px; font-weight:normal;">下部帯</label>
+                    <input type="color" id="lineColor" value="#226699">
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button class="btn-generate" onclick="drawStationSign()">駅名標を再描画</button>
+            <button class="btn-download" onclick="downloadImage()">画像を保存</button>
+        </div>
+    </div>
+
+    <div class="preview-container">
+        <div class="preview-title">プレビュー</div>
+        <canvas id="signCanvas" width="1200" height="400"></canvas>
+    </div>
+
+    <script>
+        function drawStationSign() {
+            const canvas = document.getElementById('signCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // 入力値の取得
+            const stationName = document.getElementById('stationName').value;
+            const hiragana = document.getElementById('hiragana').value;
+            const romaji = document.getElementById('romaji').value;
+            const leftStationJa = document.getElementById('leftStationJa').value;
+            const leftStationEn = document.getElementById('leftStationEn').value;
+            const rightStationJa = document.getElementById('rightStationJa').value;
+            const rightStationEn = document.getElementById('rightStationEn').value;
+            const bgColor = document.getElementById('bgColor').value;
+            const lineColor = document.getElementById('lineColor').value;
+
+            const w = canvas.width;
+            const h = canvas.height;
+            const topHeight = h * 0.62; // 上部グレー部分の高さ (約248px)
+            const bottomHeight = h * 0.38; // 下部青色部分の高さ (約152px)
+
+            // 1. 上部背景の描画
+            ctx.fillStyle = bgColor;
+            ctx.fillRect(0, 0, w, topHeight);
+
+            // 2. 下部帯の描画
+            ctx.fillStyle = lineColor;
+            ctx.fillRect(0, topHeight, w, bottomHeight);
+
+            // フォント指定の共通定義（読み込み失敗時はsans-serifにフォールバック）
+            const jaFont = "'ShinGo', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif";
+            const enFont = "'Frutiger', Arial, sans-serif";
+
+            // --- 上部セクションの描画 ---
+            ctx.fillStyle = '#000000';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'alphabetic';
+
+            // 現在駅名（漢字など）
+            ctx.font = `bold 100px ${jaFont}`;
+            ctx.fillText(stationName, w / 2, 130);
+
+            // ふりがな（中央から少し左に右揃え）
+            ctx.font = `bold 34px ${jaFont}`;
+            ctx.textAlign = 'right';
+            ctx.fillText(hiragana, w / 2 - 35, 205);
+
+            // 英語（中央から少し右に左揃え）
+            ctx.font = `bold 34px ${enFont}`;
+            ctx.textAlign = 'left';
+            ctx.fillText(romaji, w / 2 + 35, 205);
+
+
+            // --- 下部セクションの描画 ---
+            ctx.fillStyle = '#ffffff';
+
+            // 左駅（前駅）
+            ctx.textAlign = 'left';
+            ctx.font = `bold 32px ${jaFont}`;
+            ctx.fillText(leftStationJa, 70, topHeight + 60);
+            ctx.font = `bold 28px ${enFont}`;
+            ctx.fillText(leftStationEn, 70, topHeight + 115);
+
+            // 右駅（次駅）
+            ctx.textAlign = 'right';
+            ctx.font = `bold 32px ${jaFont}`;
+            ctx.fillText(rightStationJa, w - 160, topHeight + 60);
+            ctx.font = `bold 28px ${enFont}`;
+            ctx.fillText(rightStationEn, w - 160, topHeight + 115);
+
+            // 右向き矢印の描画
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            let arrowX = w - 50; // 矢印の先端のX座標
+            let arrowY = topHeight + (bottomHeight / 2); // 下部帯の垂直中央
+            
+            ctx.moveTo(arrowX, arrowY);
+            ctx.lineTo(arrowX - 35, arrowY - 22);
+            ctx.lineTo(arrowX - 35, arrowY - 9);
+            ctx.lineTo(arrowX - 80, arrowY - 9);
+            ctx.lineTo(arrowX - 80, arrowY + 9);
+            ctx.lineTo(arrowX - 35, arrowY + 9);
+            ctx.lineTo(arrowX - 35, arrowY + 22);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function downloadImage() {
+            const canvas = document.getElementById('signCanvas');
+            const link = document.createElement('a');
+            link.download = 'station_sign.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        // フォントの読み込みを待ってから描画（環境によって完全に読み込まれる前に描画されるのを防ぐ）
+        window.onload = function() {
+            if (document.fonts) {
+                document.fonts.ready.then(function() {
+                    drawStationSign();
+                });
+            } else {
+                setTimeout(drawStationSign, 500);
+            }
+        };
+    </script>
+</body>
+</html>
