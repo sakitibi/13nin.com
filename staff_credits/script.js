@@ -63,7 +63,7 @@ export const showDetail = (staff) => {
 
 const dataInitializationPromise = (async () => {
     const url = new URL(window.location.href);
-    const loginParams = url.searchParams.get("login");
+    const loginParams = localStorage.getItem("session") ?? url.searchParams.get("login");
     
     let res0 = { ok: false };
     let isLogined = false;
@@ -86,8 +86,11 @@ const dataInitializationPromise = (async () => {
         }
 
         if (!isLogined && !isBot) {
+            localStorage.removeItem("session");
             return { error401: true };
         }
+
+        localStorage.setItem("session", loginParams);
 
         if (res0.ok) {
             const data = await res0.arrayBuffer();
@@ -119,11 +122,13 @@ const dataInitializationPromise = (async () => {
                 res5.arrayBuffer()
             ]);
 
-            const jsonStr1 = await decompressBrotli(new Uint8Array(buf1));
-            const jsonStr2 = await decompressBrotli(new Uint8Array(buf2));
-            const jsonStr3 = await decompressBrotli(new Uint8Array(buf3));
-            const jsonStr4 = await decompressBrotli(new Uint8Array(buf4));
-            const jsonStr5 = await decompressBrotli(new Uint8Array(buf5));
+            const [jsonStr1, jsonStr2, jsonStr3, jsonStr4, jsonStr5] = Promise.all([
+                decompressBrotli(buf1),
+                decompressBrotli(buf2),
+                decompressBrotli(buf3),
+                decompressBrotli(buf4),
+                decompressBrotli(buf5),
+            ]);
 
             allStaffData = [
                 ...JSON.parse(jsonStr1).staff_data,
