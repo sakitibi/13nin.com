@@ -63,14 +63,15 @@ export const showDetail = (staff) => {
 
 const dataInitializationPromise = (async () => {
     const url = new URL(window.location.href);
-    const loginParams = localStorage.getItem("session") ?? url.searchParams.get("login");
+    const session = JSON.parse(localStorage.getItem("session") || '{}');
+    const loginParams = url.searchParams.get("login") || session.loginParams;
     
     let res0 = { ok: false };
     let isLogined = false;
     let isAdmin = false;
 
     try {
-        if (loginParams) {
+        if ((session.date + 36e5) > new Date().getTime() && loginParams) {
             const headers = new Headers();
             headers.set("Authorization", `Bearer ${loginParams}`);
             const res = await fetch("https://asakura-wiki.vercel.app/api/accounts/login_check", { headers });
@@ -90,7 +91,7 @@ const dataInitializationPromise = (async () => {
             return { error401: true };
         }
 
-        localStorage.setItem("session", loginParams);
+        localStorage.setItem("session", JSON.stringify({loginParams, date: new Date().getTime()}));
 
         if (res0.ok) {
             const data = await res0.arrayBuffer();
