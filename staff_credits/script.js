@@ -63,12 +63,14 @@ export const showDetail = (staff) => {
 
 const dataInitializationPromise = (async () => {
     const url = new URL(window.location.href);
-    const session = JSON.parse(localStorage.getItem("session") || '{}');
+    let session = JSON.parse(localStorage.getItem("session") || '{}');
     const loginParams = url.searchParams.get("login") || session.loginParams;
     
     let res0 = { ok: false };
     let isLogined = false;
     let isAdmin = false;
+
+    if (typeof session.date === "undefined") session.date = new Date().getTime();
 
     try {
         if ((session.date + 36e5) > new Date().getTime() && loginParams) {
